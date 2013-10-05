@@ -29,6 +29,27 @@ class Role extends Eloquent {
 	protected $softDelete = true;
 
 	/**
+	 * Default roles.
+	 *
+	 * @var array
+	 */
+	protected static $defaultRoles = array(
+		'admin'  => 1,
+		'member' => 2,
+	);
+
+	/**
+	 * Set default roles.
+	 * 
+	 * @param  array    $roles
+	 * @return void
+	 */
+	public static function setDefaultRoles(array $roles)
+	{
+		static::$defaultRoles = array_merge(static::$defaultRoles, $roles);
+	}
+
+	/**
 	 * Has many and belongs to relationship with User.
 	 *
 	 * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -45,9 +66,7 @@ class Role extends Eloquent {
 	 */
 	public static function admin()
 	{
-		return static::find(
-			Config::get('orchestra/foundation::roles.admin')
-		);
+		return static::find(static::$defaultRoles['admin']);
 	}
 
 	/**
@@ -57,8 +76,6 @@ class Role extends Eloquent {
 	 */
 	public static function member()
 	{
-		return static::find(
-			Config::get('orchestra/foundation::roles.member')
-		);
+		return static::find(static::$defaultRoles['member']);
 	}
 }
