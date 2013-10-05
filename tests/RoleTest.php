@@ -1,9 +1,6 @@
 <?php namespace Orchestra\Model\TestCase;
 
 use Mockery as m;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Facade;
-use Illuminate\Container\Container;
 use Orchestra\Model\Role;
 
 class RoleTest extends \PHPUnit_Framework_TestCase {
@@ -30,8 +27,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function setUp()
 	{
-		Facade::clearResolvedInstances();
-		Facade::setFacadeApplication($app = new Container);
+		Role::setDefaultRoles(array('admin' => 10, 'member' => 20));
 	}
 
 	/**
@@ -66,10 +62,6 @@ class RoleTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testAdminMethod()
 	{
-		Config::swap($config = m::mock('Config\Manager'));
-
-		$config->shouldReceive('get')->once()->with('orchestra/foundation::roles.admin')->andReturn(1);
-
 		$model = new Role;
 		
 		$resolver = m::mock('Illuminate\Database\ConnectionResolverInterface');
@@ -84,7 +76,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase {
 				->andReturn($processor = m::mock('Illuminate\Database\Query\Processors\Processor'));
 
 		$grammar->shouldReceive('compileSelect')->once()->andReturn('SELECT * FROM `roles` WHERE id=?');
-		$connection->shouldReceive('select')->once()->with('SELECT * FROM `roles` WHERE id=?', array(1))->andReturn(null);
+		$connection->shouldReceive('select')->once()->with('SELECT * FROM `roles` WHERE id=?', array(10))->andReturn(null);
 		$processor->shouldReceive('processSelect')->once()->andReturn(array());
 		
 		$model->admin();
@@ -97,10 +89,6 @@ class RoleTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testMemberMethod()
 	{
-		Config::swap($config = m::mock('Config\Manager'));
-
-		$config->shouldReceive('get')->once()->with('orchestra/foundation::roles.member')->andReturn(2);
-
 		$model = new Role;
 		
 		$resolver = m::mock('Illuminate\Database\ConnectionResolverInterface');
@@ -115,7 +103,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase {
 				->andReturn($processor = m::mock('Illuminate\Database\Query\Processors\Processor'));
 
 		$grammar->shouldReceive('compileSelect')->once()->andReturn('SELECT * FROM `roles` WHERE id=?');
-		$connection->shouldReceive('select')->once()->with('SELECT * FROM `roles` WHERE id=?', array(2))->andReturn(null);
+		$connection->shouldReceive('select')->once()->with('SELECT * FROM `roles` WHERE id=?', array(20))->andReturn(null);
 		$processor->shouldReceive('processSelect')->once()->andReturn(array());
 		
 		$model->member();
