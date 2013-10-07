@@ -4,9 +4,9 @@ use Mockery as m;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Container\Container;
 use Orchestra\Support\Facades\Acl;
-use Orchestra\Model\Observer\RoleObserver;
+use Orchestra\Model\Observer\Role as RoleObserver;
 
-class RoleObserverTest extends \PHPUnit_Framework_TestCase {
+class RoleTest extends \PHPUnit_Framework_TestCase {
 	
 	/**
 	 * Setup the test environment.
@@ -26,7 +26,7 @@ class RoleObserverTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Test Orchestra\Foundation\Services\Event\RoleObserver::creating() 
+	 * Test Orchestra\Model\Observer\Role::creating() 
 	 * method.
 	 *
 	 * @test
@@ -44,7 +44,7 @@ class RoleObserverTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Test Orchestra\Foundation\Services\Event\RoleObserver::deleting() 
+	 * Test Orchestra\Model\Observer\Role::deleting() 
 	 * method.
 	 *
 	 * @test
@@ -62,7 +62,7 @@ class RoleObserverTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Test Orchestra\Foundation\Services\Event\RoleObserver::updating() 
+	 * Test Orchestra\Model\Observer\Role::updating() 
 	 * method.
 	 *
 	 * @test
@@ -83,7 +83,7 @@ class RoleObserverTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Test Orchestra\Foundation\Services\Event\RoleObserver::updating() 
+	 * Test Orchestra\Model\Observer\Role::updating() 
 	 * method for restoring.
 	 *
 	 * @test
