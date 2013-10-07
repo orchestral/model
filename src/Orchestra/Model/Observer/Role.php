@@ -2,7 +2,7 @@
 
 use Orchestra\Support\Facades\Acl;
 
-class RoleObserver {
+class Role {
 
 	/**
 	 * On creating observer.
