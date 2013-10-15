@@ -52,7 +52,7 @@ class Role extends Eloquent {
 	/**
 	 * Has many and belongs to relationship with User.
 	 *
-	 * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
 	public function users() 
 	{
@@ -62,7 +62,7 @@ class Role extends Eloquent {
 	/**
 	 * Get default roles for Orchestra Platform
 	 *
-	 * @return self
+	 * @return Role
 	 */
 	public static function admin()
 	{
@@ -72,7 +72,7 @@ class Role extends Eloquent {
 	/**
 	 * Get default member roles for Orchestra Platform
 	 *
-	 * @return self
+	 * @return Role
 	 */
 	public static function member()
 	{

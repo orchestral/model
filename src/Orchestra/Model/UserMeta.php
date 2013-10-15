@@ -23,7 +23,7 @@ class UserMeta extends Eloquent {
 	/**
 	 * Belongs to relationship with User.
 	 *
-	 * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
 	public function users()
 	{
@@ -35,7 +35,7 @@ class UserMeta extends Eloquent {
 	 * 
 	 * @param  string   $name
 	 * @param  integer  $userId
-	 * @return Orchestra\Model\UserMeta
+	 * @return UserMeta
 	 */
 	public function scopeSearch($query, $name, $userId)
 	{
