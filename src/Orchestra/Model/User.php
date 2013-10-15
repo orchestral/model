@@ -38,7 +38,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	/**
 	 * Has many and belongs to relationship with Role.
 	 *
-	 * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
 	public function roles() 
 	{
@@ -48,10 +48,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	/**
 	 * Search user based on keyword as roles.
 	 *
-	 * @param  Illuminate\Database\Eloquent\Builder $query
-	 * @param  string                               $keyword
-	 * @param  array                                $roles
-	 * @return Orchestra\Model\User
+	 * @param  \Illuminate\Database\Eloquent\Builder    $query
+	 * @param  string                                   $keyword
+	 * @param  array                                    $roles
+	 * @return User
 	 */
 	public function scopeSearch($query, $keyword = '', $roles = array())
 	{
