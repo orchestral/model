@@ -1,7 +1,6 @@
 <?php namespace Orchestra\Model;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
-use Illuminate\Support\Facades\Config;
 
 class Role extends Eloquent
 {
