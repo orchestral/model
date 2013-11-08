@@ -54,7 +54,7 @@ class UserMetaTest extends \PHPUnit_Framework_TestCase
      */
     public function testScopeSearchMethod()
     {
-        $query = m::mock('Query');
+        $query = m::mock('\Illuminate\Database\Eloquent\Builder');
 
         $query->shouldReceive('where')->once()->with('user_id', '=', 1)->andReturn($query)
             ->shouldReceive('where')->once()->with('name', '=', 'foo')->andReturn($query);

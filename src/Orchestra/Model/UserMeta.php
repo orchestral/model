@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Model;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class UserMeta extends Eloquent
@@ -33,11 +34,12 @@ class UserMeta extends Eloquent
     /**
      * Return a meta data belong to a user.
      *
-     * @param  string   $name
-     * @param  integer  $userId
-     * @return UserMeta
+     * @param  \Illuminate\Database\Eloquent\Builder    $query
+     * @param  string                                   $name
+     * @param  integer                                  $userId
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeSearch($query, $name, $userId)
+    public function scopeSearch(Builder $query, $name, $userId)
     {
         return $query->where('user_id', '=', $userId)
             ->where('name', '=', $name);

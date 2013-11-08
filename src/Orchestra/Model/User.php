@@ -52,7 +52,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface
      * @param  \Illuminate\Database\Eloquent\Builder    $query
      * @param  string                                   $keyword
      * @param  array                                    $roles
-     * @return User
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeSearch(Builder $query, $keyword = '', $roles = array())
     {
