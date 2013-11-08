@@ -34,7 +34,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
     public function testCreatingMethod()
     {
         Acl::swap($acl = m::mock('Acl'));
-        $model = m::mock('Role');
+        $model = m::mock('\Orchestra\Model\Role');
 
         $model->shouldReceive('getAttribute')->once()->with('name')->andReturn('foo');
         $acl->shouldReceive('addRole')->once()->with('foo')->andReturn(null);
@@ -52,7 +52,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
     public function testDeletingMethod()
     {
         Acl::swap($acl = m::mock('Acl'));
-        $model = m::mock('Role');
+        $model = m::mock('\Orchestra\Model\Role');
 
         $model->shouldReceive('getAttribute')->once()->with('name')->andReturn('foo');
         $acl->shouldReceive('removeRole')->once()->with('foo')->andReturn(null);
@@ -70,7 +70,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
     public function testUpdatingMethod()
     {
         Acl::swap($acl = m::mock('Acl'));
-        $model = m::mock('Role');
+        $model = m::mock('\Orchestra\Model\Role');
 
         $model->shouldReceive('getOriginal')->once()->with('name')->andReturn('foo')
             ->shouldReceive('getAttribute')->once()->with('name')->andReturn('foobar')
@@ -91,7 +91,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
     public function testUpdatingMethodForRestoring()
     {
         Acl::swap($acl = m::mock('Acl'));
-        $model = m::mock('Role');
+        $model = m::mock('\Orchestra\Model\Role');
 
         $model->shouldReceive('getOriginal')->once()->with('name')->andReturn('foo')
             ->shouldReceive('getAttribute')->once()->with('name')->andReturn('foobar')

@@ -73,7 +73,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $search  = 'foo%';
         $roles   = array('admin');
 
-        $query = m::mock('QueryBuilder');
+        $query = m::mock('\Illuminate\Database\Eloquent\Builder');
         $query->shouldReceive('with')->once()->with('roles')->andReturn($query)
             ->shouldReceive('whereNotNull')->once()->with('users.id')->andReturn($query)
             ->shouldReceive('join')->once()->with('user_role', 'users.id', '=', 'user_role.user_id')->andReturn($query)

@@ -2,6 +2,7 @@
 
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Support\Facades\Hash;
 use Orchestra\Support\Str;
@@ -53,7 +54,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface
      * @param  array                                    $roles
      * @return User
      */
-    public function scopeSearch($query, $keyword = '', $roles = array())
+    public function scopeSearch(Builder $query, $keyword = '', $roles = array())
     {
         $query->with('roles')->whereNotNull('users.id');
 

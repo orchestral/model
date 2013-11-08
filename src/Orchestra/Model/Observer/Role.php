@@ -1,7 +1,7 @@
 <?php namespace Orchestra\Model\Observer;
 
 use Orchestra\Support\Facades\Acl;
-use Orchestra\Model\Role;
+use Orchestra\Model\Role as Eloquent;
 
 class Role
 {
@@ -11,7 +11,7 @@ class Role
      * @param  \Orchestra\Model\Role    $model
      * @return void
      */
-    public function creating(Role $model)
+    public function creating(Eloquent $model)
     {
         Acl::addRole($model->getAttribute('name'));
     }
@@ -22,7 +22,7 @@ class Role
      * @param  \Orchestra\Model\Role    $model
      * @return void
      */
-    public function deleting(Role $model)
+    public function deleting(Eloquent $model)
     {
         Acl::removeRole($model->getAttribute('name'));
     }
@@ -33,7 +33,7 @@ class Role
      * @param  \Orchestra\Model\Role    $model
      * @return void
      */
-    public function updating(Role $model)
+    public function updating(Eloquent $model)
     {
         $originalName = $model->getOriginal('name');
         $currentName  = $model->getAttribute('name');
