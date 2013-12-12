@@ -1,7 +1,7 @@
 {
 	"name": "orchestra/model",
 	"description": "Orchestra Platform 2 Model Component",
-	"homepage": "http://orchestraplatform.com/docs/2.0/",
+	"homepage": "http://orchestraplatform.com/docs/latest/components/model",
 	"keywords": ["orchestra-platform", "orchestral", "model", "laravel"],
 	"license": "MIT",
 	"authors": [
@@ -12,7 +12,7 @@
 		}
 	],
 	"autoload": {
-		"psr-0": { 
+		"psr-0": {
 			"Orchestra\\Model" : "src/"
 		}
 	},
@@ -21,7 +21,7 @@
 		"orchestra/support": "2.1.*"
 	},
 	"require-dev": {
-		"mockery/mockery": "0.8.0",
+		"mockery/mockery": "0.8.*",
 		"illuminate/auth": "4.1.*",
 		"illuminate/database": "4.1.*"
 	},
