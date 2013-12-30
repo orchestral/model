@@ -18,6 +18,7 @@
 	},
 	"require": {
 		"php": ">=5.3.3",
+		"orchestra/notifier": "2.1.*",
 		"orchestra/support": "2.1.*"
 	},
 	"require-dev": {
