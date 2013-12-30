@@ -4,11 +4,11 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model as Eloquent;
-use Orchestra\Notifier\UserProviderInterface;
+use Orchestra\Notifier\RecipientInterface;
 use Illuminate\Support\Facades\Hash;
 use Orchestra\Support\Str;
 
-class User extends Eloquent implements UserInterface, RemindableInterface, UserProviderInterface
+class User extends Eloquent implements UserInterface, RemindableInterface, RecipientInterface
 {
     /**
      * Available user status as constant.
@@ -124,7 +124,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, UserP
      *
      * @return string
      */
-    public function getNotifierEmail()
+    public function getRecipientEmail()
     {
         return $this->getReminderEmail();
     }
@@ -134,7 +134,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, UserP
      *
      * @return string
      */
-    public function getNotifierName()
+    public function getRecipientName()
     {
         return $this->fullname;
     }
