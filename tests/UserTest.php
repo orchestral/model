@@ -132,28 +132,28 @@ class UserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Orchestra\Model\User::getNotifierEmail() method.
+     * Test Orchestra\Model\User::getRecipientEmail() method.
      *
      * @test
      */
-    public function testGetNotifierEmailMethod()
+    public function testGetRecipientEmailMethod()
     {
         $stub = new User;
         $stub->email = 'admin@orchestraplatform.com';
 
-        $this->assertEquals('admin@orchestraplatform.com', $stub->getNotifierEmail());
+        $this->assertEquals('admin@orchestraplatform.com', $stub->getRecipientEmail());
     }
 
     /**
-     * Test Orchestra\Model\User::getNotifierName() method.
+     * Test Orchestra\Model\User::getRecipientName() method.
      *
      * @test
      */
-    public function testGetNotifierNameMethod()
+    public function testGetRecipientNameMethod()
     {
         $stub = new User;
         $stub->fullname = 'Administrator';
 
-        $this->assertEquals('Administrator', $stub->getNotifierName());
+        $this->assertEquals('Administrator', $stub->getRecipientName());
     }
 }
