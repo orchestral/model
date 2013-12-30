@@ -4,11 +4,11 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model as Eloquent;
-use Orchestra\Notifier\NotifiableInterface;
+use Orchestra\Notifier\UserProviderInterface;
 use Illuminate\Support\Facades\Hash;
 use Orchestra\Support\Str;
 
-class User extends Eloquent implements UserInterface, RemindableInterface, NotifiableInterface
+class User extends Eloquent implements UserInterface, RemindableInterface, UserProviderInterface
 {
     /**
      * Available user status as constant.
