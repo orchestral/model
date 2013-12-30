@@ -108,7 +108,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAuthPasswordMethod()
     {
-        Hash::swap($hash = m::mock('Hasher'));
+        Hash::swap($hash = m::mock('\Illuminate\Hashing\HasherInterface'));
 
         $hash->shouldReceive('make')->once()->with('foo')->andReturn('foobar');
 
@@ -125,9 +125,35 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetReminderEmailMethod()
     {
-        $stub        = new User;
+        $stub = new User;
         $stub->email = 'admin@orchestraplatform.com';
 
         $this->assertEquals('admin@orchestraplatform.com', $stub->getReminderEmail());
+    }
+
+    /**
+     * Test Orchestra\Model\User::getNotifierEmail() method.
+     *
+     * @test
+     */
+    public function testGetNotifierEmailMethod()
+    {
+        $stub = new User;
+        $stub->email = 'admin@orchestraplatform.com';
+
+        $this->assertEquals('admin@orchestraplatform.com', $stub->getNotifierEmail());
+    }
+
+    /**
+     * Test Orchestra\Model\User::getNotifierName() method.
+     *
+     * @test
+     */
+    public function testGetNotifierNameMethod()
+    {
+        $stub = new User;
+        $stub->fullname = 'Administrator';
+
+        $this->assertEquals('Administrator', $stub->getNotifierName());
     }
 }
