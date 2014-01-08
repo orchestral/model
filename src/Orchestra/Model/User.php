@@ -138,4 +138,26 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
     {
         return $this->fullname;
     }
+
+    /**
+     * Assign role to user
+     * 
+     * @param  integer|array $roles
+     * @return void
+     */
+    public function attachRole($roles)
+    {
+        $this->roles()->sync((array) $roles, false);
+    }
+
+    /**
+     * Unassign role from user
+     * 
+     * @param  integer|array $roles
+     * @return void
+     */
+    public function detachRole($roles)
+    {
+        $this->roles()->detach((array) $roles);
+    }
 }
