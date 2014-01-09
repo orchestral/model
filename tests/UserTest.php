@@ -92,6 +92,150 @@ class UserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test Orchestra\Model\User::is() method
+     * 
+     * @test
+     */
+    public function testIsMethod()
+    {
+        $model = m::mock('\Orchestra\Model\User[roles]');
+        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany');
+
+        $model->shouldReceive('roles')->times(4)->andReturn(array('admin', 'editor'));
+
+        $this->assertTrue($model->is('admin'));
+        $this->assertFalse($model->is('user'));
+
+        $this->assertTrue($model->is(array('admin', 'editor')));
+        $this->assertFalse($model->is(array('admin', 'user')));
+    }
+
+    /**
+     * Test Orchestra\Support\Auth::is() method when invalid roles is
+     * returned.
+     *
+     * @test
+     */
+    public function testIsMethodWhenInvalidRolesIsReturned()
+    {
+        $model = m::mock('\Orchestra\Model\User[roles]');
+        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany');
+
+        $model->shouldReceive('roles')->times(4)->andReturn('foo');
+
+        $this->assertFalse($model->is('admin'));
+        $this->assertFalse($model->is('user'));
+
+        $this->assertFalse($model->is(array('admin', 'editor')));
+        $this->assertFalse($model->is(array('admin', 'user')));
+    }
+
+    /**
+     * Test Orchestra\Model\User::isNot() method
+     * 
+     * @test
+     */
+    public function testIsNotMethod()
+    {
+        $model = m::mock('\Orchestra\Model\User[roles]');
+        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany');
+
+        $model->shouldReceive('roles')->times(4)->andReturn(array('admin', 'editor'));
+
+        $this->assertTrue($model->isNot('user'));
+        $this->assertFalse($model->isNot('admin'));
+
+        $this->assertTrue($model->isNot(array('superadmin', 'user')));
+        $this->assertFalse($model->isNot(array('admin', 'editor')));
+    }
+
+    /**
+     * Test Orchestra\Support\Auth::isNot() method when invalid roles is
+     * returned.
+     *
+     * @test
+     */
+    public function testIsNotMethodWhenInvalidRolesIsReturned()
+    {
+        $model = m::mock('\Orchestra\Model\User[roles]');
+        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany');
+
+        $model->shouldReceive('roles')->times(4)->andReturn('foo');
+
+        $this->assertFalse($model->isNot('admin'));
+        $this->assertFalse($model->isNot('user'));
+
+        $this->assertFalse($model->isNot(array('admin', 'editor')));
+        $this->assertFalse($model->isNot(array('admin', 'user')));
+    }
+
+    /**
+     * Test Orchestra\Model\User::isAny() method
+     * 
+     * @test
+     */
+    public function testIsAnyMethod()
+    {
+        $model = m::mock('\Orchestra\Model\User[roles]');
+        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany');
+
+        $model->shouldReceive('roles')->times(2)->andReturn(array('admin', 'editor'));
+
+        $this->assertTrue($model->isAny(array('admin', 'user')));
+        $this->assertFalse($model->isAny(array('superadmin', 'user')));
+    }
+
+    /**
+     * Test Orchestra\Support\Auth::isAny() method when invalid roles is
+     * returned.
+     *
+     * @test
+     */
+    public function testIsAnyMethodWhenInvalidRolesIsReturned()
+    {
+        $model = m::mock('\Orchestra\Model\User[roles]');
+        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany');
+
+        $model->shouldReceive('roles')->times(2)->andReturn('foo');
+
+        $this->assertFalse($model->isAny(array('admin', 'editor')));
+        $this->assertFalse($model->isAny(array('admin', 'user')));
+    }
+
+    /**
+     * Test Orchestra\Model\User::isNotAny() method
+     * 
+     * @test
+     */
+    public function testIsNotAnyMethod()
+    {
+        $model = m::mock('\Orchestra\Model\User[roles]');
+        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany');
+
+        $model->shouldReceive('roles')->times(2)->andReturn(array('admin', 'editor'));
+
+        $this->assertTrue($model->isNotAny(array('admin', 'user')));
+        $this->assertFalse($model->isNotAny(array('admin', 'editor')));
+    }
+
+    /**
+     * Test Orchestra\Support\Auth::isNotAny() method when invalid roles is
+     * returned.
+     *
+     * @test
+     */
+    public function testIsNotAnyMethodWhenInvalidRolesIsReturned()
+    {
+        $model = m::mock('\Orchestra\Model\User[roles]');
+        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany');
+
+        $model->shouldReceive('roles')->times(2)->andReturn('foo');
+
+        $this->assertFalse($model->isNotAny(array('admin', 'editor')));
+        $this->assertFalse($model->isNotAny(array('admin', 'user')));
+    }
+
+    /**
      * Test Orchestra\Model\User::scopeSearch() method.
      *
      * @test
