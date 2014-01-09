@@ -60,6 +60,38 @@ class UserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test Orchestra\Model\User::attachRole() method.
+     *
+     * @test
+     */
+    public function testAttachRoleMethod()
+    {
+        $model = m::mock('\Orchestra\Model\User[roles]');
+        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany[sync]');
+
+        $model->shouldReceive('roles')->once()->andReturn($relationship);
+        $relationship->shouldReceive('sync')->once()->with(array(2), false)->andReturnNull();
+
+        $model->attachRole(2);
+    }
+
+    /**
+     * Test Orchestra\Model\User::detachRole() method.
+     *
+     * @test
+     */
+    public function testDetachRoleMethod()
+    {
+        $model = m::mock('\Orchestra\Model\User[roles]');
+        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany[detach]');
+
+        $model->shouldReceive('roles')->once()->andReturn($relationship);
+        $relationship->shouldReceive('detach')->once()->with(array(2))->andReturnNull();
+
+        $model->detachRole(2);
+    }
+
+    /**
      * Test Orchestra\Model\User::scopeSearch() method.
      *
      * @test

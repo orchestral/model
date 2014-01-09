@@ -140,8 +140,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
     }
 
     /**
-     * Assign role to user
-     * 
+     * Assign role to user.
+     *
      * @param  integer|array $roles
      * @return void
      */
@@ -151,8 +151,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
     }
 
     /**
-     * Unassign role from user
-     * 
+     * Unassign role from user.
+     *
      * @param  integer|array $roles
      * @return void
      */
