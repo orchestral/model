@@ -160,4 +160,122 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
     {
         $this->roles()->detach((array) $roles);
     }
+
+     /**
+     * Determine if current user has the given role.
+     *
+     * @param  string   $roles
+     * @return boolean
+     */
+    public function is($roles)
+    {
+        $userRoles = $this->resolveRolesAsArray();
+
+        // For a pre-caution, we should return false in events where user
+        // roles not an array.
+        if (! is_array($userRoles)) {
+            return false;
+        }
+
+        // We should ensure that all given roles match the current user,
+        // consider it as a AND condition instead of OR.
+        foreach ((array) $roles as $role) {
+            if (! in_array($role, $userRoles)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Determine if current user has any of the given role.
+     *
+     * @param  array   $roles
+     * @return boolean
+     */
+    public function isAny(array $roles)
+    {
+        $userRoles = $this->resolveRolesAsArray();
+
+        // For a pre-caution, we should return false in events where user
+        // roles not an array.
+        if (! is_array($userRoles)) {
+            return false;
+        }
+
+        // We should ensure that any given roles match the current user,
+        // consider it as OR condition.
+        foreach ($roles as $role) {
+            if (in_array($role, $userRoles)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Determine if current user does not has any of the given role.
+     *
+     * @param  string   $roles
+     * @return boolean
+     */
+    public function isNot($roles)
+    {
+        $userRoles = $this->resolveRolesAsArray();
+
+        // For a pre-caution, we should return false in events where user
+        // roles not an array.
+        if (! is_array($userRoles)) {
+            return false;
+        }
+
+        // We should ensure that any given roles does not match the current
+        // user, consider it as OR condition.
+        foreach ((array) $roles as $role) {
+            if (in_array($role, $userRoles)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Determine if current user does not has any of the given role.
+     *
+     * @param  array   $roles
+     * @return boolean
+     */
+    public function isNotAny(array $roles)
+    {
+        $userRoles = $this->resolveRolesAsArray();
+
+        // For a pre-caution, we should return false in events where user
+        // roles not an array.
+        if (! is_array($userRoles)) {
+            return false;
+        }
+
+        // We should ensure that any given roles does not match the current user,
+        // consider it as OR condition.
+        foreach ($roles as $role) {
+            if (! in_array($role, $userRoles)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Resolve roles into array for checking
+     *  
+     * @return array
+     */
+    protected function resolveRolesAsArray()
+    {
+        return $this->roles()->lists('name');
+    }
 }
