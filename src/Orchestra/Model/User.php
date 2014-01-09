@@ -169,7 +169,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
      */
     public function is($roles)
     {
-        $userRoles = $this->roles();
+        $userRoles = $this->resolveRolesAsArray();
 
         // For a pre-caution, we should return false in events where user
         // roles not an array.
@@ -196,7 +196,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
      */
     public function isAny(array $roles)
     {
-        $userRoles = $this->roles();
+        $userRoles = $this->resolveRolesAsArray();
 
         // For a pre-caution, we should return false in events where user
         // roles not an array.
@@ -223,7 +223,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
      */
     public function isNot($roles)
     {
-        $userRoles = $this->roles();
+        $userRoles = $this->resolveRolesAsArray();
 
         // For a pre-caution, we should return false in events where user
         // roles not an array.
@@ -250,7 +250,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
      */
     public function isNotAny(array $roles)
     {
-        $userRoles = $this->roles();
+        $userRoles = $this->resolveRolesAsArray();
 
         // For a pre-caution, we should return false in events where user
         // roles not an array.
@@ -267,5 +267,15 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
         }
 
         return false;
+    }
+
+    /**
+     * Resolve roles into array for checking
+     *  
+     * @return array
+     */
+    protected function resolveRolesAsArray()
+    {
+        return $this->roles()->lists('name');
     }
 }
