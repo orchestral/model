@@ -5,6 +5,11 @@ title: Model Change Log
 
 ## Version 2.1 {#v2-1}
 
+### v2.1.1 {#v2-1-1}
+
+* Fixes `Orchestra\Model\User::isNot()` and `Orchestra\Model\User::isNotAny()` helper class.
+* Rename `Orchestra\Model\User::resolveRolesAsArray()` to `Orchestra\Model\User::getRoles()` with visibility changed to public. Additionally allow relations to be loaded from cache if it's available instead of querying the database each time it being used.
+
 ### v2.1.0 {#v2-1-0}
 
 * Add support for Laravel 4.1 and Orchestra Platform 2.1.
