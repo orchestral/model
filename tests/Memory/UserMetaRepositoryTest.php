@@ -83,14 +83,14 @@ class UserMetaRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $value = m::mock('stdClass', array(
             'id' => 2,
-            'value' => 'foobar',
+            'value' => 's:6:"foobar";',
         ));
 
         $items = array(
-            'foo/user-1'    => '',
-            'foobar/user-1' => 'foo',
+            'foo/user-1'    => 's:0:"";',
+            'foobar/user-1' => 's:3:"foo";',
             'foo/user-2'    => ':to-be-deleted:',
-            'foo/user-'     => ''
+            'foo/user-'     => 's:0:"";'
         );
 
         $app->instance('Orchestra\Model\UserMeta', $eloquent = m::mock('UserMeta'));

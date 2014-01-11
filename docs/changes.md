@@ -9,6 +9,7 @@ title: Model Change Log
 
 * Fixes `Orchestra\Model\User::isNot()` and `Orchestra\Model\User::isNotAny()` helper class.
 * Rename `Orchestra\Model\User::resolveRolesAsArray()` to `Orchestra\Model\User::getRoles()` with visibility changed to public. Additionally allow relations to be loaded from cache if it's available instead of querying the database each time it being used.
+* Serialize storage value on user_meta to allow adding value other than string.
 
 ### v2.1.0 {#v2-1-0}
 

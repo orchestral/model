@@ -50,12 +50,16 @@ class UserMetaRepository extends Handler implements MemoryHandlerInterface
         $userMeta = $this->getModel()->search($name, $userId)->first();
 
         if (! is_null($userMeta)) {
+            if (! $value = @unserialize($userMeta->value)) {
+                $value = $userMeta->value;
+            }
+
             $this->addKey($key, array(
                 'id'    => $userMeta->id,
-                'value' => $userMeta->value,
+                'value' => $value,
             ));
 
-            return $userMeta->value;
+            return $value;
         }
 
         return null;
@@ -113,7 +117,7 @@ class UserMetaRepository extends Handler implements MemoryHandlerInterface
             $meta->user_id = $userId;
         }
 
-        $meta->value = $value;
+        $meta->value = serialize($value);
         $meta->save();
     }
 
