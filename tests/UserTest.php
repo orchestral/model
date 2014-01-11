@@ -93,7 +93,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test Orchestra\Model\User::is() method
-     * 
+     *
      * @test
      */
     public function testIsMethod()
@@ -134,7 +134,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test Orchestra\Model\User::isNot() method
-     * 
+     *
      * @test
      */
     public function testIsNotMethod()
@@ -166,16 +166,16 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $model->shouldReceive('roles')->times(4)->andReturn($relationship);
         $relationship->shouldReceive('lists')->times(4)->andReturn('foo');
 
-        $this->assertFalse($model->isNot('admin'));
-        $this->assertFalse($model->isNot('user'));
+        $this->assertTrue($model->isNot('admin'));
+        $this->assertTrue($model->isNot('user'));
 
-        $this->assertFalse($model->isNot(array('admin', 'editor')));
-        $this->assertFalse($model->isNot(array('admin', 'user')));
+        $this->assertTrue($model->isNot(array('admin', 'editor')));
+        $this->assertTrue($model->isNot(array('admin', 'user')));
     }
 
     /**
      * Test Orchestra\Model\User::isAny() method
-     * 
+     *
      * @test
      */
     public function testIsAnyMethod()
@@ -210,7 +210,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test Orchestra\Model\User::isNotAny() method
-     * 
+     *
      * @test
      */
     public function testIsNotAnyMethod()
@@ -218,10 +218,11 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $model = m::mock('\Orchestra\Model\User[roles]');
         $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany[lists]');
 
-        $model->shouldReceive('roles')->twice()->andReturn($relationship);
-        $relationship->shouldReceive('lists')->twice()->andReturn(array('admin', 'editor'));
+        $model->shouldReceive('roles')->times(3)->andReturn($relationship);
+        $relationship->shouldReceive('lists')->times(3)->andReturn(array('admin', 'editor'));
 
-        $this->assertTrue($model->isNotAny(array('admin', 'user')));
+        $this->assertTrue($model->isNotAny(array('administrator', 'user')));
+        $this->assertFalse($model->isNotAny(array('user', 'editor')));
         $this->assertFalse($model->isNotAny(array('admin', 'editor')));
     }
 
@@ -239,8 +240,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $model->shouldReceive('roles')->twice()->andReturn($relationship);
         $relationship->shouldReceive('lists')->twice()->andReturn('foo');
 
-        $this->assertFalse($model->isNotAny(array('admin', 'editor')));
-        $this->assertFalse($model->isNotAny(array('admin', 'user')));
+        $this->assertTrue($model->isNotAny(array('admin', 'editor')));
+        $this->assertTrue($model->isNotAny(array('admin', 'user')));
     }
 
     /**
