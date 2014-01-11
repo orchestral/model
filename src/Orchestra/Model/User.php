@@ -169,7 +169,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
      */
     public function is($roles)
     {
-        $userRoles = $this->resolveRolesAsArray();
+        $userRoles = $this->getRoles();
 
         // For a pre-caution, we should return false in events where user
         // roles not an array.
@@ -196,7 +196,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
      */
     public function isAny(array $roles)
     {
-        $userRoles = $this->resolveRolesAsArray();
+        $userRoles = $this->getRoles();
 
         // For a pre-caution, we should return false in events where user
         // roles not an array.
@@ -238,12 +238,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
     }
 
     /**
-     * Resolve roles into array for checking
+     * Get roles name as an array.
      *
      * @return array
      */
-    protected function resolveRolesAsArray()
+    public function getRoles()
     {
-        return $this->roles()->lists('name');
+        // If the relationship is already loaded, avoid re-querying the
+        // database and instead fetch the collection.
+        $roles = (array_key_exists('roles', $this->relations) ? $this->relations['roles'] : $this->roles());
+
+        return $roles->lists('name');
     }
 }

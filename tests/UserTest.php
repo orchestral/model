@@ -98,11 +98,9 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsMethod()
     {
-        $model = m::mock('\Orchestra\Model\User[roles]');
-        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany[lists]');
+        $model = m::mock('\Orchestra\Model\User[getRoles]');
 
-        $model->shouldReceive('roles')->times(4)->andReturn($relationship);
-        $relationship->shouldReceive('lists')->times(4)->andReturn(array('admin', 'editor'));
+        $model->shouldReceive('getRoles')->times(4)->andReturn(array('admin', 'editor'));
 
         $this->assertTrue($model->is('admin'));
         $this->assertFalse($model->is('user'));
@@ -119,11 +117,9 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsMethodWhenInvalidRolesIsReturned()
     {
-        $model = m::mock('\Orchestra\Model\User[roles]');
-        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany[lists]');
+        $model = m::mock('\Orchestra\Model\User[getRoles]');
 
-        $model->shouldReceive('roles')->times(4)->andReturn($relationship);
-        $relationship->shouldReceive('lists')->times(4)->andReturn('foo');
+        $model->shouldReceive('getRoles')->times(4)->andReturn('foo');
 
         $this->assertFalse($model->is('admin'));
         $this->assertFalse($model->is('user'));
@@ -139,11 +135,9 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsNotMethod()
     {
-        $model = m::mock('\Orchestra\Model\User[roles]');
-        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany[lists]');
+        $model = m::mock('\Orchestra\Model\User[getRoles]');
 
-        $model->shouldReceive('roles')->times(4)->andReturn($relationship);
-        $relationship->shouldReceive('lists')->times(4)->andReturn(array('admin', 'editor'));
+        $model->shouldReceive('getRoles')->times(4)->andReturn(array('admin', 'editor'));
 
         $this->assertTrue($model->isNot('user'));
         $this->assertFalse($model->isNot('admin'));
@@ -160,11 +154,9 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsNotMethodWhenInvalidRolesIsReturned()
     {
-        $model = m::mock('\Orchestra\Model\User[roles]');
-        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany[lists]');
+        $model = m::mock('\Orchestra\Model\User[getRoles]');
 
-        $model->shouldReceive('roles')->times(4)->andReturn($relationship);
-        $relationship->shouldReceive('lists')->times(4)->andReturn('foo');
+        $model->shouldReceive('getRoles')->times(4)->andReturn('foo');
 
         $this->assertTrue($model->isNot('admin'));
         $this->assertTrue($model->isNot('user'));
@@ -180,11 +172,9 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsAnyMethod()
     {
-        $model = m::mock('\Orchestra\Model\User[roles]');
-        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany[lists]');
+        $model = m::mock('\Orchestra\Model\User[getRoles]');
 
-        $model->shouldReceive('roles')->twice()->andReturn($relationship);
-        $relationship->shouldReceive('lists')->twice()->andReturn(array('admin', 'editor'));
+        $model->shouldReceive('getRoles')->twice()->andReturn(array('admin', 'editor'));
 
         $this->assertTrue($model->isAny(array('admin', 'user')));
         $this->assertFalse($model->isAny(array('superadmin', 'user')));
@@ -198,11 +188,9 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsAnyMethodWhenInvalidRolesIsReturned()
     {
-        $model = m::mock('\Orchestra\Model\User[roles]');
-        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany[lists]');
+        $model = m::mock('\Orchestra\Model\User[getRoles]');
 
-        $model->shouldReceive('roles')->twice()->andReturn($relationship);
-        $relationship->shouldReceive('lists')->times(2)->andReturn('foo');
+        $model->shouldReceive('getRoles')->twice()->andReturn('foo');
 
         $this->assertFalse($model->isAny(array('admin', 'editor')));
         $this->assertFalse($model->isAny(array('admin', 'user')));
@@ -215,11 +203,9 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsNotAnyMethod()
     {
-        $model = m::mock('\Orchestra\Model\User[roles]');
-        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany[lists]');
+        $model = m::mock('\Orchestra\Model\User[getRoles]');
 
-        $model->shouldReceive('roles')->times(3)->andReturn($relationship);
-        $relationship->shouldReceive('lists')->times(3)->andReturn(array('admin', 'editor'));
+        $model->shouldReceive('getRoles')->times(3)->andReturn(array('admin', 'editor'));
 
         $this->assertTrue($model->isNotAny(array('administrator', 'user')));
         $this->assertFalse($model->isNotAny(array('user', 'editor')));
@@ -234,14 +220,35 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsNotAnyMethodWhenInvalidRolesIsReturned()
     {
-        $model = m::mock('\Orchestra\Model\User[roles]');
-        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany[lists]');
+        $model = m::mock('\Orchestra\Model\User[getRoles]');
 
-        $model->shouldReceive('roles')->twice()->andReturn($relationship);
-        $relationship->shouldReceive('lists')->twice()->andReturn('foo');
+        $model->shouldReceive('getRoles')->twice()->andReturn('foo');
 
         $this->assertTrue($model->isNotAny(array('admin', 'editor')));
         $this->assertTrue($model->isNotAny(array('admin', 'user')));
+    }
+
+    /**
+     * Test Orchestra\Model\User::getRoles() method.
+     *
+     * @test
+     */
+    public function testGetRolesMethod()
+    {
+        $model = m::mock('\Orchestra\Model\User[roles]');
+        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany[lists]');
+
+        $model->shouldReceive('roles')->once()->andReturn($relationship);
+        $relationship->shouldReceive('lists')->once()->andReturn(array('admin', 'editor'));
+
+        $this->assertEquals(array('admin', 'editor'), $model->getRoles());
+        /*
+
+        $stub = $model->roles();
+
+        $this->assertInstanceOf('\Illuminate\Database\Eloquent\Relations\BelongsToMany', $stub);
+        $this->assertInstanceOf('\Orchestra\Model\Role', $stub->getQuery()->getModel());
+        */
     }
 
     /**
