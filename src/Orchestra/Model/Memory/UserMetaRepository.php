@@ -99,6 +99,20 @@ class UserMetaRepository extends Handler implements MemoryHandlerInterface
             return ;
         }
 
+        return $this->saving($name, $userId, $value, $isNew);
+    }
+
+    /**
+     * Process saving the value to memory.
+     *
+     * @param  string   $name
+     * @param  mixed    $userId
+     * @param  mixed    $value
+     * @param  boolean  $isNew
+     * @return void
+     */
+    protected function saving($name, $userId, $value = null, $isNew = true)
+    {
         $meta = $this->getModel()->search($name, $userId)->first();
 
         // Deleting a configuration is determined by ':to-be-deleted:'. It
