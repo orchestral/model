@@ -41,8 +41,8 @@ class Role
 
         $isRestoring = function ($model, $deletedAt) {
             return ($model->isSoftDeleting()
-                and is_null($model->getAttribute($deletedAt))
-                and ! is_null($model->getOriginal($deletedAt)));
+                && is_null($model->getAttribute($deletedAt))
+                && ! is_null($model->getOriginal($deletedAt)));
         };
 
         if ($isRestoring($model, $deletedAt)) {
