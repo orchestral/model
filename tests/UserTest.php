@@ -67,7 +67,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
     public function testAttachRoleMethod()
     {
         $model = m::mock('\Orchestra\Model\User[roles]');
-        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany[sync]');
+        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany')->makePartial();
 
         $model->shouldReceive('roles')->once()->andReturn($relationship);
         $relationship->shouldReceive('sync')->once()->with(array(2), false)->andReturnNull();
@@ -83,7 +83,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
     public function testDetachRoleMethod()
     {
         $model = m::mock('\Orchestra\Model\User[roles]');
-        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany[detach]');
+        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany')->makePartial();
 
         $model->shouldReceive('roles')->once()->andReturn($relationship);
         $relationship->shouldReceive('detach')->once()->with(array(2))->andReturnNull();
@@ -236,7 +236,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
     public function testGetRolesMethod()
     {
         $model = m::mock('\Orchestra\Model\User[roles]');
-        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany[lists]');
+        $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany')->makePartial();
 
         $model->shouldReceive('roles')->once()->andReturn($relationship);
         $relationship->shouldReceive('lists')->once()->andReturn(array('admin', 'editor'));

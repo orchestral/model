@@ -97,9 +97,9 @@ class UserMetaRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $eloquent->shouldReceive('newInstance')->times(4)->andReturn($eloquent)
             ->shouldReceive('search')->once()->with('foo', 1)
-                ->andReturn($fooQuery = m::mock('\Illuminate\Database\Eloquent\Builder[first]'))
+                ->andReturn($fooQuery = m::mock('\Illuminate\Database\Eloquent\Builder')->makePartial())
             ->shouldReceive('search')->once()->with('foobar', 1)
-                ->andReturn($foobarQuery = m::mock('\Illuminate\Database\Eloquent\Builder[first]'))
+                ->andReturn($foobarQuery = m::mock('\Illuminate\Database\Eloquent\Builder')->makePartial())
             ->shouldReceive('search')->once()->with('foo', 2)
                 ->andReturn($foobarQuery)
             ->shouldReceive('save')->once()->andReturnNull();
