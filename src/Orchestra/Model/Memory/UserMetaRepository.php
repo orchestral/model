@@ -95,7 +95,7 @@ class UserMetaRepository extends Handler implements MemoryHandlerInterface
 
         // We should be able to ignore this if user id is empty or checksum
         // return the same value (no change occured).
-        if ($this->check($key, $value) or empty($userId)) {
+        if ($this->check($key, $value) || empty($userId)) {
             return ;
         }
 
@@ -117,14 +117,14 @@ class UserMetaRepository extends Handler implements MemoryHandlerInterface
 
         // Deleting a configuration is determined by ':to-be-deleted:'. It
         // would be extremely weird if that is used for other purposed.
-        if (is_null($value) or $value === ':to-be-deleted:') {
-            ! is_null($meta) and $meta->delete();
+        if (is_null($value) || $value === ':to-be-deleted:') {
+            ! is_null($meta) && $meta->delete();
             return ;
         }
 
         // If the content is a new configuration, let push it as a insert
         // instead of an update to Eloquent.
-        if (true === $isNew and is_null($meta)) {
+        if (true === $isNew && is_null($meta)) {
             $meta = $this->getModel();
 
             $meta->name    = $name;

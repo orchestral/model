@@ -22,7 +22,7 @@
 		"orchestra/support": "2.2.*"
 	},
 	"require-dev": {
-		"mockery/mockery": "0.8.*",
+		"mockery/mockery": "0.9.*",
 		"illuminate/auth": "4.2.*",
 		"illuminate/database": "4.2.*"
 	},
