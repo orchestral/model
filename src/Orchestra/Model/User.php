@@ -60,8 +60,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
         $query->with('roles')->whereNotNull('users.id');
 
         if (! empty($roles)) {
-            $query->join('user_role', 'users.id', '=', 'user_role.user_id')
-                ->whereIn('user_role.role_id', $roles);
+            $query->whereHas('roles', function ($query) use ($roles) {
+                $query->whereIn('roles.id', $roles);
+            });
         }
 
         if (! empty($keyword)) {

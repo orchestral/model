@@ -5,6 +5,10 @@ title: Model Change Log
 
 ## Version 2.1 {#v2-1}
 
+### v2.1.2 {#v2-1-1}
+
+* Use `Orchestra\Model\User::whereHas('roles')` to get filtered search instead of doing join query.
+
 ### v2.1.1 {#v2-1-1}
 
 * Fixes `Orchestra\Model\User::isNot()` and `Orchestra\Model\User::isNotAny()` helper class.
@@ -18,7 +22,7 @@ title: Model Change Log
 * Implement `Orchestra\Notifier\RecipientInterface`.
 * Abstract `Orchestra\Model\Memory\UserMetaRepository` and `Orchestra\Model\Memory\UserMetaProvider` from orchestra/foundation which allow it to be used outside of Orchestra Platform.
 * Add multiple helpers method to `Orchestra\Model\User`:
-  - `attachRole()` 
+  - `attachRole()`
   - `detachRole()`
   - `is()`
   - `isAny()`

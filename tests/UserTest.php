@@ -268,8 +268,11 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $query = m::mock('\Illuminate\Database\Eloquent\Builder');
         $query->shouldReceive('with')->once()->with('roles')->andReturn($query)
             ->shouldReceive('whereNotNull')->once()->with('users.id')->andReturn($query)
-            ->shouldReceive('join')->once()->with('user_role', 'users.id', '=', 'user_role.user_id')->andReturn($query)
-            ->shouldReceive('whereIn')->once()->with('user_role.role_id', $roles)->andReturn(null)
+            ->shouldReceive('whereHas')->once()->with('roles', m::type('Closure'))
+                ->andReturnUsing(function ($n, $c) use ($query) {
+                    $c($query);
+                })
+            ->shouldReceive('whereIn')->once()->with('roles.id', $roles)->andReturn(null)
             ->shouldReceive('orWhere')->once()->with('email', 'LIKE', $search)->andReturn($query)
             ->shouldReceive('orWhere')->once()->with('fullname', 'LIKE', $search)->andReturn(null)
             ->shouldReceive('where')->once()->with(m::type('Closure'))->andReturnUsing(function ($q) use ($query, $keyword) {
