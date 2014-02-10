@@ -61,7 +61,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
 
         if (! empty($roles)) {
             $query->whereHas('roles', function ($query) use ($roles) {
-                $query->whereIn('id', $roles);
+                $query->whereIn('roles.id', $roles);
             });
         }
 
