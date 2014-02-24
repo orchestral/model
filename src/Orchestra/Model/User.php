@@ -239,6 +239,30 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
     }
 
     /**
+     * Activate current user
+     * 
+     * @return boolean
+     */
+    public function activate()
+    {
+        $this->attributes['status'] = self::VERIFIED;
+
+        return true;
+    }
+
+    /**
+     * Deactivate current user
+     * 
+     * @return boolean
+     */
+    public function deactivate()
+    {
+        $this->attributes['status'] = self::UNVERIFIED;
+
+        return true;
+    }
+
+    /**
      * Get roles name as an array.
      *
      * @return array
