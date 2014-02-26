@@ -242,13 +242,6 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $relationship->shouldReceive('lists')->once()->andReturn(array('admin', 'editor'));
 
         $this->assertEquals(array('admin', 'editor'), $model->getRoles());
-        /*
-
-        $stub = $model->roles();
-
-        $this->assertInstanceOf('\Illuminate\Database\Eloquent\Relations\BelongsToMany', $stub);
-        $this->assertInstanceOf('\Orchestra\Model\Role', $stub->getQuery()->getModel());
-        */
     }
 
     /**
@@ -350,5 +343,39 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $stub->fullname = 'Administrator';
 
         $this->assertEquals('Administrator', $stub->getRecipientName());
+    }
+
+    /**
+     * Test Orchestra\Model\User::activate() method.
+     *
+     * @test
+     */
+    public function testActivateMethod()
+    {
+        $stub = m::mock('\Orchestra\Model\User[save]');
+
+        $stub->shouldReceive('save')->once();
+
+        $stub->status = 0;
+
+        $this->assertEquals($stub, $stub->activate());
+        $this->assertEquals(1, $stub->status);
+    }
+
+    /**
+     * Test Orchestra\Model\User::deactivate() method.
+     *
+     * @test
+     */
+    public function testDeactivateMethod()
+    {
+        $stub = m::mock('\Orchestra\Model\User[save]');
+
+        $stub->shouldReceive('save')->once();
+
+        $stub->status = 1;
+
+        $this->assertEquals($stub, $stub->deactivate());
+        $this->assertEquals(0, $stub->status);
     }
 }
