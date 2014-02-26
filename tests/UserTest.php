@@ -345,37 +345,103 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Administrator', $stub->getRecipientName());
     }
 
+    
     /**
-     * Test Orchestra\Model\User::activate() method.
-     *
+     * Test Orchestra\Model\User::activate() method
+     * 
      * @test
      */
     public function testActivateMethod()
     {
-        $stub = m::mock('\Orchestra\Model\User[save]');
-
-        $stub->shouldReceive('save')->once();
-
+        $stub = new User;
         $stub->status = 0;
 
         $this->assertEquals($stub, $stub->activate());
-        $this->assertEquals(1, $stub->status);
     }
 
     /**
-     * Test Orchestra\Model\User::deactivate() method.
-     *
+     * Test Orchestra\Model\User::deactivate() method
+     * 
      * @test
      */
     public function testDeactivateMethod()
     {
-        $stub = m::mock('\Orchestra\Model\User[save]');
-
-        $stub->shouldReceive('save')->once();
-
+        $stub = new User;
         $stub->status = 1;
 
         $this->assertEquals($stub, $stub->deactivate());
-        $this->assertEquals(0, $stub->status);
+    }
+
+    /**
+     * Test Orchestra\Model\User::suspend() method
+     * 
+     * @test
+     */
+    public function testSuspendMethod()
+    {
+        $stub = new User;
+        $stub->status = 1;
+
+        $this->assertEquals($stub, $stub->suspend());
+    }
+
+    /**
+     * Test Orchestra\Model\User::isActivated() method when account
+     * is activated
+     * 
+     * @test
+     */
+    public function testIsActivatedMethodReturnTrue()
+    {
+        $stub = new User;
+        $stub->status = 0;
+
+        $stub->activate();
+
+        $this->assertTrue($stub->isActivated());
+    }
+
+    /**
+     * Test Orchestra\Model\User::isActivated() method when account
+     * is not activated
+     * 
+     * @test
+     */
+    public function testIsActivatedMethodReturnFalse()
+    {
+        $stub = new User;
+        $stub->status = 0;
+
+        $this->assertFalse($stub->isActivated());
+    }
+
+    /**
+     * Test Orchestra\Model\User::isSuspended() method when account
+     * is suspended
+     * 
+     * @test
+     */
+    public function testIsSuspendedMethodReturnTrue()
+    {
+        $stub = new User;
+        $stub->status = 0;
+
+        $stub->suspend();
+
+        $this->assertTrue($stub->isSuspended());
+    }
+
+    /**
+     * Test Orchestra\Model\User::isSuspended() method when account
+     * is not suspended
+     * 
+     * @test
+     */
+    public function testIsSuspendedMethodReturnFalse()
+    {
+        $stub = new User;
+        $stub->status = 0;
+
+        $this->assertFalse($stub->isActivated());
     }
 }

@@ -15,6 +15,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
      */
     const UNVERIFIED = 0;
     const VERIFIED   = 1;
+    const SUSPENDED = 9;
 
     /**
      * The database table used by the model.
@@ -246,7 +247,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
     public function activate()
     {
         $this->setAttribute('status', self::VERIFIED);
-        $this->save();
 
         return $this;
     }
@@ -259,9 +259,48 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
     public function deactivate()
     {
         $this->setAttribute('status', self::UNVERIFIED);
-        $this->save();
 
         return $this;
+    }
+
+    /**
+     * Suspend current user
+     * 
+     * @return Orchestra\Model\User
+     */
+    public function suspend()
+    {
+        $this->setAttribute('status', self::SUSPENDED);
+
+        return $this;
+    }
+
+    /**
+     * Determine if the current user account activated or not
+     * 
+     * @return boolean
+     */
+    public function isActivated()
+    {
+        if ($this->getAttribute('status') == self::VERIFIED) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Determine if the current user account suspended or not
+     * 
+     * @return boolean
+     */
+    public function isSuspended()
+    {
+        if ($this->getAttribute('status') == self::SUSPENDED) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
