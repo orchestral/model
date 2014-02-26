@@ -241,25 +241,27 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
     /**
      * Activate current user
      * 
-     * @return boolean
+     * @return Orchestra\Model\User
      */
     public function activate()
     {
-        $this->attributes['status'] = self::VERIFIED;
+        $this->setAttribute('status', self::VERIFIED);
+        $this->save();
 
-        return true;
+        return $this;
     }
 
     /**
      * Deactivate current user
      * 
-     * @return boolean
+     * @return Orchestra\Model\User
      */
     public function deactivate()
     {
-        $this->attributes['status'] = self::UNVERIFIED;
+        $this->setAttribute('status', self::UNVERIFIED);
+        $this->save();
 
-        return true;
+        return $this;
     }
 
     /**

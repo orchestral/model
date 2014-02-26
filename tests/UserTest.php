@@ -351,32 +351,4 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('Administrator', $stub->getRecipientName());
     }
-
-    /**
-     * Test Orchestra\Model\User::activate() method.
-     * 
-     * @test
-     */
-    public function testActivateMethod()
-    {
-        $stub = new User;
-        $stub->status = 0;
-
-        $this->assertTrue($stub->activate());
-        $this->assertEquals(1, $stub->status);
-    }
-
-    /**
-     * Test Orchestra\Model\User::deactivate() method.
-     * 
-     * @test
-     */
-    public function testDeactivateMethod()
-    {
-        $stub = new User;
-        $stub->status = 1;
-
-        $this->assertTrue($stub->deactivate());
-        $this->assertEquals(0, $stub->status);
-    }
 }
