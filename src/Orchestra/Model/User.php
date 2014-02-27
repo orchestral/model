@@ -14,6 +14,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
      * Available user status as constant.
      */
     const UNVERIFIED = 0;
+    const SUSPENDED = 63;
     const VERIFIED   = 1;
 
     /**
@@ -141,6 +142,32 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
     }
 
     /**
+     * Get roles name as an array.
+     *
+     * @return array
+     */
+    public function getRoles()
+    {
+        // If the relationship is already loaded, avoid re-querying the
+        // database and instead fetch the collection.
+        $roles = (array_key_exists('roles', $this->relations) ? $this->relations['roles'] : $this->roles());
+
+        return $roles->lists('name');
+    }
+
+    /**
+     * Activate current user
+     *
+     * @return Orchestra\Model\User
+     */
+    public function activate()
+    {
+        $this->setAttribute('status', self::VERIFIED);
+
+        return $this;
+    }
+
+    /**
      * Assign role to user.
      *
      * @param  integer|array $roles
@@ -149,6 +176,18 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
     public function attachRole($roles)
     {
         $this->roles()->sync((array) $roles, false);
+    }
+
+    /**
+     * Deactivate current user
+     *
+     * @return Orchestra\Model\User
+     */
+    public function deactivate()
+    {
+        $this->setAttribute('status', self::UNVERIFIED);
+
+        return $this;
     }
 
     /**
@@ -187,6 +226,20 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
         }
 
         return true;
+    }
+
+    /**
+     * Determine if the current user account activated or not
+     *
+     * @return boolean
+     */
+    public function isActivated()
+    {
+        if ($this->getAttribute('status') == self::VERIFIED) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -239,42 +292,28 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
     }
 
     /**
-     * Activate current user
-     * 
-     * @return Orchestra\Model\User
-     */
-    public function activate()
-    {
-        $this->setAttribute('status', self::VERIFIED);
-        $this->save();
-
-        return $this;
-    }
-
-    /**
-     * Deactivate current user
-     * 
-     * @return Orchestra\Model\User
-     */
-    public function deactivate()
-    {
-        $this->setAttribute('status', self::UNVERIFIED);
-        $this->save();
-
-        return $this;
-    }
-
-    /**
-     * Get roles name as an array.
+     * Determine if the current user account suspended or not
      *
-     * @return array
+     * @return boolean
      */
-    public function getRoles()
+    public function isSuspended()
     {
-        // If the relationship is already loaded, avoid re-querying the
-        // database and instead fetch the collection.
-        $roles = (array_key_exists('roles', $this->relations) ? $this->relations['roles'] : $this->roles());
+        if ($this->getAttribute('status') == self::SUSPENDED) {
+            return true;
+        }
 
-        return $roles->lists('name');
+        return false;
+    }
+
+    /**
+     * Suspend current user
+     *
+     * @return Orchestra\Model\User
+     */
+    public function suspend()
+    {
+        $this->setAttribute('status', self::SUSPENDED);
+
+        return $this;
     }
 }
