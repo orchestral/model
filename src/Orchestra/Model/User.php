@@ -14,8 +14,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
      * Available user status as constant.
      */
     const UNVERIFIED = 0;
+    const SUSPENDED = 63;
     const VERIFIED   = 1;
-    const SUSPENDED = 9;
 
     /**
      * The database table used by the model.
