@@ -345,10 +345,9 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Administrator', $stub->getRecipientName());
     }
 
-    
     /**
      * Test Orchestra\Model\User::activate() method
-     * 
+     *
      * @test
      */
     public function testActivateMethod()
@@ -361,7 +360,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test Orchestra\Model\User::deactivate() method
-     * 
+     *
      * @test
      */
     public function testDeactivateMethod()
@@ -374,7 +373,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test Orchestra\Model\User::suspend() method
-     * 
+     *
      * @test
      */
     public function testSuspendMethod()
@@ -388,7 +387,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
     /**
      * Test Orchestra\Model\User::isActivated() method when account
      * is activated
-     * 
+     *
      * @test
      */
     public function testIsActivatedMethodReturnTrue()
@@ -404,7 +403,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
     /**
      * Test Orchestra\Model\User::isActivated() method when account
      * is not activated
-     * 
+     *
      * @test
      */
     public function testIsActivatedMethodReturnFalse()
@@ -418,13 +417,15 @@ class UserTest extends \PHPUnit_Framework_TestCase
     /**
      * Test Orchestra\Model\User::isSuspended() method when account
      * is suspended
-     * 
+     *
      * @test
      */
     public function testIsSuspendedMethodReturnTrue()
     {
         $stub = new User;
         $stub->status = 0;
+
+        $this->assertFalse($stub->isSuspended());
 
         $stub->suspend();
 
@@ -434,7 +435,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
     /**
      * Test Orchestra\Model\User::isSuspended() method when account
      * is not suspended
-     * 
+     *
      * @test
      */
     public function testIsSuspendedMethodReturnFalse()
