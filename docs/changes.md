@@ -5,7 +5,7 @@ title: Model Change Log
 
 ## Version 2.1 {#v2-1}
 
-### v2.1.3@dev {#v2-1-3}
+### v2.1.3 {#v2-1-3}
 
 * Add `Orchestra\Model\User::activate()`, `Orchestra\Model\User::deactivate()` and `Orchestra\Model\User::suspend()` helpers.
 * Implement [PSR-4](https://github.com/php-fig/fig-standards/blob/master/proposed/psr-4-autoloader/psr-4-autoloader.md) autoloading structure.
