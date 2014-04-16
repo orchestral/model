@@ -307,6 +307,43 @@ class UserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test Orchestra\Model\User::getRememberToken() method.
+     *
+     * @test
+     */
+    public function testGetRememberTokenMethod()
+    {
+        $stub = new User;
+        $stub->remember_token = 'foobar';
+
+        $this->assertEquals('foobar', $stub->getRememberToken());
+    }
+
+    /**
+     * Test Orchestra\Model\User::setRememberToken() method.
+     *
+     * @test
+     */
+    public function testSetRememberTokenMethod()
+    {
+        $stub = m::mock('\Orchestra\Model\User[setAttribute]');
+        $stub->shouldReceive('setAttribute')->once()->with('remember_token', 'foobar')->andReturnNull();
+
+        $stub->setRememberToken('foobar');
+    }
+
+     /**
+     * Test Orchestra\Model\User::getRememberTokenName() method.
+     *
+     * @test
+     */
+    public function testGetRememberTokenNameMethod()
+    {
+        $stub = new User;
+        $this->assertEquals('remember_token', $stub->getRememberTokenName());
+    }
+
+    /**
      * Test Orchestra\Model\User::getReminderEmail() method.
      *
      * @test
