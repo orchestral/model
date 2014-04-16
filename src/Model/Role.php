@@ -1,9 +1,12 @@
 <?php namespace Orchestra\Model;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class Role extends Eloquent
 {
+    use SoftDeletingTrait;
+
     /**
      * The database table used by the model.
      *
@@ -19,13 +22,6 @@ class Role extends Eloquent
     protected $fillable = array(
         'name',
     );
-
-    /**
-     * Indicates if the model should soft delete.
-     *
-     * @var boolean
-     */
-    protected $softDelete = true;
 
     /**
      * Default roles.

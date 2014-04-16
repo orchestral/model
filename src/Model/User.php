@@ -4,12 +4,15 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use Orchestra\Notifier\RecipientInterface;
 use Illuminate\Support\Facades\Hash;
 use Orchestra\Support\Str;
 
 class User extends Eloquent implements UserInterface, RemindableInterface, RecipientInterface
 {
+    use SoftDeletingTrait;
+
     /**
      * Available user status as constant.
      */
@@ -30,13 +33,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
      * @var array
      */
     protected $hidden = array('password');
-
-    /**
-     * Indicates if the model should soft delete.
-     *
-     * @var boolean
-     */
-    protected $softDelete = true;
 
     /**
      * Has many and belongs to relationship with Role.
