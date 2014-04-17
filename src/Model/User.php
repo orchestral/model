@@ -5,13 +5,15 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
-use Orchestra\Notifier\RecipientInterface;
 use Illuminate\Support\Facades\Hash;
+use Orchestra\Notifier\RecipientInterface;
 use Orchestra\Support\Str;
+use Orchestra\Support\Traits\QueryFilterTrait;
 
 class User extends Eloquent implements UserInterface, RemindableInterface, RecipientInterface
 {
     use SoftDeletingTrait;
+    use QueryFilterTrait;
 
     /**
      * Available user status as constant.
@@ -62,18 +64,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
             });
         }
 
-        if (! empty($keyword)) {
-            $query->where(function ($query) use ($keyword) {
-                $keyword = Str::searchable($keyword);
-
-                foreach ($keyword as $key) {
-                    $query->orWhere('email', 'LIKE', $key)
-                        ->orWhere('fullname', 'LIKE', $key);
-                }
-            });
-        }
-
-        return $query;
+        return $this->setupWildcardQueryFilter($query, $keyword, array('email', 'fullname'));
     }
 
     /**
