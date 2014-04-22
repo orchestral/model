@@ -29,7 +29,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
      *
      * @var array
      */
-    protected $hidden = array('password');
+    protected $hidden = array('password', 'remember_token');
 
     /**
      * Indicates if the model should soft delete.
