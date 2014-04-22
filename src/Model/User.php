@@ -34,7 +34,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
      *
      * @var array
      */
-    protected $hidden = array('password');
+    protected $hidden = array('password', 'remember_token');
 
     /**
      * Has many and belongs to relationship with Role.
