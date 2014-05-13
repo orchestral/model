@@ -8,8 +8,7 @@ use Orchestra\Model\User;
 
 class UserTest extends \PHPUnit_Framework_TestCase
 {
-    use \Orchestra\Support\Traits\EloquentConnectionTrait;
-
+    use \Orchestra\Support\Traits\Testing\EloquentConnectionTrait;
 
     /**
      * Setup the test environment.

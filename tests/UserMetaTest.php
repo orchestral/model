@@ -5,7 +5,7 @@ use Orchestra\Model\UserMeta;
 
 class UserMetaTest extends \PHPUnit_Framework_TestCase
 {
-    use \Orchestra\Support\Traits\EloquentConnectionTrait;
+    use \Orchestra\Support\Traits\Testing\EloquentConnectionTrait;
 
     /**
      * Teardown the test environment.
