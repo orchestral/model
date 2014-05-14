@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use Illuminate\Support\Facades\Hash;
+use Orchestra\Notifier\NotifiableTrait;
 use Orchestra\Notifier\RecipientInterface;
-use Orchestra\Support\Str;
 use Orchestra\Support\Traits\QueryFilterTrait;
 
 class User extends Eloquent implements UserInterface, RemindableInterface, RecipientInterface
 {
-    use UserTrait, RemindableTrait, SoftDeletingTrait, QueryFilterTrait;
+    use NotifiableTrait, QueryFilterTrait, RemindableTrait, SoftDeletingTrait, UserTrait;
 
     /**
      * Available user status as constant.
@@ -193,11 +193,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
      */
     public function isActivated()
     {
-        if ($this->getAttribute('status') == self::VERIFIED) {
-            return true;
-        }
-
-        return false;
+        return ($this->getAttribute('status') == self::VERIFIED);
     }
 
     /**
@@ -256,12 +252,22 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
      */
     public function isSuspended()
     {
-        if ($this->getAttribute('status') == self::SUSPENDED) {
-            return true;
-        }
-
-        return false;
+        return ($this->getAttribute('status') == self::SUSPENDED);
     }
+
+    /**
+     * Send notification for a user.
+     *
+     * @param  string       $subject
+     * @param  string|array $view
+     * @param  array        $data
+     * @return boolean
+     */
+    public function notify($subject, $view, array $data = [])
+    {
+        return $this->sendNotification($this, $subject, $view, $data);
+    }
+
 
     /**
      * Suspend current user
