@@ -8,22 +8,7 @@ use Orchestra\Model\User;
 
 class UserTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Set mock connection
-     */
-    protected function addMockConnection($model)
-    {
-        $resolver = m::mock('Illuminate\Database\ConnectionResolverInterface');
-        $model->setConnectionResolver($resolver);
-        $resolver->shouldReceive('connection')
-            ->andReturn(m::mock('Illuminate\Database\Connection'));
-        $model->getConnection()
-            ->shouldReceive('getQueryGrammar')
-                ->andReturn(m::mock('Illuminate\Database\Query\Grammars\Grammar'));
-        $model->getConnection()
-            ->shouldReceive('getPostProcessor')
-                ->andReturn(m::mock('Illuminate\Database\Query\Processors\Processor'));
-    }
+    use \Orchestra\Support\Traits\Testing\EloquentConnectionTrait;
 
     /**
      * Setup the test environment.
@@ -467,6 +452,23 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $stub->suspend();
 
         $this->assertTrue($stub->isSuspended());
+    }
+
+
+    public function testNotifyMethod()
+    {
+        $stub = m::mock('\Orchestra\Model\User')->makePartial();
+        $stub->shouldAllowMockingProtectedMethods();
+
+        $subject = 'foo';
+        $view    = 'email.notification';
+        $data    = array('foo' => 'bar');
+
+
+        $stub->shouldReceive('sendNotification')->once()
+            ->with($stub, $subject, $view, $data)->andReturn(true);
+
+        $this->assertTrue($stub->notify($subject, $view, $data));
     }
 
     /**
