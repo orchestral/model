@@ -263,7 +263,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
      * @param  array        $data
      * @return boolean
      */
-    public function notify($subject, $view, array $data = [])
+    public function notify($subject, $view, array $data = array())
     {
         return $this->sendNotification($this, $subject, $view, $data);
     }
