@@ -18,13 +18,13 @@
 	},
 	"require": {
 		"php": ">=5.4.0",
-		"orchestra/notifier": "2.2.*",
-		"orchestra/support": "2.2.*"
+		"orchestra/notifier": "2.3.*",
+		"orchestra/support": "2.3.*"
 	},
 	"require-dev": {
 		"mockery/mockery": "0.9.*",
-		"illuminate/auth": "4.2.*",
-		"illuminate/database": "4.2.*"
+		"illuminate/auth": "4.3.*",
+		"illuminate/database": "4.3.*"
 	},
 	"extra": {
 		"branch-alias": {
