@@ -34,6 +34,13 @@ class Role extends Eloquent
     );
 
     /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = array('deleted_at');
+
+    /**
      * Set default roles.
      *
      * @param  array    $roles

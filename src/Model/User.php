@@ -38,6 +38,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
     protected $hidden = array('password', 'remember_token');
 
     /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = array('deleted_at');
+
+    /**
      * Has many and belongs to relationship with Role.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
