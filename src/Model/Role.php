@@ -1,6 +1,5 @@
 <?php namespace Orchestra\Model;
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class Role extends Eloquent

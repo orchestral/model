@@ -37,10 +37,14 @@ class Role
     {
         $originalName = $model->getOriginal('name');
         $currentName  = $model->getAttribute('name');
-        $deletedAt    = $model->getDeletedAtColumn();
+        $deletedAt    = null;
+
+        if ($model->isSoftDeleting()) {
+            $deletedAt = $model->getDeletedAtColumn();
+        }
 
         $isRestoring = function ($model, $deletedAt) {
-            return ($model->isSoftDeleting()
+            return (! is_null($deletedAt)
                 && is_null($model->getAttribute($deletedAt))
                 && ! is_null($model->getOriginal($deletedAt)));
         };
