@@ -74,7 +74,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
 
         $model->shouldReceive('getOriginal')->once()->with('name')->andReturn('foo')
             ->shouldReceive('getAttribute')->once()->with('name')->andReturn('foobar')
-            ->shouldReceive('getDeletedAtColumn')->once()->andReturn('deleted_at')
+            ->shouldReceive('getDeletedAtColumn')->never()->andReturn('deleted_at')
             ->shouldReceive('isSoftDeleting')->once()->andReturn(false);
         $acl->shouldReceive('renameRole')->once()->with('foo', 'foobar')->andReturn(null);
 

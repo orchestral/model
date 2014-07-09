@@ -1,6 +1,5 @@
 <?php namespace Orchestra\Model;
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class Role extends Eloquent
@@ -32,6 +31,13 @@ class Role extends Eloquent
         'admin'  => 1,
         'member' => 2,
     );
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = array('deleted_at');
 
     /**
      * Set default roles.
