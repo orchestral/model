@@ -99,7 +99,7 @@ class UserMetaRepository extends Handler implements MemoryHandlerInterface
             return ;
         }
 
-        return $this->saving($name, $userId, $value, $isNew);
+        $this->saving($name, $userId, $value, $isNew);
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Model\Memory;
 
+use Illuminate\Support\Arr;
 use Orchestra\Memory\Provider;
 
 class UserMetaProvider extends Provider
@@ -14,7 +15,7 @@ class UserMetaProvider extends Provider
     public function get($key = null, $default = null)
     {
         $key   = str_replace('.', '/user-', $key);
-        $value = array_get($this->items, $key);
+        $value = Arr::get($this->items, $key);
 
         // We need to consider if the value pending to be deleted,
         // in this case return the default.
@@ -63,6 +64,7 @@ class UserMetaProvider extends Provider
     public function forget($key = null)
     {
         $key = str_replace('.', '/user-', $key);
-        return array_set($this->items, $key, ':to-be-deleted:');
+
+        return Arr::set($this->items, $key, ':to-be-deleted:');
     }
 }

@@ -122,7 +122,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
     /**
      * Activate current user
      *
-     * @return Orchestra\Model\User
+     * @return \Orchestra\Model\User
      */
     public function activate()
     {
@@ -145,7 +145,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
     /**
      * Deactivate current user
      *
-     * @return Orchestra\Model\User
+     * @return \Orchestra\Model\User
      */
     public function deactivate()
     {
@@ -278,7 +278,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Recip
     /**
      * Suspend current user
      *
-     * @return Orchestra\Model\User
+     * @return \Orchestra\Model\User
      */
     public function suspend()
     {
