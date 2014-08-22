@@ -1,7 +1,7 @@
 <?php namespace Orchestra\Model;
 
 use Illuminate\Auth\UserTrait;
-use Illuminate\Auth\UserInterface;
+use Illuminate\Contracts\Auth\User as UserContract;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 use Illuminate\Database\Eloquent\Builder;
@@ -11,7 +11,7 @@ use Orchestra\Notifier\NotifiableTrait;
 use Orchestra\Notifier\RecipientInterface;
 use Orchestra\Support\Traits\QueryFilterTrait;
 
-class User extends Eloquent implements UserInterface, RemindableInterface, RecipientInterface
+class User extends Eloquent implements UserContract, RemindableInterface, RecipientInterface
 {
     use NotifiableTrait, QueryFilterTrait, RemindableTrait, SoftDeletingTrait, UserTrait;
 

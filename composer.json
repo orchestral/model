@@ -18,6 +18,7 @@
 	},
 	"require": {
 		"php": ">=5.4.0",
+		"illuminate/contracts": "4.3.*",
 		"orchestra/notifier": "2.3.*",
 		"orchestra/support": "2.3.*"
 	},
