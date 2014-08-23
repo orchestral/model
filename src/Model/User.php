@@ -3,7 +3,7 @@
 use Illuminate\Auth\UserTrait;
 use Illuminate\Contracts\Auth\User as UserContract;
 use Illuminate\Auth\Reminders\RemindableTrait;
-use Illuminate\Auth\Reminders\RemindableInterface;
+use Illuminate\Contracts\Auth\Remindable as RemindableContract;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use Illuminate\Support\Facades\Hash;
@@ -11,7 +11,7 @@ use Orchestra\Notifier\NotifiableTrait;
 use Orchestra\Notifier\RecipientInterface;
 use Orchestra\Support\Traits\QueryFilterTrait;
 
-class User extends Eloquent implements UserContract, RemindableInterface, RecipientInterface
+class User extends Eloquent implements UserContract, RemindableContract, RecipientInterface
 {
     use NotifiableTrait, QueryFilterTrait, RemindableTrait, SoftDeletingTrait, UserTrait;
 
