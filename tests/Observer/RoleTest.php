@@ -3,7 +3,7 @@
 use Mockery as m;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Container\Container;
-use Orchestra\Support\Facades\Acl;
+use Orchestra\Support\Facades\ACL;
 use Orchestra\Model\Observer\Role as RoleObserver;
 
 class RoleTest extends \PHPUnit_Framework_TestCase
@@ -33,7 +33,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreatingMethod()
     {
-        Acl::swap($acl = m::mock('Acl'));
+        ACL::swap($acl = m::mock('Acl'));
         $model = m::mock('\Orchestra\Model\Role');
 
         $model->shouldReceive('getAttribute')->once()->with('name')->andReturn('foo');
@@ -51,7 +51,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
      */
     public function testDeletingMethod()
     {
-        Acl::swap($acl = m::mock('Acl'));
+        ACL::swap($acl = m::mock('Acl'));
         $model = m::mock('\Orchestra\Model\Role');
 
         $model->shouldReceive('getAttribute')->once()->with('name')->andReturn('foo');
@@ -69,7 +69,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdatingMethod()
     {
-        Acl::swap($acl = m::mock('Acl'));
+        ACL::swap($acl = m::mock('Acl'));
         $model = m::mock('\Orchestra\Model\Role');
 
         $model->shouldReceive('getOriginal')->once()->with('name')->andReturn('foo')
@@ -90,7 +90,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdatingMethodForRestoring()
     {
-        Acl::swap($acl = m::mock('Acl'));
+        ACL::swap($acl = m::mock('Acl'));
         $model = m::mock('\Orchestra\Model\Role');
 
         $model->shouldReceive('getOriginal')->once()->with('name')->andReturn('foo')
