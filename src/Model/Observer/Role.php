@@ -1,7 +1,7 @@
 <?php namespace Orchestra\Model\Observer;
 
-use Orchestra\Support\Facades\ACL;
 use Orchestra\Model\Role as Eloquent;
+use Orchestra\Support\Facades\ACL;
 
 class Role
 {
