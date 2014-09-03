@@ -1,6 +1,6 @@
 <?php namespace Orchestra\Model\Observer;
 
-use Orchestra\Support\Facades\Acl;
+use Orchestra\Support\Facades\ACL;
 use Orchestra\Model\Role as Eloquent;
 
 class Role
@@ -13,7 +13,7 @@ class Role
      */
     public function creating(Eloquent $model)
     {
-        Acl::addRole($model->getAttribute('name'));
+        ACL::addRole($model->getAttribute('name'));
     }
 
     /**
@@ -24,7 +24,7 @@ class Role
      */
     public function deleting(Eloquent $model)
     {
-        Acl::removeRole($model->getAttribute('name'));
+        ACL::removeRole($model->getAttribute('name'));
     }
 
     /**
@@ -50,9 +50,9 @@ class Role
         };
 
         if ($isRestoring($model, $deletedAt)) {
-            Acl::addRole($currentName);
+            ACL::addRole($currentName);
         } else {
-            Acl::renameRole($originalName, $currentName);
+            ACL::renameRole($originalName, $currentName);
         }
     }
 }
