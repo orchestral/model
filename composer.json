@@ -1,6 +1,6 @@
 {
 	"name": "orchestra/model",
-	"description": "Orchestra Platform 2 Model Component",
+	"description": "Model Component for Orchestra Platform",
 	"homepage": "http://orchestraplatform.com/docs/latest/components/model",
 	"keywords": ["orchestra-platform", "orchestral", "model", "laravel"],
 	"license": "MIT",
@@ -18,18 +18,18 @@
 	},
 	"require": {
 		"php": ">=5.4.0",
-		"illuminate/contracts": "4.3.*",
-		"orchestra/notifier": "2.3.*",
-		"orchestra/support": "2.3.*"
+		"illuminate/contracts": "5.0.*",
+		"orchestra/notifier": "3.0.*",
+		"orchestra/support": "3.0.*"
 	},
 	"require-dev": {
 		"mockery/mockery": "0.9.*",
-		"illuminate/auth": "4.3.*",
-		"illuminate/database": "4.3.*"
+		"illuminate/auth": "5.0.*",
+		"illuminate/database": "5.0.*"
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "2.3-dev"
+			"dev-master": "3.0-dev"
 		}
 	},
 	"minimum-stability": "dev"
