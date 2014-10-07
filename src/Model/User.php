@@ -1,15 +1,15 @@
 <?php namespace Orchestra\Model;
 
 use Illuminate\Auth\UserTrait;
-use Illuminate\Contracts\Auth\User as UserContract;
-use Illuminate\Auth\Reminders\RemindableTrait;
-use Illuminate\Contracts\Auth\Remindable as RemindableContract;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use Illuminate\Support\Facades\Hash;
 use Orchestra\Notifier\NotifiableTrait;
+use Illuminate\Database\Eloquent\Builder;
 use Orchestra\Notifier\RecipientInterface;
+use Illuminate\Auth\Reminders\RemindableTrait;
 use Orchestra\Support\Traits\QueryFilterTrait;
+use Illuminate\Contracts\Auth\User as UserContract;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use Illuminate\Contracts\Auth\Remindable as RemindableContract;
 
 class User extends Eloquent implements UserContract, RemindableContract, RecipientInterface
 {
