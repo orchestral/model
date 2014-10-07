@@ -2,14 +2,14 @@
 
 use Illuminate\Auth\UserTrait;
 use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableTrait;
-use Illuminate\Auth\Reminders\RemindableInterface;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use Illuminate\Support\Facades\Hash;
 use Orchestra\Notifier\NotifiableTrait;
+use Illuminate\Database\Eloquent\Builder;
 use Orchestra\Notifier\RecipientInterface;
+use Illuminate\Auth\Reminders\RemindableTrait;
 use Orchestra\Support\Traits\QueryFilterTrait;
+use Illuminate\Auth\Reminders\RemindableInterface;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class User extends Eloquent implements UserInterface, RemindableInterface, RecipientInterface
 {
