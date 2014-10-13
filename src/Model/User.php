@@ -5,15 +5,15 @@ use Illuminate\Support\Facades\Hash;
 use Orchestra\Notifier\NotifiableTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Orchestra\Notifier\RecipientInterface;
-use Illuminate\Auth\Reminders\RemindableTrait;
 use Orchestra\Support\Traits\QueryFilterTrait;
 use Illuminate\Contracts\Auth\User as UserContract;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
-use Illuminate\Contracts\Auth\Remindable as RemindableContract;
+use Illuminate\Auth\Passwords\CanResetPasswordTrait;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Eloquent implements UserContract, RemindableContract, RecipientInterface
+class User extends Eloquent implements UserContract, CanResetPasswordContract, RecipientInterface
 {
-    use NotifiableTrait, QueryFilterTrait, RemindableTrait, SoftDeletingTrait, UserTrait;
+    use NotifiableTrait, QueryFilterTrait, CanResetPasswordTrait, SoftDeletingTrait, UserTrait;
 
     /**
      * Available user status as constant.
