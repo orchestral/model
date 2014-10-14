@@ -34,14 +34,14 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
      *
      * @var array
      */
-    protected $hidden = array('password', 'remember_token');
+    protected $hidden = ['password', 'remember_token'];
 
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    protected $dates = array('deleted_at');
+    protected $dates = ['deleted_at'];
 
     /**
      * Has many and belongs to relationship with Role.
@@ -92,7 +92,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
      */
     public function getRecipientEmail()
     {
-        return $this->getReminderEmail();
+        return $this->getEmailForPasswordReset();
     }
 
     /**
@@ -102,7 +102,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
      */
     public function getRecipientName()
     {
-        return $this->fullname;
+        return $this->getAttribute('fullname');
     }
 
     /**

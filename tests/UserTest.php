@@ -329,16 +329,16 @@ class UserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Orchestra\Model\User::getReminderEmail() method.
+     * Test Orchestra\Model\User::getEmailForPasswordReset() method.
      *
      * @test
      */
-    public function testGetReminderEmailMethod()
+    public function testGetEmailForPasswordResetMethod()
     {
         $stub = new User;
         $stub->email = 'admin@orchestraplatform.com';
 
-        $this->assertEquals('admin@orchestraplatform.com', $stub->getReminderEmail());
+        $this->assertEquals('admin@orchestraplatform.com', $stub->getEmailForPasswordReset());
     }
 
     /**
