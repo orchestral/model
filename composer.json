@@ -19,6 +19,7 @@
 	"require": {
 		"php": ">=5.4.0",
 		"illuminate/contracts": "5.0.*",
+		"orchestra/contracts": "3.0.*",
 		"orchestra/notifier": "3.0.*",
 		"orchestra/support": "3.0.*"
 	},

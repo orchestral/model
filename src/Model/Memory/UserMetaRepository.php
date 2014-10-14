@@ -1,10 +1,10 @@
 <?php namespace Orchestra\Model\Memory;
 
 use Orchestra\Memory\Abstractable\Handler;
-use Orchestra\Memory\MemoryHandlerInterface;
 use Illuminate\Contracts\Container\Container;
+use Orchestra\Contracts\Memory\MemoryHandler;
 
-class UserMetaRepository extends Handler implements MemoryHandlerInterface
+class UserMetaRepository extends Handler implements MemoryHandler
 {
     /**
      * Storage name.
@@ -54,10 +54,10 @@ class UserMetaRepository extends Handler implements MemoryHandlerInterface
                 $value = $userMeta->value;
             }
 
-            $this->addKey($key, array(
+            $this->addKey($key, [
                 'id'    => $userMeta->id,
                 'value' => $value,
-            ));
+            ]);
 
             return $value;
         }
@@ -69,9 +69,9 @@ class UserMetaRepository extends Handler implements MemoryHandlerInterface
      * Add a finish event.
      *
      * @param  array   $items
-     * @return boolean
+     * @return bool
      */
-    public function finish(array $items = array())
+    public function finish(array $items = [])
     {
         foreach ($items as $key => $value) {
             $this->save($key, $value);
@@ -108,7 +108,7 @@ class UserMetaRepository extends Handler implements MemoryHandlerInterface
      * @param  string   $name
      * @param  mixed    $userId
      * @param  mixed    $value
-     * @param  boolean  $isNew
+     * @param  bool     $isNew
      * @return void
      */
     protected function saving($name, $userId, $value = null, $isNew = true)
