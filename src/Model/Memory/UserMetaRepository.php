@@ -1,8 +1,8 @@
 <?php namespace Orchestra\Model\Memory;
 
-use Illuminate\Contracts\Container\Container;
 use Orchestra\Memory\Abstractable\Handler;
 use Orchestra\Memory\MemoryHandlerInterface;
+use Illuminate\Contracts\Container\Container;
 
 class UserMetaRepository extends Handler implements MemoryHandlerInterface
 {

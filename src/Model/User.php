@@ -4,14 +4,14 @@ use Illuminate\Auth\UserTrait;
 use Illuminate\Support\Facades\Hash;
 use Orchestra\Notifier\NotifiableTrait;
 use Illuminate\Database\Eloquent\Builder;
-use Orchestra\Notifier\RecipientInterface;
 use Orchestra\Support\Traits\QueryFilterTrait;
+use Orchestra\Contracts\Notification\Recipient;
 use Illuminate\Contracts\Auth\User as UserContract;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use Illuminate\Auth\Passwords\CanResetPasswordTrait;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Eloquent implements UserContract, CanResetPasswordContract, RecipientInterface
+class User extends Eloquent implements UserContract, CanResetPasswordContract, Recipient
 {
     use NotifiableTrait, QueryFilterTrait, CanResetPasswordTrait, SoftDeletingTrait, UserTrait;
 
