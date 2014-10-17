@@ -1,6 +1,6 @@
 <?php namespace Orchestra\Model\Memory;
 
-use Orchestra\Memory\Abstractable\Handler;
+use Orchestra\Memory\Handler;
 use Illuminate\Contracts\Container\Container;
 use Orchestra\Contracts\Memory\Handler as HandlerContract;
 
