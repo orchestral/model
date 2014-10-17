@@ -2,9 +2,9 @@
 
 use Orchestra\Memory\Abstractable\Handler;
 use Illuminate\Contracts\Container\Container;
-use Orchestra\Contracts\Memory\MemoryHandler;
+use Orchestra\Contracts\Memory\Handler as HandlerContract;
 
-class UserMetaRepository extends Handler implements MemoryHandler
+class UserMetaRepository extends Handler implements HandlerContract
 {
     /**
      * Storage name.
