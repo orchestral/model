@@ -71,7 +71,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
             });
         }
 
-        return $this->setupWildcardQueryFilter($query, $keyword, array('email', 'fullname'));
+        return $this->setupWildcardQueryFilter($query, $keyword, ['email', 'fullname']);
     }
 
     /**
