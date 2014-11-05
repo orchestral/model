@@ -264,12 +264,12 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     /**
      * Send notification for a user.
      *
-     * @param  string  $subject
-     * @param  string|array  $view
+     * @param  \Orchestra\Contracts\Notification\Message|string  $subject
+     * @param  string|array|null  $view
      * @param  array  $data
      * @return bool
      */
-    public function notify($subject, $view, array $data = [])
+    public function notify($subject, $view = null, array $data = [])
     {
         return $this->sendNotification($this, $subject, $view, $data);
     }
