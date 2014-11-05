@@ -18,26 +18,24 @@ class Role extends Eloquent
      *
      * @var array
      */
-    protected $fillable = array(
-        'name',
-    );
+    protected $fillable = ['name'];
 
     /**
      * Default roles.
      *
      * @var array
      */
-    protected static $defaultRoles = array(
+    protected static $defaultRoles = [
         'admin'  => 1,
         'member' => 2,
-    );
+    ];
 
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    protected $dates = array('deleted_at');
+    protected $dates = ['deleted_at'];
 
     /**
      * Set default roles.

@@ -16,9 +16,9 @@ class UserMeta extends Eloquent
      *
      * @var array
      */
-    protected $fillable = array(
+    protected $fillable = [
         'value',
-    );
+    ];
 
     /**
      * Belongs to relationship with User.
@@ -33,9 +33,9 @@ class UserMeta extends Eloquent
     /**
      * Return a meta data belong to a user.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder    $query
-     * @param  string                                   $name
-     * @param  integer                                  $userId
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  string  $name
+     * @param  int  $userId
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeSearch(Builder $query, $name, $userId)

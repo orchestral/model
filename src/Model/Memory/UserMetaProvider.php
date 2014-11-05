@@ -8,8 +8,8 @@ class UserMetaProvider extends Provider
     /**
      * Get value of a key
      *
-     * @param  string   $key        A string of key to search.
-     * @param  mixed    $default    Default value if key doesn't exist.
+     * @param  string  $key        A string of key to search.
+     * @param  mixed   $default    Default value if key doesn't exist.
      * @return mixed
      */
     public function get($key = null, $default = null)
@@ -41,8 +41,8 @@ class UserMetaProvider extends Provider
     /**
      * Set a value from a key.
      *
-     * @param  string   $key        A string of key to add the value.
-     * @param  mixed    $value      The value.
+     * @param  string  $key        A string of key to add the value.
+     * @param  mixed   $value      The value.
      * @return mixed
      */
     public function put($key, $value = '')

@@ -16,9 +16,9 @@ class UserMetaRepository extends Handler implements HandlerContract
     /**
      * Setup a new memory handler.
      *
-     * @param  string                                       $name
-     * @param  array                                        $config
-     * @param  \Illuminate\Contracts\Container\Container    $repository
+     * @param  string  $name
+     * @param  array  $config
+     * @param  \Illuminate\Contracts\Container\Container  $repository
      */
     public function __construct($name, array $config, Container $repository)
     {
@@ -34,7 +34,7 @@ class UserMetaRepository extends Handler implements HandlerContract
      */
     public function initiate()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -68,7 +68,7 @@ class UserMetaRepository extends Handler implements HandlerContract
     /**
      * Add a finish event.
      *
-     * @param  array   $items
+     * @param  array  $items
      * @return bool
      */
     public function finish(array $items = [])
@@ -105,10 +105,10 @@ class UserMetaRepository extends Handler implements HandlerContract
     /**
      * Process saving the value to memory.
      *
-     * @param  string   $name
-     * @param  mixed    $userId
-     * @param  mixed    $value
-     * @param  bool     $isNew
+     * @param  string  $name
+     * @param  mixed   $userId
+     * @param  mixed   $value
+     * @param  bool    $isNew
      * @return void
      */
     protected function saving($name, $userId, $value = null, $isNew = true)
