@@ -1,10 +1,10 @@
 <?php namespace Orchestra\Model;
 
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Role extends Eloquent
 {
-    use SoftDeletingTrait;
+    use SoftDeletes;
 
     /**
      * The database table used by the model.
