@@ -14,6 +14,13 @@ class Role extends Eloquent
     protected $table = 'roles';
 
     /**
+     * The class name to be used in polymorphic relations.
+     *
+     * @var string
+     */
+    protected $morphClass = 'Role';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array

@@ -16,18 +16,25 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     use Authenticatable, NotifiableTrait, QueryFilterTrait, CanResetPassword, SoftDeletes;
 
     /**
-     * Available user status as constant.
-     */
-    const UNVERIFIED = 0;
-    const SUSPENDED = 63;
-    const VERIFIED   = 1;
-
-    /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'users';
+
+    /**
+     * The class name to be used in polymorphic relations.
+     *
+     * @var string
+     */
+    protected $morphClass = 'User';
+
+    /**
+     * Available user status as constant.
+     */
+    const UNVERIFIED = 0;
+    const SUSPENDED = 63;
+    const VERIFIED   = 1;
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -56,9 +63,9 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     /**
      * Search user based on keyword as roles.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  string  $keyword
-     * @param  array  $roles
+     * @param  \Illuminate\Database\Eloquent\Builder   $query
+     * @param  string   $keyword
+     * @param  array   $roles
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeSearch(Builder $query, $keyword = '', $roles = [])
@@ -134,7 +141,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     /**
      * Assign role to user.
      *
-     * @param  int|array  $roles
+     * @param  int|array   $roles
      * @return void
      */
     public function attachRole($roles)
@@ -157,7 +164,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     /**
      * Un-assign role from user.
      *
-     * @param  int|array  $roles
+     * @param  int|array   $roles
      * @return void
      */
     public function detachRole($roles)
@@ -168,7 +175,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
      /**
      * Determine if current user has the given role.
      *
-     * @param  string  $roles
+     * @param  string   $roles
      * @return bool
      */
     public function is($roles)
@@ -205,7 +212,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     /**
      * Determine if current user has any of the given role.
      *
-     * @param  array  $roles
+     * @param  array   $roles
      * @return bool
      */
     public function isAny(array $roles)
@@ -232,7 +239,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     /**
      * Determine if current user does not has any of the given role.
      *
-     * @param  string  $roles
+     * @param  string   $roles
      * @return bool
      */
     public function isNot($roles)
@@ -243,7 +250,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     /**
      * Determine if current user does not has any of the given role.
      *
-     * @param  array  $roles
+     * @param  array   $roles
      * @return bool
      */
     public function isNotAny(array $roles)
@@ -264,16 +271,15 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     /**
      * Send notification for a user.
      *
-     * @param  \Orchestra\Contracts\Notification\Message|string  $subject
-     * @param  string|array|null  $view
-     * @param  array  $data
+     * @param  \Orchestra\Contracts\Notification\Message|string   $subject
+     * @param  string|array|null   $view
+     * @param  array   $data
      * @return bool
      */
     public function notify($subject, $view = null, array $data = [])
     {
         return $this->sendNotification($this, $subject, $view, $data);
     }
-
 
     /**
      * Suspend current user
