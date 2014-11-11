@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Orchestra\Support\Traits\QueryFilterTrait;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Orchestra\Contracts\Notification\Recipient;
-use Illuminate\Contracts\Auth\User as UserContract;
+use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Eloquent implements UserContract, CanResetPasswordContract, Recipient

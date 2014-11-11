@@ -1,14 +1,15 @@
 <?php namespace Orchestra\Model\TestCase;
 
 use Mockery as m;
-use Illuminate\Support\Facades\Facade;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Container\Container;
 use Orchestra\Model\User;
+use Illuminate\Container\Container;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Facade;
+use Orchestra\Support\Traits\Testing\EloquentConnectionTrait;
 
 class UserTest extends \PHPUnit_Framework_TestCase
 {
-    use \Orchestra\Support\Traits\Testing\EloquentConnectionTrait;
+    use EloquentConnectionTrait;
 
     /**
      * Setup the test environment.
