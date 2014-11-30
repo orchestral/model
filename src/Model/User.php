@@ -63,9 +63,9 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     /**
      * Search user based on keyword as roles.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder   $query
-     * @param  string   $keyword
-     * @param  array   $roles
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  string  $keyword
+     * @param  array  $roles
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeSearch(Builder $query, $keyword = '', $roles = [])
@@ -84,7 +84,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     /**
      * Set `password` mutator.
      *
-     * @param  string   $value
+     * @param  string  $value
      * @return void
      */
     public function setPasswordAttribute($value)
@@ -141,7 +141,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     /**
      * Assign role to user.
      *
-     * @param  int|array   $roles
+     * @param  int|array  $roles
      * @return void
      */
     public function attachRole($roles)
@@ -164,7 +164,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     /**
      * Un-assign role from user.
      *
-     * @param  int|array   $roles
+     * @param  int|array  $roles
      * @return void
      */
     public function detachRole($roles)
@@ -175,7 +175,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
      /**
      * Determine if current user has the given role.
      *
-     * @param  string   $roles
+     * @param  string  $roles
      * @return bool
      */
     public function is($roles)
@@ -212,7 +212,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     /**
      * Determine if current user has any of the given role.
      *
-     * @param  array   $roles
+     * @param  array  $roles
      * @return bool
      */
     public function isAny(array $roles)
@@ -239,7 +239,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     /**
      * Determine if current user does not has any of the given role.
      *
-     * @param  string   $roles
+     * @param  string  $roles
      * @return bool
      */
     public function isNot($roles)
@@ -250,7 +250,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     /**
      * Determine if current user does not has any of the given role.
      *
-     * @param  array   $roles
+     * @param  array  $roles
      * @return bool
      */
     public function isNotAny(array $roles)
@@ -271,9 +271,9 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     /**
      * Send notification for a user.
      *
-     * @param  \Orchestra\Contracts\Notification\Message|string   $subject
-     * @param  string|array|null   $view
-     * @param  array   $data
+     * @param  \Orchestra\Contracts\Notification\Message|string  $subject
+     * @param  string|array|null  $view
+     * @param  array  $data
      * @return \Orchestra\Contracts\Notification\Receipt
      */
     public function notify($subject, $view = null, array $data = [])

@@ -47,7 +47,7 @@ class Role extends Eloquent
     /**
      * Set default roles.
      *
-     * @param  array    $roles
+     * @param  array  $roles
      * @return void
      */
     public static function setDefaultRoles(array $roles)
@@ -68,7 +68,7 @@ class Role extends Eloquent
     /**
      * Get default roles for Orchestra Platform
      *
-     * @return Role
+     * @return $this|null
      */
     public static function admin()
     {
@@ -78,7 +78,7 @@ class Role extends Eloquent
     /**
      * Get default member roles for Orchestra Platform
      *
-     * @return Role
+     * @return $this|null
      */
     public static function member()
     {

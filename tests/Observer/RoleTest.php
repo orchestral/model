@@ -1,22 +1,11 @@
 <?php namespace Orchestra\Model\Observer\TestCase;
 
 use Mockery as m;
-use Illuminate\Support\Facades\Facade;
-use Illuminate\Container\Container;
 use Orchestra\Support\Facades\ACL;
 use Orchestra\Model\Observer\Role as RoleObserver;
 
 class RoleTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Setup the test environment.
-     */
-    public function setUp()
-    {
-        Facade::clearResolvedInstances();
-        Facade::setFacadeApplication(new Container);
-    }
-
     /**
      * Teardown the test environment.
      */
@@ -33,13 +22,13 @@ class RoleTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreatingMethod()
     {
-        ACL::swap($acl = m::mock('Acl'));
+        $acl = m::mock('Orchestra\Contracts\Authorization\Factory');
         $model = m::mock('\Orchestra\Model\Role');
 
         $model->shouldReceive('getAttribute')->once()->with('name')->andReturn('foo');
         $acl->shouldReceive('addRole')->once()->with('foo')->andReturn(null);
 
-        $stub = new RoleObserver;
+        $stub = new RoleObserver($acl);
         $stub->creating($model);
     }
 
@@ -51,13 +40,13 @@ class RoleTest extends \PHPUnit_Framework_TestCase
      */
     public function testDeletingMethod()
     {
-        ACL::swap($acl = m::mock('Acl'));
+        $acl = m::mock('Orchestra\Contracts\Authorization\Factory');
         $model = m::mock('\Orchestra\Model\Role');
 
         $model->shouldReceive('getAttribute')->once()->with('name')->andReturn('foo');
         $acl->shouldReceive('removeRole')->once()->with('foo')->andReturn(null);
 
-        $stub = new RoleObserver;
+        $stub = new RoleObserver($acl);
         $stub->deleting($model);
     }
 
@@ -69,7 +58,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdatingMethod()
     {
-        ACL::swap($acl = m::mock('Acl'));
+        $acl = m::mock('Orchestra\Contracts\Authorization\Factory');
         $model = m::mock('\Orchestra\Model\Role');
 
         $model->shouldReceive('getOriginal')->once()->with('name')->andReturn('foo')
@@ -78,7 +67,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('isSoftDeleting')->once()->andReturn(false);
         $acl->shouldReceive('renameRole')->once()->with('foo', 'foobar')->andReturn(null);
 
-        $stub = new RoleObserver;
+        $stub = new RoleObserver($acl);
         $stub->updating($model);
     }
 
@@ -90,7 +79,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdatingMethodForRestoring()
     {
-        ACL::swap($acl = m::mock('Acl'));
+        $acl = m::mock('Orchestra\Contracts\Authorization\Factory');
         $model = m::mock('\Orchestra\Model\Role');
 
         $model->shouldReceive('getOriginal')->once()->with('name')->andReturn('foo')
@@ -101,7 +90,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('getAttribute')->once()->with('deleted_at')->andReturn(null);
         $acl->shouldReceive('addRole')->once()->with('foobar')->andReturn(null);
 
-        $stub = new RoleObserver;
+        $stub = new RoleObserver($acl);
         $stub->updating($model);
     }
 }

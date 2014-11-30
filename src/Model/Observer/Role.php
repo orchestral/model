@@ -1,36 +1,53 @@
 <?php namespace Orchestra\Model\Observer;
 
-use Orchestra\Support\Facades\ACL;
 use Orchestra\Model\Role as Eloquent;
+use Orchestra\Contracts\Authorization\Factory;
 
 class Role
 {
     /**
+     * The authorization factory implementation.
+     *
+     * @var \Orchestra\Contracts\Authorization\Factory
+     */
+    protected $acl;
+
+    /**
+     * Construct a new role observer.
+     *
+     * @param  \Orchestra\Contracts\Authorization\Factory  $acl
+     */
+    public function __construct(Factory $acl)
+    {
+        $this->acl = $acl;
+    }
+
+    /**
      * On creating observer.
      *
-     * @param  \Orchestra\Model\Role    $model
+     * @param  \Orchestra\Model\Role  $model
      * @return void
      */
     public function creating(Eloquent $model)
     {
-        ACL::addRole($model->getAttribute('name'));
+        $this->acl->addRole($model->getAttribute('name'));
     }
 
     /**
      * On deleting observer.
      *
-     * @param  \Orchestra\Model\Role    $model
+     * @param  \Orchestra\Model\Role  $model
      * @return void
      */
     public function deleting(Eloquent $model)
     {
-        ACL::removeRole($model->getAttribute('name'));
+        $this->acl->removeRole($model->getAttribute('name'));
     }
 
     /**
      * On updating/restoring observer.
      *
-     * @param  \Orchestra\Model\Role    $model
+     * @param  \Orchestra\Model\Role  $model
      * @return void
      */
     public function updating(Eloquent $model)
@@ -50,9 +67,9 @@ class Role
         };
 
         if ($isRestoring($model, $deletedAt)) {
-            ACL::addRole($currentName);
+            $this->acl->addRole($currentName);
         } else {
-            ACL::renameRole($originalName, $currentName);
+            $this->acl->renameRole($originalName, $currentName);
         }
     }
 }
