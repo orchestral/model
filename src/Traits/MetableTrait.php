@@ -13,9 +13,11 @@ trait MetableTrait
     public function getMetaAttribute($value)
     {
         $meta = null;
+
         if (! is_null($value)) {
             $meta = json_decode($value, true);
         }
+
         return new Meta($meta);
     }
     /**
@@ -26,8 +28,10 @@ trait MetableTrait
      */
     public function setMetaAttribute(Meta $value = null)
     {
-        if (! is_null($value)) {
-            $this->attributes['meta'] = $value->toJson();
+        if (is_null($value)) {
+            return;
         }
+        
+        $this->attributes['meta'] = $value->toJson();
     }
 }
