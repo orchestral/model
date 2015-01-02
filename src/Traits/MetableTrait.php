@@ -12,7 +12,7 @@ trait MetableTrait
      */
     public function getMetaAttribute($value)
     {
-        $meta = null;
+        $meta = [];
 
         if (! is_null($value)) {
             $meta = json_decode($value, true);
