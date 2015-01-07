@@ -58,8 +58,6 @@ class UserMetaRepository extends Handler implements HandlerContract
         if (! isset($this->userMeta[$userId])) {
             $data = $this->getModel()->where('user_id', '=', $userId)->get();
 
-            $this->processRetrievedData($userId, $data);
-
             $this->userMeta[$userId] = $this->processRetrievedData($userId, $data);
         }
 
