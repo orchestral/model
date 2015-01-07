@@ -83,10 +83,10 @@ class UserMetaRepository extends Handler implements HandlerContract
      * Process retrieved data.
      *
      * @param  string|int  $userId
-     * @param  array  $data
+     * @param  \Illuminate\Support\Collection|array  $data
      * @return void
      */
-    protected function processRetrievedData($userId, array $data = [])
+    protected function processRetrievedData($userId, $data = [])
     {
         $items = [];
 
