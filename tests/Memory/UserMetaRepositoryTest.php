@@ -1,6 +1,7 @@
 <?php namespace Orchestra\Model\Memory\TestCase;
 
 use Mockery as m;
+use Illuminate\Support\Fluent;
 use Illuminate\Container\Container;
 use Orchestra\Model\Memory\UserMetaRepository;
 
@@ -9,7 +10,7 @@ class UserMetaRepositoryTest extends \PHPUnit_Framework_TestCase
     /**
      * Application instance.
      *
-     * @var Illuminate\Model\Memory\Application
+     * @var \Illuminate\Container\Container
      */
     private $app = null;
 
@@ -52,19 +53,17 @@ class UserMetaRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $app = $this->app;
 
-        $value = (object) array(
-            'id' => 2,
-            'value' => 'foobar',
-        );
-
         $app->instance('Orchestra\Model\UserMeta', $eloquent = m::mock('UserMeta'));
 
-        $eloquent->shouldReceive('newInstance')->twice()->andReturn($eloquent)
-            ->shouldReceive('search')->once()->with('foo', 1)->andReturn($fooQuery = m::mock('Model\Query'))
-            ->shouldReceive('search')->once()->with('foobar', 1)->andReturn($foobarQuery = m::mock('Model\Query'));
-
-        $fooQuery->shouldReceive('first')->andReturn($value);
-        $foobarQuery->shouldReceive('first')->andReturn(null);
+        $eloquent->shouldReceive('newInstance')->once()->andReturn($eloquent)
+            ->shouldReceive('where')->once()->with('user_id', '=', 1)->andReturnSelf()
+            ->shouldReceive('get')->once()->andReturn(array(
+                0 => new Fluent(array(
+                    'name' => 'foo',
+                    'id' => 2,
+                    'value' => 'foobar',
+                )),
+            ));
 
         $stub = new UserMetaRepository('meta', array(), $app);
 

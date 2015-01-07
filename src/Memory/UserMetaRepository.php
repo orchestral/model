@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Model\Memory;
 
+use Illuminate\Support\Arr;
 use Orchestra\Memory\Handler;
 use Illuminate\Contracts\Container\Container;
 use Orchestra\Contracts\Memory\Handler as HandlerContract;
@@ -12,6 +13,13 @@ class UserMetaRepository extends Handler implements HandlerContract
      * @var string
      */
     protected $storage = 'user';
+
+    /**
+     * Cached user meta.
+     *
+     * @var array
+     */
+    protected $userMeta = [];
 
     /**
      * Setup a new memory handler.
@@ -47,22 +55,15 @@ class UserMetaRepository extends Handler implements HandlerContract
     {
         list($name, $userId) = explode('/user-', $key);
 
-        $userMeta = $this->getModel()->search($name, $userId)->first();
+        if (! isset($this->userMeta[$userId])) {
+            $data = $this->getModel()->where('user_id', '=', $userId)->get();
 
-        if (! is_null($userMeta)) {
-            if (! $value = @unserialize($userMeta->value)) {
-                $value = $userMeta->value;
-            }
+            $this->processRetrievedData($userId, $data);
 
-            $this->addKey($key, [
-                'id'    => $userMeta->id,
-                'value' => $value,
-            ]);
-
-            return $value;
+            $this->userMeta[$userId] = $this->processRetrievedData($userId, $data);
         }
 
-        return null;
+        return Arr::get($this->userMeta, "{$userId}.{$name}");
     }
 
     /**
@@ -78,6 +79,35 @@ class UserMetaRepository extends Handler implements HandlerContract
         }
 
         return true;
+    }
+
+    /**
+     * Process retrieved data.
+     *
+     * @param  string|int  $userId
+     * @param  array  $data
+     * @return void
+     */
+    protected function processRetrievedData($userId, array $data = [])
+    {
+        $items = [];
+
+        foreach ($data as $meta) {
+            if (! $value = @unserialize($meta->value)) {
+                $value = $meta->value;
+            }
+
+            $key = $meta->name;
+
+            $this->addKey("{$key}/user-{$userId}", [
+                'id' => $meta->id,
+                'value' => $value,
+            ]);
+
+            $items[$key] = $value;
+        }
+
+        return $items;
     }
 
     /**
