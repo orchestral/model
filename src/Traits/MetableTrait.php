@@ -1,7 +1,7 @@
 <?php namespace Orchestra\Model\Traits;
 
-use Illuminate\Contracts\Support\Arrayable;
 use Orchestra\Model\Value\Meta;
+use Illuminate\Contracts\Support\Arrayable;
 
 trait MetableTrait
 {
