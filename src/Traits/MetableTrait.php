@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Model\Traits;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Orchestra\Model\Value\Meta;
 
 trait MetableTrait
@@ -23,15 +24,32 @@ trait MetableTrait
     /**
      * `meta` field mutator.
      *
-     * @param  \Orchestra\Model\Value\Meta|null  $value
+     * @param  mixed  $value
      * @return void
      */
-    public function setMetaAttribute(Meta $value = null)
+    public function setMetaAttribute($value = null)
+    {
+        $this->attributes['meta'] = $this->mutateMetaAttribute($value);
+    }
+
+    /**
+     * Get value from mixed content.
+     *
+     * @param  mixed  $value
+     * @return mixed
+     */
+    protected function mutateMetaAttribute($value)
     {
         if (is_null($value)) {
-            return;
+            return $value;
         }
-        
-        $this->attributes['meta'] = $value->toJson();
+
+        if ($value instanceof Arrayable) {
+            $value = $value->toArray();
+        } elseif (! is_array($value)) {
+            $value = (array) $value;
+        }
+
+        return json_encode($value);
     }
 }
