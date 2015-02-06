@@ -1,6 +1,6 @@
 {
 	"name": "orchestra/model",
-	"description": "Orchestra Platform 2 Model Component",
+	"description": "Model Component for Orchestra Platform",
 	"homepage": "http://orchestraplatform.com/docs/latest/components/model",
 	"keywords": ["orchestra-platform", "orchestral", "model", "laravel"],
 	"license": "MIT",
@@ -28,7 +28,7 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "2.3-dev"
+			"dev-master": "3.1-dev"
 		}
 	},
 	"minimum-stability": "dev"
