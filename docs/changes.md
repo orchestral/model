@@ -3,6 +3,16 @@ title: Model Change Log
 
 ---
 
+## Version 3.0 {#v3-0}
+
+### v3.0.0 {#v3-0-0}
+
+* Update support to Laravel Framework v5.0.
+* Simplify PSR-4 path.
+* Implements soft caching on `Orchestra\Model\Memory\UserMetaRepository`.
+* Set `$morphClass` for relevant `Eloquent` classes.
+* Add `Orchestra\Model\Traits\MetableTrait` to easily handle json data using `Orchestra\Model\Value\Meta`.
+
 ## Version 2.2 {#v2-2}
 
 ### v2.2.1 {#v2-2-1}
