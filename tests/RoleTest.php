@@ -61,7 +61,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
                 ->andReturn($processor = m::mock('Illuminate\Database\Query\Processors\Processor'));
 
         $grammar->shouldReceive('compileSelect')->once()->andReturn('SELECT * FROM `roles` WHERE id=?');
-        $connection->shouldReceive('select')->once()->with('SELECT * FROM `roles` WHERE id=?', array(10))->andReturn(null);
+        $connection->shouldReceive('select')->once()->with('SELECT * FROM `roles` WHERE id=?', array(10), true)->andReturn(null);
         $processor->shouldReceive('processSelect')->once()->andReturn(array());
 
         $model->admin();
@@ -88,7 +88,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
                 ->andReturn($processor = m::mock('Illuminate\Database\Query\Processors\Processor'));
 
         $grammar->shouldReceive('compileSelect')->once()->andReturn('SELECT * FROM `roles` WHERE id=?');
-        $connection->shouldReceive('select')->once()->with('SELECT * FROM `roles` WHERE id=?', array(20))->andReturn(null);
+        $connection->shouldReceive('select')->once()->with('SELECT * FROM `roles` WHERE id=?', array(20), true)->andReturn(null);
         $processor->shouldReceive('processSelect')->once()->andReturn(array());
 
         $model->member();
