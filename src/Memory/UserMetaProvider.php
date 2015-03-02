@@ -6,10 +6,11 @@ use Orchestra\Memory\Provider;
 class UserMetaProvider extends Provider
 {
     /**
-     * Get value of a key
+     * Get value of a key.
      *
      * @param  string  $key        A string of key to search.
      * @param  mixed   $default    Default value if key doesn't exist.
+     *
      * @return mixed
      */
     public function get($key = null, $default = null)
@@ -43,6 +44,7 @@ class UserMetaProvider extends Provider
      *
      * @param  string  $key        A string of key to add the value.
      * @param  mixed   $value      The value.
+     *
      * @return mixed
      */
     public function put($key, $value = '')
@@ -59,6 +61,7 @@ class UserMetaProvider extends Provider
      * Delete value of a key.
      *
      * @param  string   $key        A string of key to delete.
+     *
      * @return boolean
      */
     public function forget($key = null)

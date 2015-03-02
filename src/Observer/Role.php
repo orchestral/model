@@ -26,6 +26,7 @@ class Role
      * On creating observer.
      *
      * @param  \Orchestra\Model\Role  $model
+     *
      * @return void
      */
     public function creating(Eloquent $model)
@@ -37,6 +38,7 @@ class Role
      * On deleting observer.
      *
      * @param  \Orchestra\Model\Role  $model
+     *
      * @return void
      */
     public function deleting(Eloquent $model)
@@ -48,6 +50,7 @@ class Role
      * On updating/restoring observer.
      *
      * @param  \Orchestra\Model\Role  $model
+     *
      * @return void
      */
     public function updating(Eloquent $model)
