@@ -12,7 +12,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        Role::setDefaultRoles(array('admin' => 10, 'member' => 20));
+        Role::setDefaultRoles(['admin' => 10, 'member' => 20]);
     }
 
     /**
@@ -30,7 +30,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsersMethod()
     {
-        $model = new Role;
+        $model = new Role();
 
         $this->addMockConnection($model);
 
@@ -47,7 +47,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
      */
     public function testAdminMethod()
     {
-        $model = new Role;
+        $model = new Role();
 
         $resolver = m::mock('Illuminate\Database\ConnectionResolverInterface');
         $model->setConnectionResolver($resolver);
@@ -61,8 +61,8 @@ class RoleTest extends \PHPUnit_Framework_TestCase
                 ->andReturn($processor = m::mock('Illuminate\Database\Query\Processors\Processor'));
 
         $grammar->shouldReceive('compileSelect')->once()->andReturn('SELECT * FROM `roles` WHERE id=?');
-        $connection->shouldReceive('select')->once()->with('SELECT * FROM `roles` WHERE id=?', array(10), true)->andReturn(null);
-        $processor->shouldReceive('processSelect')->once()->andReturn(array());
+        $connection->shouldReceive('select')->once()->with('SELECT * FROM `roles` WHERE id=?', [10], true)->andReturn(null);
+        $processor->shouldReceive('processSelect')->once()->andReturn([]);
 
         $model->admin();
     }
@@ -74,7 +74,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
      */
     public function testMemberMethod()
     {
-        $model = new Role;
+        $model = new Role();
 
         $resolver = m::mock('Illuminate\Database\ConnectionResolverInterface');
         $model->setConnectionResolver($resolver);
@@ -88,8 +88,8 @@ class RoleTest extends \PHPUnit_Framework_TestCase
                 ->andReturn($processor = m::mock('Illuminate\Database\Query\Processors\Processor'));
 
         $grammar->shouldReceive('compileSelect')->once()->andReturn('SELECT * FROM `roles` WHERE id=?');
-        $connection->shouldReceive('select')->once()->with('SELECT * FROM `roles` WHERE id=?', array(20), true)->andReturn(null);
-        $processor->shouldReceive('processSelect')->once()->andReturn(array());
+        $connection->shouldReceive('select')->once()->with('SELECT * FROM `roles` WHERE id=?', [20], true)->andReturn(null);
+        $processor->shouldReceive('processSelect')->once()->andReturn([]);
 
         $model->member();
     }

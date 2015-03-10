@@ -10,6 +10,7 @@ class Meta extends Fluent
      *
      * @param  string  $key
      * @param  mixed   $default
+     *
      * @return mixed
      */
     public function get($key, $default = null)
@@ -22,6 +23,7 @@ class Meta extends Fluent
      *
      * @param  string  $key    A string of key to add the value.
      * @param  mixed   $value  The value.
+     *
      * @return $this
      */
     public function put($key, $value = '')

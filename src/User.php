@@ -33,7 +33,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
      * Available user status as constant.
      */
     const UNVERIFIED = 0;
-    const SUSPENDED = 63;
+    const SUSPENDED  = 63;
     const VERIFIED   = 1;
 
     /**
@@ -66,6 +66,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @param  string  $keyword
      * @param  array  $roles
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeSearch(Builder $query, $keyword = '', $roles = [])
@@ -85,6 +86,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
      * Set `password` mutator.
      *
      * @param  string  $value
+     *
      * @return void
      */
     public function setPasswordAttribute($value)
@@ -127,7 +129,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     }
 
     /**
-     * Activate current user
+     * Activate current user.
      *
      * @return \Orchestra\Model\User
      */
@@ -142,6 +144,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
      * Assign role to user.
      *
      * @param  int|array  $roles
+     *
      * @return void
      */
     public function attachRole($roles)
@@ -150,7 +153,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     }
 
     /**
-     * Deactivate current user
+     * Deactivate current user.
      *
      * @return \Orchestra\Model\User
      */
@@ -165,6 +168,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
      * Un-assign role from user.
      *
      * @param  int|array  $roles
+     *
      * @return void
      */
     public function detachRole($roles)
@@ -172,10 +176,11 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
         $this->roles()->detach((array) $roles);
     }
 
-     /**
+    /**
      * Determine if current user has the given role.
      *
      * @param  string  $roles
+     *
      * @return bool
      */
     public function is($roles)
@@ -200,7 +205,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     }
 
     /**
-     * Determine if the current user account activated or not
+     * Determine if the current user account activated or not.
      *
      * @return bool
      */
@@ -213,6 +218,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
      * Determine if current user has any of the given role.
      *
      * @param  array  $roles
+     *
      * @return bool
      */
     public function isAny(array $roles)
@@ -240,6 +246,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
      * Determine if current user does not has any of the given role.
      *
      * @param  string  $roles
+     *
      * @return bool
      */
     public function isNot($roles)
@@ -251,6 +258,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
      * Determine if current user does not has any of the given role.
      *
      * @param  array  $roles
+     *
      * @return bool
      */
     public function isNotAny(array $roles)
@@ -259,7 +267,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     }
 
     /**
-     * Determine if the current user account suspended or not
+     * Determine if the current user account suspended or not.
      *
      * @return bool
      */
@@ -274,6 +282,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
      * @param  \Orchestra\Contracts\Notification\Message|string  $subject
      * @param  string|array|null  $view
      * @param  array  $data
+     *
      * @return \Orchestra\Contracts\Notification\Receipt
      */
     public function notify($subject, $view = null, array $data = [])
@@ -282,7 +291,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     }
 
     /**
-     * Suspend current user
+     * Suspend current user.
      *
      * @return \Orchestra\Model\User
      */

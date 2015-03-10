@@ -49,6 +49,7 @@ class UserMetaRepository extends Handler implements HandlerContract
      * Get value from database.
      *
      * @param  string   $key
+     *
      * @return mixed
      */
     public function retrieve($key)
@@ -68,6 +69,7 @@ class UserMetaRepository extends Handler implements HandlerContract
      * Add a finish event.
      *
      * @param  array  $items
+     *
      * @return bool
      */
     public function finish(array $items = [])
@@ -84,6 +86,7 @@ class UserMetaRepository extends Handler implements HandlerContract
      *
      * @param  string|int  $userId
      * @param  \Illuminate\Support\Collection|array  $data
+     *
      * @return void
      */
     protected function processRetrievedData($userId, $data = [])
@@ -98,7 +101,7 @@ class UserMetaRepository extends Handler implements HandlerContract
             $key = $meta->name;
 
             $this->addKey("{$key}/user-{$userId}", [
-                'id' => $meta->id,
+                'id'    => $meta->id,
                 'value' => $value,
             ]);
 
@@ -113,6 +116,7 @@ class UserMetaRepository extends Handler implements HandlerContract
      *
      * @param  mixed    $key
      * @param  mixed    $value
+     *
      * @return void
      */
     protected function save($key, $value)
@@ -137,6 +141,7 @@ class UserMetaRepository extends Handler implements HandlerContract
      * @param  mixed   $userId
      * @param  mixed   $value
      * @param  bool    $isNew
+     *
      * @return void
      */
     protected function saving($name, $userId, $value = null, $isNew = true)

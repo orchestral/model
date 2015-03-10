@@ -22,7 +22,7 @@ class UserMetaTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsersMethod()
     {
-        $model = new UserMeta;
+        $model = new UserMeta();
 
         $this->addMockConnection($model);
 
@@ -44,6 +44,6 @@ class UserMetaTest extends \PHPUnit_Framework_TestCase
         $query->shouldReceive('where')->once()->with('user_id', '=', 1)->andReturn($query)
             ->shouldReceive('where')->once()->with('name', '=', 'foo')->andReturn($query);
 
-        with(new UserMeta)->scopeSearch($query, 'foo', 1);
+        with(new UserMeta())->scopeSearch($query, 'foo', 1);
     }
 }

@@ -17,7 +17,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         Facade::clearResolvedInstances();
-        Facade::setFacadeApplication(new Container);
+        Facade::setFacadeApplication(new Container());
     }
 
     /**
@@ -35,7 +35,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testRolesMethod()
     {
-        $model = new User;
+        $model = new User();
 
         $this->addMockConnection($model);
 
@@ -52,11 +52,11 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testAttachRoleMethod()
     {
-        $model = m::mock('\Orchestra\Model\User[roles]');
+        $model        = m::mock('\Orchestra\Model\User[roles]');
         $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany')->makePartial();
 
         $model->shouldReceive('roles')->once()->andReturn($relationship);
-        $relationship->shouldReceive('sync')->once()->with(array(2), false)->andReturnNull();
+        $relationship->shouldReceive('sync')->once()->with([2], false)->andReturnNull();
 
         $model->attachRole(2);
     }
@@ -68,17 +68,17 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testDetachRoleMethod()
     {
-        $model = m::mock('\Orchestra\Model\User[roles]');
+        $model        = m::mock('\Orchestra\Model\User[roles]');
         $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany')->makePartial();
 
         $model->shouldReceive('roles')->once()->andReturn($relationship);
-        $relationship->shouldReceive('detach')->once()->with(array(2))->andReturnNull();
+        $relationship->shouldReceive('detach')->once()->with([2])->andReturnNull();
 
         $model->detachRole(2);
     }
 
     /**
-     * Test Orchestra\Model\User::is() method
+     * Test Orchestra\Model\User::is() method.
      *
      * @test
      */
@@ -86,13 +86,13 @@ class UserTest extends \PHPUnit_Framework_TestCase
     {
         $model = m::mock('\Orchestra\Model\User[getRoles]');
 
-        $model->shouldReceive('getRoles')->times(4)->andReturn(array('admin', 'editor'));
+        $model->shouldReceive('getRoles')->times(4)->andReturn(['admin', 'editor']);
 
         $this->assertTrue($model->is('admin'));
         $this->assertFalse($model->is('user'));
 
-        $this->assertTrue($model->is(array('admin', 'editor')));
-        $this->assertFalse($model->is(array('admin', 'user')));
+        $this->assertTrue($model->is(['admin', 'editor']));
+        $this->assertFalse($model->is(['admin', 'user']));
     }
 
     /**
@@ -110,12 +110,12 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($model->is('admin'));
         $this->assertFalse($model->is('user'));
 
-        $this->assertFalse($model->is(array('admin', 'editor')));
-        $this->assertFalse($model->is(array('admin', 'user')));
+        $this->assertFalse($model->is(['admin', 'editor']));
+        $this->assertFalse($model->is(['admin', 'user']));
     }
 
     /**
-     * Test Orchestra\Model\User::isNot() method
+     * Test Orchestra\Model\User::isNot() method.
      *
      * @test
      */
@@ -123,13 +123,13 @@ class UserTest extends \PHPUnit_Framework_TestCase
     {
         $model = m::mock('\Orchestra\Model\User[getRoles]');
 
-        $model->shouldReceive('getRoles')->times(4)->andReturn(array('admin', 'editor'));
+        $model->shouldReceive('getRoles')->times(4)->andReturn(['admin', 'editor']);
 
         $this->assertTrue($model->isNot('user'));
         $this->assertFalse($model->isNot('admin'));
 
-        $this->assertTrue($model->isNot(array('superadmin', 'user')));
-        $this->assertFalse($model->isNot(array('admin', 'editor')));
+        $this->assertTrue($model->isNot(['superadmin', 'user']));
+        $this->assertFalse($model->isNot(['admin', 'editor']));
     }
 
     /**
@@ -147,12 +147,12 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($model->isNot('admin'));
         $this->assertTrue($model->isNot('user'));
 
-        $this->assertTrue($model->isNot(array('admin', 'editor')));
-        $this->assertTrue($model->isNot(array('admin', 'user')));
+        $this->assertTrue($model->isNot(['admin', 'editor']));
+        $this->assertTrue($model->isNot(['admin', 'user']));
     }
 
     /**
-     * Test Orchestra\Model\User::isAny() method
+     * Test Orchestra\Model\User::isAny() method.
      *
      * @test
      */
@@ -160,10 +160,10 @@ class UserTest extends \PHPUnit_Framework_TestCase
     {
         $model = m::mock('\Orchestra\Model\User[getRoles]');
 
-        $model->shouldReceive('getRoles')->twice()->andReturn(array('admin', 'editor'));
+        $model->shouldReceive('getRoles')->twice()->andReturn(['admin', 'editor']);
 
-        $this->assertTrue($model->isAny(array('admin', 'user')));
-        $this->assertFalse($model->isAny(array('superadmin', 'user')));
+        $this->assertTrue($model->isAny(['admin', 'user']));
+        $this->assertFalse($model->isAny(['superadmin', 'user']));
     }
 
     /**
@@ -178,12 +178,12 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
         $model->shouldReceive('getRoles')->twice()->andReturn('foo');
 
-        $this->assertFalse($model->isAny(array('admin', 'editor')));
-        $this->assertFalse($model->isAny(array('admin', 'user')));
+        $this->assertFalse($model->isAny(['admin', 'editor']));
+        $this->assertFalse($model->isAny(['admin', 'user']));
     }
 
     /**
-     * Test Orchestra\Model\User::isNotAny() method
+     * Test Orchestra\Model\User::isNotAny() method.
      *
      * @test
      */
@@ -191,11 +191,11 @@ class UserTest extends \PHPUnit_Framework_TestCase
     {
         $model = m::mock('\Orchestra\Model\User[getRoles]');
 
-        $model->shouldReceive('getRoles')->times(3)->andReturn(array('admin', 'editor'));
+        $model->shouldReceive('getRoles')->times(3)->andReturn(['admin', 'editor']);
 
-        $this->assertTrue($model->isNotAny(array('administrator', 'user')));
-        $this->assertFalse($model->isNotAny(array('user', 'editor')));
-        $this->assertFalse($model->isNotAny(array('admin', 'editor')));
+        $this->assertTrue($model->isNotAny(['administrator', 'user']));
+        $this->assertFalse($model->isNotAny(['user', 'editor']));
+        $this->assertFalse($model->isNotAny(['admin', 'editor']));
     }
 
     /**
@@ -210,8 +210,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
         $model->shouldReceive('getRoles')->twice()->andReturn('foo');
 
-        $this->assertTrue($model->isNotAny(array('admin', 'editor')));
-        $this->assertTrue($model->isNotAny(array('admin', 'user')));
+        $this->assertTrue($model->isNotAny(['admin', 'editor']));
+        $this->assertTrue($model->isNotAny(['admin', 'user']));
     }
 
     /**
@@ -221,13 +221,13 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRolesMethod()
     {
-        $model = m::mock('\Orchestra\Model\User[roles]');
+        $model        = m::mock('\Orchestra\Model\User[roles]');
         $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany')->makePartial();
 
         $model->shouldReceive('roles')->once()->andReturn($relationship);
-        $relationship->shouldReceive('lists')->once()->andReturn(array('admin', 'editor'));
+        $relationship->shouldReceive('lists')->once()->andReturn(['admin', 'editor']);
 
-        $this->assertEquals(array('admin', 'editor'), $model->getRoles());
+        $this->assertEquals(['admin', 'editor'], $model->getRoles());
     }
 
     /**
@@ -237,12 +237,12 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testScopeSearchMethod()
     {
-        $model = new User;
+        $model = new User();
         $this->addMockConnection($model);
 
         $keyword = 'foo*';
         $search  = 'foo%';
-        $roles   = array('admin');
+        $roles   = ['admin'];
 
         $query = m::mock('\Illuminate\Database\Eloquent\Builder');
         $query->shouldReceive('with')->once()->with('roles')->andReturn($query)
@@ -259,7 +259,6 @@ class UserTest extends \PHPUnit_Framework_TestCase
             });
 
         $this->assertEquals($query, $model->scopeSearch($query, $keyword, $roles));
-
     }
 
     /**
@@ -269,7 +268,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAuthIdentifierMethod()
     {
-        $stub = new User;
+        $stub     = new User();
         $stub->id = 5;
 
         $this->assertEquals(5, $stub->getAuthIdentifier());
@@ -286,7 +285,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
         $hash->shouldReceive('make')->once()->with('foo')->andReturn('foobar');
 
-        $stub = new User;
+        $stub           = new User();
         $stub->password = 'foo';
 
         $this->assertEquals('foobar', $stub->getAuthPassword());
@@ -299,7 +298,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRememberTokenMethod()
     {
-        $stub = new User;
+        $stub                 = new User();
         $stub->remember_token = 'foobar';
 
         $this->assertEquals('foobar', $stub->getRememberToken());
@@ -318,14 +317,14 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $stub->setRememberToken('foobar');
     }
 
-     /**
+    /**
      * Test Orchestra\Model\User::getRememberTokenName() method.
      *
      * @test
      */
     public function testGetRememberTokenNameMethod()
     {
-        $stub = new User;
+        $stub = new User();
         $this->assertEquals('remember_token', $stub->getRememberTokenName());
     }
 
@@ -336,7 +335,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetEmailForPasswordResetMethod()
     {
-        $stub = new User;
+        $stub        = new User();
         $stub->email = 'admin@orchestraplatform.com';
 
         $this->assertEquals('admin@orchestraplatform.com', $stub->getEmailForPasswordReset());
@@ -349,7 +348,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRecipientEmailMethod()
     {
-        $stub = new User;
+        $stub        = new User();
         $stub->email = 'admin@orchestraplatform.com';
 
         $this->assertEquals('admin@orchestraplatform.com', $stub->getRecipientEmail());
@@ -362,46 +361,46 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRecipientNameMethod()
     {
-        $stub = new User;
+        $stub           = new User();
         $stub->fullname = 'Administrator';
 
         $this->assertEquals('Administrator', $stub->getRecipientName());
     }
 
     /**
-     * Test Orchestra\Model\User::activate() method
+     * Test Orchestra\Model\User::activate() method.
      *
      * @test
      */
     public function testActivateMethod()
     {
-        $stub = new User;
+        $stub         = new User();
         $stub->status = 0;
 
         $this->assertEquals($stub, $stub->activate());
     }
 
     /**
-     * Test Orchestra\Model\User::deactivate() method
+     * Test Orchestra\Model\User::deactivate() method.
      *
      * @test
      */
     public function testDeactivateMethod()
     {
-        $stub = new User;
+        $stub         = new User();
         $stub->status = 1;
 
         $this->assertEquals($stub, $stub->deactivate());
     }
 
     /**
-     * Test Orchestra\Model\User::suspend() method
+     * Test Orchestra\Model\User::suspend() method.
      *
      * @test
      */
     public function testSuspendMethod()
     {
-        $stub = new User;
+        $stub         = new User();
         $stub->status = 1;
 
         $this->assertEquals($stub, $stub->suspend());
@@ -409,13 +408,13 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test Orchestra\Model\User::isActivated() method when account
-     * is activated
+     * is activated.
      *
      * @test
      */
     public function testIsActivatedMethodReturnTrue()
     {
-        $stub = new User;
+        $stub         = new User();
         $stub->status = 0;
 
         $stub->activate();
@@ -425,13 +424,13 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test Orchestra\Model\User::isActivated() method when account
-     * is not activated
+     * is not activated.
      *
      * @test
      */
     public function testIsActivatedMethodReturnFalse()
     {
-        $stub = new User;
+        $stub         = new User();
         $stub->status = 0;
 
         $this->assertFalse($stub->isActivated());
@@ -439,13 +438,13 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test Orchestra\Model\User::isSuspended() method when account
-     * is suspended
+     * is suspended.
      *
      * @test
      */
     public function testIsSuspendedMethodReturnTrue()
     {
-        $stub = new User;
+        $stub         = new User();
         $stub->status = 0;
 
         $this->assertFalse($stub->isSuspended());
@@ -455,7 +454,6 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($stub->isSuspended());
     }
 
-
     public function testNotifyMethod()
     {
         $stub = m::mock('\Orchestra\Model\User')->makePartial();
@@ -463,8 +461,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
         $subject = 'foo';
         $view    = 'email.notification';
-        $data    = array('foo' => 'bar');
-
+        $data    = ['foo' => 'bar'];
 
         $stub->shouldReceive('sendNotification')->once()
             ->with($stub, $subject, $view, $data)->andReturn(true);
@@ -474,13 +471,13 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test Orchestra\Model\User::isSuspended() method when account
-     * is not suspended
+     * is not suspended.
      *
      * @test
      */
     public function testIsSuspendedMethodReturnFalse()
     {
-        $stub = new User;
+        $stub         = new User();
         $stub->status = 0;
 
         $this->assertFalse($stub->isActivated());
