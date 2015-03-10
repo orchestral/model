@@ -21,14 +21,12 @@ class SoftDeletingModel extends Eloquent
     protected $forceDeleting = false;
 }
 
-
 class NoneSoftDeletingModel extends Eloquent
 {
-
+    //
 }
 
 class ForceDeletingModel extends Eloquent
 {
     protected $forceDeleting = true;
 }
-

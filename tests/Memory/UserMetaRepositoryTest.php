@@ -19,7 +19,7 @@ class UserMetaRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->app = new Container;
+        $this->app = new Container();
     }
 
     /**
@@ -39,9 +39,9 @@ class UserMetaRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testInitiateMethod()
     {
-        $stub = new UserMetaRepository('meta', array(), $this->app);
+        $stub = new UserMetaRepository('meta', [], $this->app);
 
-        $this->assertEquals(array(), $stub->initiate());
+        $this->assertEquals([], $stub->initiate());
     }
 
     /**
@@ -57,15 +57,15 @@ class UserMetaRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $eloquent->shouldReceive('newInstance')->once()->andReturn($eloquent)
             ->shouldReceive('where')->once()->with('user_id', '=', 1)->andReturnSelf()
-            ->shouldReceive('get')->once()->andReturn(array(
-                0 => new Fluent(array(
-                    'name' => 'foo',
-                    'id' => 2,
+            ->shouldReceive('get')->once()->andReturn([
+                0 => new Fluent([
+                    'name'  => 'foo',
+                    'id'    => 2,
                     'value' => 'foobar',
-                )),
-            ));
+                ]),
+            ]);
 
-        $stub = new UserMetaRepository('meta', array(), $app);
+        $stub = new UserMetaRepository('meta', [], $app);
 
         $this->assertEquals('foobar', $stub->retrieve('foo/user-1'));
         $this->assertNull($stub->retrieve('foobar/user-1'));
@@ -80,17 +80,17 @@ class UserMetaRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $app = $this->app;
 
-        $value = m::mock('stdClass', array(
-            'id' => 2,
+        $value = m::mock('stdClass', [
+            'id'    => 2,
             'value' => 's:6:"foobar";',
-        ));
+        ]);
 
-        $items = array(
+        $items = [
             'foo/user-1'    => 's:0:"";',
             'foobar/user-1' => 's:3:"foo";',
             'foo/user-2'    => ':to-be-deleted:',
-            'foo/user-'     => 's:0:"";'
-        );
+            'foo/user-'     => 's:0:"";',
+        ];
 
         $app->instance('Orchestra\Model\UserMeta', $eloquent = m::mock('UserMeta'));
 
@@ -108,7 +108,7 @@ class UserMetaRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $value->shouldReceive('save')->once()->andReturnNull();
 
-        $stub = new UserMetaRepository('meta', array(), $app);
+        $stub = new UserMetaRepository('meta', [], $app);
 
         $this->assertTrue($stub->finish($items));
     }

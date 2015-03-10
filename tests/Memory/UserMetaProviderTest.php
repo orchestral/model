@@ -18,7 +18,7 @@ class UserMetaProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->app = new Container;
+        $this->app = new Container();
     }
 
     /**
@@ -40,7 +40,7 @@ class UserMetaProviderTest extends \PHPUnit_Framework_TestCase
     {
         $handler = m::mock('\Orchestra\Model\Memory\UserMetaRepository');
 
-        $handler->shouldReceive('initiate')->once()->andReturn(array())
+        $handler->shouldReceive('initiate')->once()->andReturn([])
             ->shouldReceive('finish')->once()->andReturn(true);
 
         $stub = new UserMetaProvider($handler);
@@ -50,11 +50,11 @@ class UserMetaProviderTest extends \PHPUnit_Framework_TestCase
 
         $items->setAccessible(true);
 
-        $items->setValue($stub, array(
+        $items->setValue($stub, [
             'foo/user-1'    => '',
             'foobar/user-1' => 'foo',
-            'foo/user-2'    => ':to-be-deleted:'
-        ));
+            'foo/user-2'    => ':to-be-deleted:',
+        ]);
 
         $this->assertTrue($stub->finish());
     }
@@ -68,7 +68,7 @@ class UserMetaProviderTest extends \PHPUnit_Framework_TestCase
     {
         $handler = m::mock('\Orchestra\Model\Memory\UserMetaRepository');
 
-        $handler->shouldReceive('initiate')->once()->andReturn(array())
+        $handler->shouldReceive('initiate')->once()->andReturn([])
             ->shouldReceive('retrieve')->once()->with('foo/user-1')->andReturn('foobar')
             ->shouldReceive('retrieve')->once()->with('foobar/user-1')->andReturnNull();
 
@@ -88,7 +88,7 @@ class UserMetaProviderTest extends \PHPUnit_Framework_TestCase
     {
         $handler = m::mock('\Orchestra\Model\Memory\UserMetaRepository');
 
-        $handler->shouldReceive('initiate')->once()->andReturn(array());
+        $handler->shouldReceive('initiate')->once()->andReturn([]);
 
         $stub  = new UserMetaProvider($handler);
 
@@ -97,10 +97,10 @@ class UserMetaProviderTest extends \PHPUnit_Framework_TestCase
 
         $items->setAccessible(true);
 
-        $items->setValue($stub, array(
+        $items->setValue($stub, [
             'foo/user-1'   => 'foobar',
             'hello/user-1' => 'foobar',
-        ));
+        ]);
 
         $this->assertEquals('foobar', $stub->get('foo.1'));
         $stub->forget('foo.1');
