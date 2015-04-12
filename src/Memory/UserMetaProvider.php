@@ -62,7 +62,7 @@ class UserMetaProvider extends Provider
      *
      * @param  string   $key        A string of key to delete.
      *
-     * @return boolean
+     * @return bool
      */
     public function forget($key = null)
     {
