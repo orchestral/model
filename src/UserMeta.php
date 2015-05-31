@@ -27,7 +27,7 @@ class UserMeta extends Eloquent
      */
     public function users()
     {
-        return $this->belongsTo('\Orchestra\Model\User', 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
@@ -42,6 +42,6 @@ class UserMeta extends Eloquent
     public function scopeSearch(Builder $query, $name, $userId)
     {
         return $query->where('user_id', '=', $userId)
-            ->where('name', '=', $name);
+                    ->where('name', '=', $name);
     }
 }

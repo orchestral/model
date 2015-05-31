@@ -57,7 +57,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
      */
     public function roles()
     {
-        return $this->belongsToMany('\Orchestra\Model\Role', 'user_role')->withTimestamps();
+        return $this->belongsToMany(Role::class, 'user_role')->withTimestamps();
     }
 
     /**
