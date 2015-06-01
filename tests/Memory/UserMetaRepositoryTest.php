@@ -58,7 +58,7 @@ class UserMetaRepositoryTest extends \PHPUnit_Framework_TestCase
         $eloquent->shouldReceive('newInstance')->once()->andReturn($eloquent)
             ->shouldReceive('where')->once()->with('user_id', '=', 1)->andReturnSelf()
             ->shouldReceive('get')->once()->andReturn([
-                0 => new Fluent([
+                new Meta([
                     'name'  => 'foo',
                     'id'    => 2,
                     'value' => 'foobar',
@@ -80,16 +80,11 @@ class UserMetaRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $app = $this->app;
 
-        $value = m::mock('stdClass', [
-            'id'    => 2,
-            'value' => 's:6:"foobar";',
-        ]);
-
         $items = [
-            'foo/user-1'    => 's:0:"";',
-            'foobar/user-1' => 's:3:"foo";',
+            'foo/user-1'    => 'foobar',
+            'foobar/user-1' => 'foo',
             'foo/user-2'    => ':to-be-deleted:',
-            'foo/user-'     => 's:0:"";',
+            'foo/user-'     => '',
         ];
 
         $app->instance('Orchestra\Model\UserMeta', $eloquent = m::mock('UserMeta'));
@@ -101,15 +96,25 @@ class UserMetaRepositoryTest extends \PHPUnit_Framework_TestCase
                 ->andReturn($foobarQuery = m::mock('\Illuminate\Database\Eloquent\Builder')->makePartial())
             ->shouldReceive('search')->once()->with('foo', 2)
                 ->andReturn($foobarQuery)
-            ->shouldReceive('save')->once()->andReturnNull();
+            ->shouldReceive('setAttribute')->once()->with('name', 'foobar')->andReturnNull()
+            ->shouldReceive('setAttribute')->once()->with('user_id', 1)->andReturnNull()
+            ->shouldReceive('setAttribute')->once()->with('value', 's:3:"foo";')->andReturnNull()
+            ->shouldReceive('setAttribute')->once()->with('value', 's:6:"foobar";')->andReturnNull()
+            ->shouldReceive('save')->twice()->andReturnNull();
 
-        $fooQuery->shouldReceive('first')->andReturn($value);
+        $fooQuery->shouldReceive('first')->andReturn($eloquent);
         $foobarQuery->shouldReceive('first')->andReturnNull();
-
-        $value->shouldReceive('save')->once()->andReturnNull();
 
         $stub = new UserMetaRepository('meta', [], $app);
 
         $this->assertTrue($stub->finish($items));
+    }
+}
+
+class Meta extends Fluent
+{
+    public function getAttribute($key)
+    {
+        return $this->{$key};
     }
 }

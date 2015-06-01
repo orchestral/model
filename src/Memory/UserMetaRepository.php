@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Arr;
 use Orchestra\Memory\Handler;
+use Orchestra\Model\UserMeta;
 use Illuminate\Contracts\Container\Container;
 use Orchestra\Contracts\Memory\Handler as HandlerContract;
 
@@ -94,14 +95,14 @@ class UserMetaRepository extends Handler implements HandlerContract
         $items = [];
 
         foreach ($data as $meta) {
-            if (! $value = @unserialize($meta->value)) {
-                $value = $meta->value;
+            if (! $value = @unserialize($meta->getAttribute('value'))) {
+                $value = $meta->getAttribute('value');
             }
 
-            $key = $meta->name;
+            $key = $meta->getAttribute('name');
 
             $this->addKey("{$key}/user-{$userId}", [
-                'id'    => $meta->id,
+                'id'    => $meta->getAttribute('id'),
                 'value' => $value,
             ]);
 
@@ -160,11 +161,11 @@ class UserMetaRepository extends Handler implements HandlerContract
         if (true === $isNew && is_null($meta)) {
             $meta = $this->getModel();
 
-            $meta->name    = $name;
-            $meta->user_id = $userId;
+            $meta->setAttribute('name', $name);
+            $meta->setAttribute('user_id', $userId);
         }
 
-        $meta->value = serialize($value);
+        $meta->setAttribute('value', serialize($value));
         $meta->save();
     }
 
@@ -175,6 +176,6 @@ class UserMetaRepository extends Handler implements HandlerContract
      */
     public function getModel()
     {
-        return $this->repository->make('Orchestra\Model\UserMeta')->newInstance();
+        return $this->repository->make(UserMeta::class)->newInstance();
     }
 }
