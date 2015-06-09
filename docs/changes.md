@@ -3,6 +3,13 @@ title: Model Change Log
 
 ---
 
+## Version 3.1 {#v3-1}
+
+### v3.1.0 {#v3-1-0}
+
+* Update support to Laravel Framework v5.1.
+* Bump minimum version to PHP v5.5.0.
+
 ## Version 3.0 {#v3-0}
 
 ### v3.0.0 {#v3-0-0}
