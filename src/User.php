@@ -13,7 +13,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Eloquent implements UserContract, CanResetPasswordContract, Recipient
 {
-    use Authenticatable, NotifiableTrait, QueryFilterTrait, CanResetPassword, SoftDeletes;
+    use Authenticatable, CanResetPassword, NotifiableTrait, QueryFilterTrait, SoftDeletes;
 
     /**
      * The database table used by the model.
