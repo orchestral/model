@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Orchestra\Support\Traits\QueryFilterTrait;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Orchestra\Contracts\Notification\Recipient;
-use Illuminate\Contracts\Auth\Authenticatable as UserContract;
+use Orchestra\Contracts\Authorization\Authorizable as UserContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Eloquent implements UserContract, CanResetPasswordContract, Recipient
@@ -117,7 +117,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     /**
      * Get roles name as an array.
      *
-     * @return array
+     * @return \Illuminate\Support\Collection|array
      */
     public function getRoles()
     {
