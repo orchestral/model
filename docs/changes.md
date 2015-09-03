@@ -5,6 +5,11 @@ title: Model Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.1 {#v3-1-1}
+
+* Use `Orchestra\Contracts\Authorization\Authorizable` contract.
+* Remove default morphClass properties.
+
 ### v3.1.0 {#v3-1-0}
 
 * Update support to Laravel Framework v5.1.
