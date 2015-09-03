@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Orchestra\Support\Traits\QueryFilterTrait;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Orchestra\Contracts\Notification\Recipient;
-use Illuminate\Contracts\Auth\Authenticatable as UserContract;
+use Orchestra\Contracts\Authorization\Authorizable as UserContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Eloquent implements UserContract, CanResetPasswordContract, Recipient
 {
-    use Authenticatable, NotifiableTrait, QueryFilterTrait, CanResetPassword, SoftDeletes;
+    use Authenticatable, CanResetPassword, NotifiableTrait, QueryFilterTrait, SoftDeletes;
 
     /**
      * The database table used by the model.
@@ -21,13 +21,6 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
      * @var string
      */
     protected $table = 'users';
-
-    /**
-     * The class name to be used in polymorphic relations.
-     *
-     * @var string
-     */
-    protected $morphClass = 'User';
 
     /**
      * Available user status as constant.
@@ -117,7 +110,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     /**
      * Get roles name as an array.
      *
-     * @return array
+     * @return \Illuminate\Support\Collection|array
      */
     public function getRoles()
     {
