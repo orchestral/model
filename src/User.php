@@ -23,13 +23,6 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     protected $table = 'users';
 
     /**
-     * The class name to be used in polymorphic relations.
-     *
-     * @var string
-     */
-    protected $morphClass = 'User';
-
-    /**
      * Available user status as constant.
      */
     const UNVERIFIED = 0;
