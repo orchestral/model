@@ -4,6 +4,7 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Hash;
 use Orchestra\Notifier\NotifiableTrait;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Orchestra\Support\Traits\QueryFilterTrait;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -84,7 +85,11 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
      */
     public function setPasswordAttribute($value)
     {
-        $this->attributes['password'] = Hash::make($value);
+        if (Hash::needsRehash($value)) {
+            $value = Hash::make($value);
+        }
+
+        $this->attributes['password'] = $value;
     }
 
     /**
@@ -180,6 +185,10 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     {
         $userRoles = $this->getRoles();
 
+        if ($userRoles instanceof Arrayable) {
+            $userRoles = $userRoles->toArray();
+        }
+
         // For a pre-caution, we should return false in events where user
         // roles not an array.
         if (! is_array($userRoles)) {
@@ -217,6 +226,10 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     public function isAny(array $roles)
     {
         $userRoles = $this->getRoles();
+
+        if ($userRoles instanceof Arrayable) {
+            $userRoles = $userRoles->toArray();
+        }
 
         // For a pre-caution, we should return false in events where user
         // roles not an array.

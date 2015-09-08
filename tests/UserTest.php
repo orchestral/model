@@ -283,12 +283,30 @@ class UserTest extends \PHPUnit_Framework_TestCase
     {
         Hash::swap($hash = m::mock('\Illuminate\Hashing\HasherInterface'));
 
+        $hash->shouldReceive('needsRehash')->once()->with('foo')->andReturn(true);
         $hash->shouldReceive('make')->once()->with('foo')->andReturn('foobar');
 
         $stub           = new User();
         $stub->password = 'foo';
 
         $this->assertEquals('foobar', $stub->getAuthPassword());
+    }
+
+    /**
+     * Test Orchestra\Model\User::getAuthPassword() method without rehash.
+     *
+     * @test
+     */
+    public function testGetAuthPasswordMethodWithoutRehash()
+    {
+        Hash::swap($hash = m::mock('\Illuminate\Hashing\HasherInterface'));
+
+        $hash->shouldReceive('needsRehash')->once()->with('foo')->andReturn(false);
+
+        $stub           = new User();
+        $stub->password = 'foo';
+
+        $this->assertEquals('foo', $stub->getAuthPassword());
     }
 
     /**
