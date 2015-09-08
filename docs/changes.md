@@ -5,6 +5,11 @@ title: Model Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.2 {#v3-1-2}
+
+* Fixes `Orchestra\Model\User::getRoles()` returning `Illuminate\Database\Eloquent\Collection` instead of simple array.
+* Only hash password (using mutator) when rehashing is required.
+
 ### v3.1.1 {#v3-1-1}
 
 * Use `Orchestra\Contracts\Authorization\Authorizable` contract.
