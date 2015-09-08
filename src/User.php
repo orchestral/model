@@ -84,7 +84,11 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
      */
     public function setPasswordAttribute($value)
     {
-        $this->attributes['password'] = Hash::make($value);
+        if (Hash::needsRehash($value)) {
+            $value = Hash::make($value);
+        }
+
+        $this->attributes['password'] = $value;
     }
 
     /**
