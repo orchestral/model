@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Model\Observer;
 
+use InvalidArgumentException;
 use Orchestra\Support\Keyword;
 use Orchestra\Model\Role as Eloquent;
 use Orchestra\Contracts\Authorization\Factory;
@@ -36,7 +37,7 @@ class Role
     }
 
     /**
-     * On creating observer.
+     * On saving observer.
      *
      * @param  \Orchestra\Model\Role  $model
      *
@@ -44,8 +45,10 @@ class Role
      */
     public function saving(Eloquent $model)
     {
-        if ((new Keyword($model->getAttribute('name')))->hasIn(['guest'])) {
-            return false;
+        $keyword = Keyword::make($model->getAttribute('name'));
+
+        if ($keyword->searchIn(['guest']) !== false) {
+            throw new InvalidArgumentException("Role [{$keyword->getValue()}] is not allowed to be used!");
         }
     }
 
