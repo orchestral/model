@@ -18,6 +18,6 @@ trait OwnsTrait
             $foreignKey = $this->getForeignKey();
         }
 
-        return $relation->getAttribute($foreignKey) == $this->getKey();
+        return $related->getAttribute($foreignKey) == $this->getKey();
     }
 }
