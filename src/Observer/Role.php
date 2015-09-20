@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Model\Observer;
 
+use Orchestra\Support\Keyword;
 use Orchestra\Model\Role as Eloquent;
 use Orchestra\Contracts\Authorization\Factory;
 
@@ -32,6 +33,20 @@ class Role
     public function creating(Eloquent $model)
     {
         $this->acl->addRole($model->getAttribute('name'));
+    }
+
+    /**
+     * On creating observer.
+     *
+     * @param  \Orchestra\Model\Role  $model
+     *
+     * @return void
+     */
+    public function saving(Eloquent $model)
+    {
+        if ((new Keyword($model->getAttribute('name')))->hasIn(['guest'])) {
+            return false;
+        }
     }
 
     /**
