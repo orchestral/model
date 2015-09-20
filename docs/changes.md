@@ -5,6 +5,13 @@ title: Model Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.3 {#v3-1-3}
+
+* Add `Orchestra\Model\Observer\Role::saving()` to disable adding "Guest" as a role.
+* Add `Orchestra\Model\Traits\OwnedByTrait`.
+* Add `Orchestra\Model\Traits\OwnsTrait`.
+* Refactor `Orchestra\Model\Observer\Role::updating()`.
+
 ### v3.1.2 {#v3-1-2}
 
 * Fixes `Orchestra\Model\User::getRoles()` returning `Illuminate\Database\Eloquent\Collection` instead of simple array.

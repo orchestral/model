@@ -1,5 +1,7 @@
 <?php namespace Orchestra\Model\Observer;
 
+use InvalidArgumentException;
+use Orchestra\Support\Keyword;
 use Orchestra\Model\Role as Eloquent;
 use Orchestra\Contracts\Authorization\Factory;
 
@@ -35,6 +37,22 @@ class Role
     }
 
     /**
+     * On saving observer.
+     *
+     * @param  \Orchestra\Model\Role  $model
+     *
+     * @return void
+     */
+    public function saving(Eloquent $model)
+    {
+        $keyword = Keyword::make($model->getAttribute('name'));
+
+        if ($keyword->searchIn(['guest']) !== false) {
+            throw new InvalidArgumentException("Role [{$keyword->getValue()}] is not allowed to be used!");
+        }
+    }
+
+    /**
      * On deleting observer.
      *
      * @param  \Orchestra\Model\Role  $model
@@ -55,24 +73,32 @@ class Role
      */
     public function updating(Eloquent $model)
     {
-        $originalName = $model->getOriginal('name');
-        $currentName  = $model->getAttribute('name');
-        $deletedAt    = null;
+        $original = $model->getOriginal('name');
+        $current  = $model->getAttribute('name');
 
-        if ($model->isSoftDeleting()) {
-            $deletedAt = $model->getDeletedAtColumn();
-        }
-
-        $isRestoring = function ($model, $deletedAt) {
-            return (! is_null($deletedAt)
-                && is_null($model->getAttribute($deletedAt))
-                && ! is_null($model->getOriginal($deletedAt)));
-        };
-
-        if ($isRestoring($model, $deletedAt)) {
-            $this->acl->addRole($currentName);
+        if ($this->isRestoringModel($model)) {
+            $this->acl->addRole($current);
         } else {
-            $this->acl->renameRole($originalName, $currentName);
+            $this->acl->renameRole($original, $current);
         }
+    }
+
+    /**
+     * Is restoring model.
+     *
+     * @param  \Orchestra\Model\Role  $model
+     * @param  string|null  $deleted
+     *
+     * @return bool
+     */
+    protected function isRestoringModel(Eloquent $model, $deleted = null)
+    {
+        if (! $model->isSoftDeleting()) {
+            return false;
+        }
+
+        $deleted = $model->getDeletedAtColumn();
+
+        return is_null($model->getAttribute($deleted)) && ! is_null($model->getOriginal($deleted));
     }
 }
