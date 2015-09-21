@@ -87,11 +87,10 @@ class Role
      * Is restoring model.
      *
      * @param  \Orchestra\Model\Role  $model
-     * @param  string|null  $deleted
      *
      * @return bool
      */
-    protected function isRestoringModel(Eloquent $model, $deleted = null)
+    protected function isRestoringModel(Eloquent $model)
     {
         if (! $model->isSoftDeleting()) {
             return false;
