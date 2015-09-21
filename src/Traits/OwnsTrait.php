@@ -35,4 +35,11 @@ trait OwnsTrait
      * @return string
      */
     abstract public function getForeignKey();
+
+    /**
+     * Get the value of the model's primary key.
+     *
+     * @return mixed
+     */
+    abstract public function getKey();
 }
