@@ -18,6 +18,28 @@ trait OwnsTrait
             $foreignKey = $this->getForeignKey();
         }
 
-        return $relation->getAttribute($foreignKey) == $this->getKey();
+        return $related->getAttribute($foreignKey) == $this->getKey();
     }
+
+    /**
+     * Get an attribute from the model.
+     *
+     * @param  string  $key
+     * @return mixed
+     */
+    abstract public function getAttribute($key);
+
+    /**
+     * Get the default foreign key name for the model.
+     *
+     * @return string
+     */
+    abstract public function getForeignKey();
+
+    /**
+     * Get the value of the model's primary key.
+     *
+     * @return mixed
+     */
+    abstract public function getKey();
 }
