@@ -20,4 +20,19 @@ trait OwnsTrait
 
         return $related->getAttribute($foreignKey) == $this->getKey();
     }
+
+    /**
+     * Get an attribute from the model.
+     *
+     * @param  string  $key
+     * @return mixed
+     */
+    abstract public function getAttribute($key);
+
+    /**
+     * Get the default foreign key name for the model.
+     *
+     * @return string
+     */
+    abstract public function getForeignKey();
 }

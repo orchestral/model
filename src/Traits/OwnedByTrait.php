@@ -20,4 +20,12 @@ trait OwnedByTrait
 
         return $this->getAttribute($key) == $related->getKey();
     }
+
+    /**
+     * Get an attribute from the model.
+     *
+     * @param  string  $key
+     * @return mixed
+     */
+    abstract public function getAttribute($key);
 }
