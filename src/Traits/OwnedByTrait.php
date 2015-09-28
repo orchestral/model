@@ -25,6 +25,7 @@ trait OwnedByTrait
      * Get an attribute from the model.
      *
      * @param  string  $key
+     *
      * @return mixed
      */
     abstract public function getAttribute($key);
