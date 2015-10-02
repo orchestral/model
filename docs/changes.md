@@ -5,6 +5,11 @@ title: Model Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.4 {#v3-1-4}
+
+* Add `Orchestra\Model\Value\Meta::forget()` method.
+* Add abstract methods for consistency.
+
 ### v3.1.3 {#v3-1-3}
 
 * Add `Orchestra\Model\Observer\Role::saving()` to disable adding "Guest" as a role.

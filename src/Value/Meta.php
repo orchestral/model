@@ -32,4 +32,18 @@ class Meta extends Fluent
 
         return $this;
     }
+
+    /**
+     * Forget a key.
+     *
+     * @param  string  $key
+     *
+     * @return $this
+     */
+    public function forget($key)
+    {
+        Arr::forget($this->attributes, $key);
+
+        return $this;
+    }
 }
