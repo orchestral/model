@@ -5,6 +5,11 @@ title: Model Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.5 {#v3-1-5}
+
+* Add `Orchestra\Model\Plugins\RefreshOnCreate`.
+* Allow customizing searchable fields/attributes via `Orchestra\Model\User::$searchable`.
+
 ### v3.1.4 {#v3-1-4}
 
 * Add `Orchestra\Model\Value\Meta::forget()` method.
