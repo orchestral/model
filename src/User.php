@@ -46,6 +46,13 @@ class User extends Eloquent implements Authorizable, CanResetPasswordContract, R
     protected $dates = ['deleted_at'];
 
     /**
+     * List of searchable attributes.
+     *
+     * @var array
+     */
+    protected $searchable = ['email', 'fullname'];
+
+    /**
      * Has many and belongs to relationship with Role.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -74,7 +81,7 @@ class User extends Eloquent implements Authorizable, CanResetPasswordContract, R
             });
         }
 
-        return $this->setupWildcardQueryFilter($query, $keyword, ['email', 'fullname']);
+        return $this->setupWildcardQueryFilter($query, $keyword, $this->searchable);
     }
 
     /**
