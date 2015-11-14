@@ -225,7 +225,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany')->makePartial();
 
         $model->shouldReceive('roles')->once()->andReturn($relationship);
-        $relationship->shouldReceive('lists')->once()->andReturn(['admin', 'editor']);
+        $relationship->shouldReceive('pluck')->once()->andReturn(['admin', 'editor']);
 
         $this->assertEquals(['admin', 'editor'], $model->getRoles());
     }

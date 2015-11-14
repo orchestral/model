@@ -131,7 +131,7 @@ class User extends Eloquent implements Authorizable, CanResetPasswordContract, R
         // database and instead fetch the collection.
         $roles = (array_key_exists('roles', $this->relations) ? $this->relations['roles'] : $this->roles());
 
-        return $roles->lists('name');
+        return $roles->pluck('name');
     }
 
     /**
