@@ -254,7 +254,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('whereIn')->once()->with('roles.id', $roles)->andReturn(null)
             ->shouldReceive('orWhere')->once()->with('email', 'LIKE', $search)->andReturn($query)
             ->shouldReceive('orWhere')->once()->with('fullname', 'LIKE', $search)->andReturn(null)
-            ->shouldReceive('where')->once()->with(m::type('Closure'))->andReturnUsing(function ($q) use ($query, $keyword) {
+            ->shouldReceive('where')->with(m::type('Closure'))->andReturnUsing(function ($q) use ($query, $keyword) {
                 $q($query);
             });
 
