@@ -257,7 +257,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('where')->once()->with(m::type('Closure'))->andReturnUsing(function ($q) use ($query, $keyword) {
                 $q($query);
             })
-            ->shouldReceive('orWhere')->with(m::type('Closure'))->andReturnUsing(function ($q) use ($query, $keyword) {
+            ->shouldReceive('orWhere')->twice()->with(m::type('Closure'))->andReturnUsing(function ($q) use ($query, $keyword) {
                 $q($query);
             });;
 
