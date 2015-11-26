@@ -52,7 +52,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testAttachRoleMethod()
     {
-        $model        = m::mock('\Orchestra\Model\User[roles]');
+        $model = m::mock('\Orchestra\Model\User[roles]');
         $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany')->makePartial();
 
         $model->shouldReceive('roles')->once()->andReturn($relationship);
@@ -68,7 +68,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testDetachRoleMethod()
     {
-        $model        = m::mock('\Orchestra\Model\User[roles]');
+        $model = m::mock('\Orchestra\Model\User[roles]');
         $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany')->makePartial();
 
         $model->shouldReceive('roles')->once()->andReturn($relationship);
@@ -221,7 +221,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRolesMethod()
     {
-        $model        = m::mock('\Orchestra\Model\User[roles]');
+        $model = m::mock('\Orchestra\Model\User[roles]');
         $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany')->makePartial();
 
         $model->shouldReceive('roles')->once()->andReturn($relationship);
@@ -241,8 +241,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->addMockConnection($model);
 
         $keyword = 'foo*';
-        $search  = 'foo%';
-        $roles   = ['admin'];
+        $search = 'foo%';
+        $roles = ['admin'];
 
         $query = m::mock('\Illuminate\Database\Eloquent\Builder');
         $query->shouldReceive('with')->once()->with('roles')->andReturn($query)
@@ -256,7 +256,10 @@ class UserTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('orWhere')->once()->with('fullname', 'LIKE', $search)->andReturn(null)
             ->shouldReceive('where')->once()->with(m::type('Closure'))->andReturnUsing(function ($q) use ($query, $keyword) {
                 $q($query);
-            });
+            })
+            ->shouldReceive('orWhere')->twice()->with(m::type('Closure'))->andReturnUsing(function ($q) use ($query, $keyword) {
+                $q($query);
+            });;
 
         $this->assertEquals($query, $model->scopeSearch($query, $keyword, $roles));
     }
@@ -268,7 +271,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAuthIdentifierMethod()
     {
-        $stub     = new User();
+        $stub = new User();
         $stub->id = 5;
 
         $this->assertEquals(5, $stub->getAuthIdentifier());
@@ -286,7 +289,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $hash->shouldReceive('needsRehash')->once()->with('foo')->andReturn(true);
         $hash->shouldReceive('make')->once()->with('foo')->andReturn('foobar');
 
-        $stub           = new User();
+        $stub = new User();
         $stub->password = 'foo';
 
         $this->assertEquals('foobar', $stub->getAuthPassword());
@@ -303,7 +306,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
         $hash->shouldReceive('needsRehash')->once()->with('foo')->andReturn(false);
 
-        $stub           = new User();
+        $stub = new User();
         $stub->password = 'foo';
 
         $this->assertEquals('foo', $stub->getAuthPassword());
@@ -316,7 +319,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRememberTokenMethod()
     {
-        $stub                 = new User();
+        $stub = new User();
         $stub->remember_token = 'foobar';
 
         $this->assertEquals('foobar', $stub->getRememberToken());
@@ -353,7 +356,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetEmailForPasswordResetMethod()
     {
-        $stub        = new User();
+        $stub = new User();
         $stub->email = 'admin@orchestraplatform.com';
 
         $this->assertEquals('admin@orchestraplatform.com', $stub->getEmailForPasswordReset());
@@ -366,7 +369,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRecipientEmailMethod()
     {
-        $stub        = new User();
+        $stub = new User();
         $stub->email = 'admin@orchestraplatform.com';
 
         $this->assertEquals('admin@orchestraplatform.com', $stub->getRecipientEmail());
@@ -379,7 +382,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRecipientNameMethod()
     {
-        $stub           = new User();
+        $stub = new User();
         $stub->fullname = 'Administrator';
 
         $this->assertEquals('Administrator', $stub->getRecipientName());
@@ -392,7 +395,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testActivateMethod()
     {
-        $stub         = new User();
+        $stub = new User();
         $stub->status = 0;
 
         $this->assertEquals($stub, $stub->activate());
@@ -405,7 +408,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testDeactivateMethod()
     {
-        $stub         = new User();
+        $stub = new User();
         $stub->status = 1;
 
         $this->assertEquals($stub, $stub->deactivate());
@@ -418,7 +421,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testSuspendMethod()
     {
-        $stub         = new User();
+        $stub = new User();
         $stub->status = 1;
 
         $this->assertEquals($stub, $stub->suspend());
@@ -432,7 +435,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsActivatedMethodReturnTrue()
     {
-        $stub         = new User();
+        $stub = new User();
         $stub->status = 0;
 
         $stub->activate();
@@ -448,7 +451,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsActivatedMethodReturnFalse()
     {
-        $stub         = new User();
+        $stub = new User();
         $stub->status = 0;
 
         $this->assertFalse($stub->isActivated());
@@ -462,7 +465,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsSuspendedMethodReturnTrue()
     {
-        $stub         = new User();
+        $stub = new User();
         $stub->status = 0;
 
         $this->assertFalse($stub->isSuspended());
@@ -478,8 +481,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $stub->shouldAllowMockingProtectedMethods();
 
         $subject = 'foo';
-        $view    = 'email.notification';
-        $data    = ['foo' => 'bar'];
+        $view = 'email.notification';
+        $data = ['foo' => 'bar'];
 
         $stub->shouldReceive('sendNotification')->once()
             ->with($stub, $subject, $view, $data)->andReturn(true);
@@ -495,7 +498,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsSuspendedMethodReturnFalse()
     {
-        $stub         = new User();
+        $stub = new User();
         $stub->status = 0;
 
         $this->assertFalse($stub->isActivated());

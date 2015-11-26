@@ -45,8 +45,8 @@ class UserMetaProviderTest extends \PHPUnit_Framework_TestCase
 
         $stub = new UserMetaProvider($handler);
 
-        $refl   = new \ReflectionObject($stub);
-        $items  = $refl->getProperty('items');
+        $refl = new \ReflectionObject($stub);
+        $items = $refl->getProperty('items');
 
         $items->setAccessible(true);
 
@@ -72,7 +72,7 @@ class UserMetaProviderTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('retrieve')->once()->with('foo/user-1')->andReturn('foobar')
             ->shouldReceive('retrieve')->once()->with('foobar/user-1')->andReturnNull();
 
-        $stub  = new UserMetaProvider($handler);
+        $stub = new UserMetaProvider($handler);
 
         $this->assertEquals('foobar', $stub->get('foo.1'));
         $this->assertEquals(null, $stub->get('foobar.1'));
@@ -90,9 +90,9 @@ class UserMetaProviderTest extends \PHPUnit_Framework_TestCase
 
         $handler->shouldReceive('initiate')->once()->andReturn([]);
 
-        $stub  = new UserMetaProvider($handler);
+        $stub = new UserMetaProvider($handler);
 
-        $refl  = new \ReflectionObject($stub);
+        $refl = new \ReflectionObject($stub);
         $items = $refl->getProperty('items');
 
         $items->setAccessible(true);
