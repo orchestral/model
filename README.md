@@ -15,4 +15,4 @@ This repository contains the model code of the Orchestra Platform. If you want t
 ## Resources
 
 * [Documentation](http://orchestraplatform.com/docs/latest/components/model)
-* [Change Log](http://orchestraplatform.com/docs/latest/components/model/changes#v3-1)
+* [Change Log](http://orchestraplatform.com/docs/latest/components/model/changes#v3-2)
