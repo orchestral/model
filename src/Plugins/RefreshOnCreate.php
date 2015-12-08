@@ -20,6 +20,7 @@ trait RefreshOnCreate
      * Refresh the current model with the current attributes from the database.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $model
+     *
      * @return void
      */
     protected static function refresh(Model $model)
