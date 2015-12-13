@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Model;
 
+use Closure;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class Eloquent extends Model
@@ -12,5 +13,19 @@ abstract class Eloquent extends Model
     public function isSoftDeleting()
     {
         return (property_exists($this, 'forceDeleting') && $this->forceDeleting === false);
+    }
+
+    /**
+     * Execute a Closure within a transaction.
+     *
+     * @param  \Closure  $callback
+     *
+     * @return mixed
+     *
+     * @throws \Throwable
+     */
+    public function transaction(Closure $callback)
+    {
+        return $this->getConnection()->transaction($callback);
     }
 }

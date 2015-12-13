@@ -5,6 +5,10 @@ title: Model Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.6 {#v3-1-6}
+
+* Add `Orchestra\Model\Eloquent::transaction()` method to execute model using transaction.
+
 ### v3.1.5 {#v3-1-5}
 
 * Add `Orchestra\Model\Plugins\RefreshOnCreate`.
