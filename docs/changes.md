@@ -3,6 +3,22 @@ title: Model Change Log
 
 ---
 
+## Version 3.2 {#v3-2}
+
+### v3.2.0 {#v3-2-0}
+
+* Update support to Laravel Framework v5.2.
+* Use `Orchestra\Contracts\Authorization\Authorizable` contract.
+* Remove default morphClass properties.
+* Only hash password (using mutator) when rehashing is required.
+* Add `Orchestra\Model\Observer\Role::saving()` to disable adding "Guest" as a role.
+* Add `Orchestra\Model\Traits\OwnedByTrait`.
+* Add `Orchestra\Model\Traits\OwnsTrait`.
+* Refactor `Orchestra\Model\Observer\Role::updating()`.
+* Add `Orchestra\Model\Plugins\RefreshOnCreate`.
+* Allow customizing searchable fields/attributes via `Orchestra\Model\User::$searchable`.
+* Add `Orchestra\Model\Eloquent::transaction()` method to execute model using transaction.
+
 ## Version 3.1 {#v3-1}
 
 ### v3.1.6 {#v3-1-6}
