@@ -1,11 +1,11 @@
 <?php namespace Orchestra\Model;
 
+use Orchestra\Notifier\Notifiable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Hash;
-use Orchestra\Notifier\NotifiableTrait;
+use Orchestra\Model\Traits\Searchable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Support\Arrayable;
-use Orchestra\Model\Traits\SearchableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Orchestra\Contracts\Notification\Recipient;
@@ -15,7 +15,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Eloquent implements Authorizable, CanResetPasswordContract, Recipient, UserContract
 {
-    use Authenticatable, CanResetPassword, NotifiableTrait, SearchableTrait, SoftDeletes;
+    use Authenticatable, CanResetPassword, Notifiable, Searchable, SoftDeletes;
 
     /**
      * The database table used by the model.

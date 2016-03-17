@@ -2,10 +2,11 @@
 
 use Mockery as m;
 use Orchestra\Model\UserMeta;
+use Orchestra\Support\Traits\Testing\MockEloquentConnection;
 
 class UserMetaTest extends \PHPUnit_Framework_TestCase
 {
-    use \Orchestra\Support\Traits\Testing\EloquentConnectionTrait;
+    use MockEloquentConnection;
 
     /**
      * Teardown the test environment.

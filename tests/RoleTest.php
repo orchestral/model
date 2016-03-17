@@ -2,10 +2,11 @@
 
 use Mockery as m;
 use Orchestra\Model\Role;
+use Orchestra\Support\Traits\Testing\MockEloquentConnection;
 
 class RoleTest extends \PHPUnit_Framework_TestCase
 {
-    use \Orchestra\Support\Traits\Testing\EloquentConnectionTrait;
+    use MockEloquentConnection;
 
     /**
      * Setup the test environment.

@@ -1,10 +1,10 @@
 <?php namespace Orchestra\Model\Traits;
 
-use Orchestra\Support\Traits\QueryFilterTrait;
+use Orchestra\Support\Traits\QueryFilter;
 
-trait SearchableTrait
+trait Searchable
 {
-    use QueryFilterTrait;
+    use QueryFilter;
 
     /**
      * Get searchable attributes.

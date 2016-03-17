@@ -5,11 +5,11 @@ use Orchestra\Model\User;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Facade;
-use Orchestra\Support\Traits\Testing\EloquentConnectionTrait;
+use Orchestra\Support\Traits\Testing\MockEloquentConnection;
 
 class UserTest extends \PHPUnit_Framework_TestCase
 {
-    use EloquentConnectionTrait;
+    use MockEloquentConnection;
 
     /**
      * Setup the test environment.
