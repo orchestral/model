@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\Hash;
 use Orchestra\Notifier\NotifiableTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Support\Arrayable;
-use Orchestra\Model\Traits\SearchableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Orchestra\Support\Traits\QueryFilterTrait;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Orchestra\Contracts\Notification\Recipient;
 use Orchestra\Contracts\Authorization\Authorizable as UserContract;
@@ -14,7 +14,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Eloquent implements UserContract, CanResetPasswordContract, Recipient
 {
-    use Authenticatable, CanResetPassword, NotifiableTrait, SearchableTrait, SoftDeletes;
+    use Authenticatable, CanResetPassword, NotifiableTrait, QueryFilterTrait, SoftDeletes;
 
     /**
      * The database table used by the model.
@@ -80,7 +80,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
             });
         }
 
-        return $this->setupWildcardQueryFilter($query, $keyword, $this->getSearchableColumns());
+        return $this->setupWildcardQueryFilter($query, $keyword, $this->searchable);
     }
 
     /**
