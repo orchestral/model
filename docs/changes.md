@@ -7,7 +7,7 @@ title: Model Change Log
 
 ### v3.2.1 {#v3-2-1}
 
-* Remove `Trait` prefix and deprecate old traits.
+* Remove `Trait` suffix and deprecate old traits.
 * Add `Orchestra\Model\Traits\Searchable`.
 
 ### v3.2.0 {#v3-2-0}
