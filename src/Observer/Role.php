@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Model\Observer;
+<?php
+
+namespace Orchestra\Model\Observer;
 
 use InvalidArgumentException;
 use Orchestra\Support\Keyword;

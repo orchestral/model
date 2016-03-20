@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Model\Value;
+<?php
+
+namespace Orchestra\Model\Value;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Fluent;

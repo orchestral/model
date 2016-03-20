@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Model;
+<?php
+
+namespace Orchestra\Model;
 
 use Closure;
 use Illuminate\Database\Eloquent\Model;

@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Model\Memory;
+<?php
+
+namespace Orchestra\Model\Memory;
 
 use Illuminate\Support\Arr;
 use Orchestra\Memory\Provider;

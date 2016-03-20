@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Model;
+<?php
+
+namespace Orchestra\Model;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 

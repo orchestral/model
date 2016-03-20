@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Model\Traits;
+<?php
+
+namespace Orchestra\Model\Traits;
 
 use Orchestra\Model\Value\Meta;
 use Illuminate\Contracts\Support\Arrayable;

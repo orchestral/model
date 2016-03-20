@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Model\Traits;
+<?php
+
+namespace Orchestra\Model\Traits;
 
 use Orchestra\Support\Traits\QueryFilter;
 

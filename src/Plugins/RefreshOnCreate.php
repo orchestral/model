@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Model\Plugins;
+<?php
+
+namespace Orchestra\Model\Plugins;
 
 use Illuminate\Database\Eloquent\Model;
 
