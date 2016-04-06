@@ -185,7 +185,7 @@ class User extends Eloquent implements Authorizable, CanResetPasswordContract, R
     /**
      * Determine if current user has the given role.
      *
-     * @param  string  $roles
+     * @param  \Illuminate\Contracts\Support\Arrayable|array|string  $roles
      *
      * @return bool
      */
@@ -227,11 +227,11 @@ class User extends Eloquent implements Authorizable, CanResetPasswordContract, R
     /**
      * Determine if current user has any of the given role.
      *
-     * @param  array  $roles
+     * @param  \Illuminate\Contracts\Support\Arrayable|array|string  $roles
      *
      * @return bool
      */
-    public function isAny(array $roles)
+    public function isAny($roles)
     {
         $userRoles = $this->getRoles();
 
@@ -247,7 +247,7 @@ class User extends Eloquent implements Authorizable, CanResetPasswordContract, R
 
         // We should ensure that any given roles match the current user,
         // consider it as OR condition.
-        foreach ($roles as $role) {
+        foreach ((array) $roles as $role) {
             if (in_array($role, $userRoles)) {
                 return true;
             }
@@ -259,7 +259,7 @@ class User extends Eloquent implements Authorizable, CanResetPasswordContract, R
     /**
      * Determine if current user does not has any of the given role.
      *
-     * @param  string  $roles
+     * @param  \Illuminate\Contracts\Support\Arrayable|array|string  $roles
      *
      * @return bool
      */
@@ -271,11 +271,11 @@ class User extends Eloquent implements Authorizable, CanResetPasswordContract, R
     /**
      * Determine if current user does not has any of the given role.
      *
-     * @param  array  $roles
+     * @param  \Illuminate\Contracts\Support\Arrayable|array|string  $roles
      *
      * @return bool
      */
-    public function isNotAny(array $roles)
+    public function isNotAny($roles)
     {
         return ! $this->isAny($roles);
     }
