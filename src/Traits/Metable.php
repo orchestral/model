@@ -22,6 +22,7 @@ trait Metable
 
         return new Meta($meta);
     }
+
     /**
      * `meta` field mutator.
      *
@@ -32,6 +33,38 @@ trait Metable
     public function setMetaAttribute($value = null)
     {
         $this->attributes['meta'] = $this->mutateMetaAttribute($value);
+    }
+
+    /**
+     * Get meta data.
+     *
+     * @param  string  $key
+     * @param  mixed  $default
+     *
+     * @return mixed
+     */
+    public function getMetaData($key, $default)
+    {
+        $meta = $this->getAttribute('meta');
+
+        return $meta->get($key, $default);
+    }
+
+    /**
+     * Put meta data.
+     *
+     * @param  string  $key
+     * @param  mixed  $value
+     *
+     * @return mixed
+     */
+    public function putMetaData($key, $value)
+    {
+        $meta = $this->getAttribute('meta');
+
+        $meta->put($key, $value);
+
+        return $this->setMetaAttribute($meta);
     }
 
     /**
