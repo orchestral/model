@@ -43,7 +43,7 @@ trait Metable
      *
      * @return mixed
      */
-    public function getMetaData($key, $default)
+    public function getMetaData($key, $default = null)
     {
         $meta = $this->getAttribute('meta');
 
