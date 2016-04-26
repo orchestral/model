@@ -58,13 +58,18 @@ trait Metable
      *
      * @return mixed
      */
-    public function putMetaData($key, $value)
+    public function putMetaData($key, $value = null)
     {
-        $meta = $this->getAttribute('meta');
+        if (! is_array($key)) {
+            $meta = $this->getAttribute('meta');
+            $meta->put($key, $value);
 
-        $meta->put($key, $value);
+            return $this->setMetaAttribute($meta);
+        }
 
-        return $this->setMetaAttribute($meta);
+        foreach($key as $name => $value) {
+            $this->putMetaData($name, $value);
+        }
     }
 
     /**
