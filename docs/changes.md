@@ -5,6 +5,10 @@ title: Model Change Log
 
 ## Version 3.2 {#v3-2}
 
+### v3.2.4 {#v3-2-4}
+
+* Allow to set `null` value when using `Orchestra\Model\Traits\Metable::putMetaData()`.
+
 ### v3.2.3 {#v3-2-3}
 
 * Fixes missing default value on `Orchestra\Model\Traits\Metable::getMetaData()`.
