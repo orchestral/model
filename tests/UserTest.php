@@ -221,10 +221,12 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRolesMethod()
     {
-        $model = m::mock('\Orchestra\Model\User[roles]');
+        $model = m::mock('\Orchestra\Model\User[relationLoaded,load,getRelation]');
         $relationship = m::mock('\Illuminate\Database\Eloquent\Relations\BelongsToMany')->makePartial();
 
-        $model->shouldReceive('roles')->once()->andReturn($relationship);
+        $model->shouldReceive('relationLoaded')->once()->andReturn(false)
+            ->shouldReceive('load')->once()->with('roles')->andReturnNull()
+            ->shouldReceive('getRelation')->once()->with('roles')->andReturn($relationship);
         $relationship->shouldReceive('pluck')->once()->andReturn(['admin', 'editor']);
 
         $this->assertEquals(['admin', 'editor'], $model->getRoles());
