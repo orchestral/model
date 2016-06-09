@@ -128,9 +128,11 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     {
         // If the relationship is already loaded, avoid re-querying the
         // database and instead fetch the collection.
-        $roles = (array_key_exists('roles', $this->relations) ? $this->relations['roles'] : $this->roles());
+        if (! $this->relationLoaded('roles')) {
+            $this->load('roles');
+        }
 
-        return $roles->lists('name');
+        return $this->relations['roles']->lists('name');
     }
 
     /**
