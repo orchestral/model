@@ -5,6 +5,10 @@ title: Model Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.7 {#v3-1-7}
+
+* Ensure that `Orchestra\Model\User::getRoles()` would only query the database for `roles` relationship once.
+
 ### v3.1.6 {#v3-1-6}
 
 * Add `Orchestra\Model\Eloquent::transaction()` method to execute model using transaction.
