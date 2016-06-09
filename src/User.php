@@ -132,7 +132,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
             $this->load('roles');
         }
 
-        return $this->relations['roles']->lists('name');
+        return $this->getRelation('roles')->lists('name');
     }
 
     /**
