@@ -5,6 +5,10 @@ title: Model Change Log
 
 ## Version 3.2 {#v3-2}
 
+### v3.2.5 {#v3-2-5}
+
+* Ensure that `Orchestra\Model\User::getRoles()` would only query the database for `roles` relationship once.
+
 ### v3.2.4 {#v3-2-4}
 
 * Allow to set `null` value when using `Orchestra\Model\Traits\Metable::putMetaData()`.
@@ -37,6 +41,10 @@ title: Model Change Log
 * Add `Orchestra\Model\Eloquent::transaction()` method to execute model using transaction.
 
 ## Version 3.1 {#v3-1}
+
+### v3.1.7 {#v3-1-7}
+
+* Ensure that `Orchestra\Model\User::getRoles()` would only query the database for `roles` relationship once.
 
 ### v3.1.6 {#v3-1-6}
 
