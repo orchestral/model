@@ -3,6 +3,17 @@ title: Model Change Log
 
 ---
 
+## Version 3.3 {#v3-3}
+
+### v3.3.0 {#v3-3-0}
+
+* Update support to Laravel Framework v5.3.
+* Remove `Trait` suffix and deprecate old traits.
+* Add `Orchestra\Model\Traits\Searchable`.
+* Add `getMetaData()` and `setMetaData()` to `Orchestra\Model\Traits\Metable`.
+* Allow to set `null` value when using `Orchestra\Model\Traits\Metable::putMetaData()`.
+* Ensure that `Orchestra\Model\User::getRoles()` would only query the database for `roles` relationship once.
+
 ## Version 3.2 {#v3-2}
 
 ### v3.2.5 {#v3-2-5}
