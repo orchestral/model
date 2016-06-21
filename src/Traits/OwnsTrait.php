@@ -7,13 +7,17 @@ trait OwnsTrait
     /**
      * Check if related model actually owns the relationship.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $related
+     * @param  \Illuminate\Database\Eloquent\Model|null  $related
      * @param  string|null  $foreignKey
      *
      * @return bool
      */
-    public function owns(Model $related, $foreignKey = null)
+    public function owns(Model $related = null, $foreignKey = null)
     {
+        if (is_null($related)) {
+            return false;
+        }
+
         if (is_null($foreignKey)) {
             $foreignKey = $this->getForeignKey();
         }

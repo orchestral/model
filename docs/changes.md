@@ -5,6 +5,10 @@ title: Model Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.8 {#v3-1-8}
+
+* Allow `Orchestra\Model\Traits\OwnedByTrait` and `Orchestra\Model\Traits\OwnsTrait` to accept `null` instead of just `Illuminate\Database\Eloquent\Model`.
+
 ### v3.1.7 {#v3-1-7}
 
 * Ensure that `Orchestra\Model\User::getRoles()` would only query the database for `roles` relationship once.
