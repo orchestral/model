@@ -5,6 +5,10 @@ title: Model Change Log
 
 ## Version 3.2 {#v3-2}
 
+### v3.2.6 {#v3-2-6}
+
+* Allow `Orchestra\Model\Traits\OwnedByTrait` and `Orchestra\Model\Traits\OwnsTrait` to accept `null` instead of just `Illuminate\Database\Eloquent\Model`.
+
 ### v3.2.5 {#v3-2-5}
 
 * Ensure that `Orchestra\Model\User::getRoles()` would only query the database for `roles` relationship once.
@@ -41,6 +45,10 @@ title: Model Change Log
 * Add `Orchestra\Model\Eloquent::transaction()` method to execute model using transaction.
 
 ## Version 3.1 {#v3-1}
+
+### v3.1.8 {#v3-1-8}
+
+* Allow `Orchestra\Model\Traits\OwnedByTrait` and `Orchestra\Model\Traits\OwnsTrait` to accept `null` instead of just `Illuminate\Database\Eloquent\Model`.
 
 ### v3.1.7 {#v3-1-7}
 
