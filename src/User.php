@@ -295,20 +295,6 @@ class User extends Eloquent implements Authorizable, CanResetPasswordContract, R
     }
 
     /**
-     * Send notification for a user.
-     *
-     * @param  \Orchestra\Contracts\Notification\Message|string  $subject
-     * @param  string|array|null  $view
-     * @param  array  $data
-     *
-     * @return \Orchestra\Contracts\Notification\Receipt
-     */
-    public function notify($subject, $view = null, array $data = [])
-    {
-        return $this->sendNotification($this, $subject, $view, $data);
-    }
-
-    /**
      * Suspend current user.
      *
      * @return \Orchestra\Model\User

@@ -477,21 +477,6 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($stub->isSuspended());
     }
 
-    public function testNotifyMethod()
-    {
-        $stub = m::mock('\Orchestra\Model\User')->makePartial();
-        $stub->shouldAllowMockingProtectedMethods();
-
-        $subject = 'foo';
-        $view = 'email.notification';
-        $data = ['foo' => 'bar'];
-
-        $stub->shouldReceive('sendNotification')->once()
-            ->with($stub, $subject, $view, $data)->andReturn(true);
-
-        $this->assertTrue($stub->notify($subject, $view, $data));
-    }
-
     /**
      * Test Orchestra\Model\User::isSuspended() method when account
      * is not suspended.
