@@ -69,7 +69,7 @@ trait Metable
             return $this->setMetaAttribute($meta);
         }
 
-        foreach($key as $name => $value) {
+        foreach ($key as $name => $value) {
             $this->putMetaData($name, $value);
         }
     }

@@ -2,22 +2,18 @@
 
 namespace Orchestra\Model;
 
-use Orchestra\Notifier\Notifiable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Hash;
 use Orchestra\Model\Traits\Searchable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Orchestra\Contracts\Notification\Recipient;
 use Orchestra\Contracts\Authorization\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Eloquent implements Authorizable, CanResetPasswordContract, Recipient, UserContract
+class User extends Eloquent implements Authorizable, UserContract
 {
-    use Authenticatable, CanResetPassword, Notifiable, Searchable, SoftDeletes;
+    use Authenticatable, Searchable, SoftDeletes;
 
     /**
      * The database table used by the model.
@@ -100,26 +96,6 @@ class User extends Eloquent implements Authorizable, CanResetPasswordContract, R
         }
 
         $this->attributes['password'] = $value;
-    }
-
-    /**
-     * Get the e-mail address where notification are sent.
-     *
-     * @return string
-     */
-    public function getRecipientEmail()
-    {
-        return $this->getEmailForPasswordReset();
-    }
-
-    /**
-     * Get the fullname where notification are sent.
-     *
-     * @return string
-     */
-    public function getRecipientName()
-    {
-        return $this->getAttribute('fullname');
     }
 
     /**
@@ -292,20 +268,6 @@ class User extends Eloquent implements Authorizable, CanResetPasswordContract, R
     public function isSuspended()
     {
         return ($this->getAttribute('status') == self::SUSPENDED);
-    }
-
-    /**
-     * Send notification for a user.
-     *
-     * @param  \Orchestra\Contracts\Notification\Message|string  $subject
-     * @param  string|array|null  $view
-     * @param  array  $data
-     *
-     * @return \Orchestra\Contracts\Notification\Receipt
-     */
-    public function notify($subject, $view = null, array $data = [])
-    {
-        return $this->sendNotification($this, $subject, $view, $data);
     }
 
     /**

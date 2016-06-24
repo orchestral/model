@@ -352,45 +352,6 @@ class UserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Orchestra\Model\User::getEmailForPasswordReset() method.
-     *
-     * @test
-     */
-    public function testGetEmailForPasswordResetMethod()
-    {
-        $stub = new User();
-        $stub->email = 'admin@orchestraplatform.com';
-
-        $this->assertEquals('admin@orchestraplatform.com', $stub->getEmailForPasswordReset());
-    }
-
-    /**
-     * Test Orchestra\Model\User::getRecipientEmail() method.
-     *
-     * @test
-     */
-    public function testGetRecipientEmailMethod()
-    {
-        $stub = new User();
-        $stub->email = 'admin@orchestraplatform.com';
-
-        $this->assertEquals('admin@orchestraplatform.com', $stub->getRecipientEmail());
-    }
-
-    /**
-     * Test Orchestra\Model\User::getRecipientName() method.
-     *
-     * @test
-     */
-    public function testGetRecipientNameMethod()
-    {
-        $stub = new User();
-        $stub->fullname = 'Administrator';
-
-        $this->assertEquals('Administrator', $stub->getRecipientName());
-    }
-
-    /**
      * Test Orchestra\Model\User::activate() method.
      *
      * @test
@@ -475,21 +436,6 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $stub->suspend();
 
         $this->assertTrue($stub->isSuspended());
-    }
-
-    public function testNotifyMethod()
-    {
-        $stub = m::mock('\Orchestra\Model\User')->makePartial();
-        $stub->shouldAllowMockingProtectedMethods();
-
-        $subject = 'foo';
-        $view = 'email.notification';
-        $data = ['foo' => 'bar'];
-
-        $stub->shouldReceive('sendNotification')->once()
-            ->with($stub, $subject, $view, $data)->andReturn(true);
-
-        $this->assertTrue($stub->notify($subject, $view, $data));
     }
 
     /**
