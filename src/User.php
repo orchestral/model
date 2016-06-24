@@ -138,7 +138,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     /**
      * Activate current user.
      *
-     * @return \Orchestra\Model\User
+     * @return $this
      */
     public function activate()
     {
@@ -166,7 +166,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     /**
      * Deactivate current user.
      *
-     * @return \Orchestra\Model\User
+     * @return $this
      */
     public function deactivate()
     {
@@ -316,7 +316,7 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
     /**
      * Suspend current user.
      *
-     * @return \Orchestra\Model\User
+     * @return $this
      */
     public function suspend()
     {
