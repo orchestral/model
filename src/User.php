@@ -117,7 +117,7 @@ class User extends Eloquent implements Authorizable, UserContract
     /**
      * Activate current user.
      *
-     * @return \Orchestra\Model\User
+     * @return $this
      */
     public function activate()
     {
@@ -141,7 +141,7 @@ class User extends Eloquent implements Authorizable, UserContract
     /**
      * Deactivate current user.
      *
-     * @return \Orchestra\Model\User
+     * @return $this
      */
     public function deactivate()
     {
@@ -273,7 +273,7 @@ class User extends Eloquent implements Authorizable, UserContract
     /**
      * Suspend current user.
      *
-     * @return \Orchestra\Model\User
+     * @return $this
      */
     public function suspend()
     {
