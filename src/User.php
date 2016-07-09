@@ -129,12 +129,16 @@ class User extends Eloquent implements Authorizable, UserContract
     /**
      * Assign role to user.
      *
-     * @param  int|array  $roles
+     * @param  \Orchestra\Model\Role|int|array  $roles
      *
      * @return void
      */
     public function attachRole($roles)
     {
+        if ($roles instanceof Role) {
+            $roles = [$roles->getKey()];
+        }
+
         $this->roles()->sync((array) $roles, false);
     }
 
@@ -153,12 +157,16 @@ class User extends Eloquent implements Authorizable, UserContract
     /**
      * Un-assign role from user.
      *
-     * @param  int|array  $roles
+     * @param  \Orchestra\Model\Role|int|array  $roles
      *
      * @return void
      */
     public function detachRole($roles)
     {
+        if ($roles instanceof Role) {
+            $roles = [$roles->getKey()];
+        }
+
         $this->roles()->detach((array) $roles);
     }
 
