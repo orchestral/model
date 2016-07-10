@@ -22,9 +22,9 @@ abstract class Eloquent extends Model
      *
      * @param  \Closure  $callback
      *
-     * @return mixed
-     *
      * @throws \Throwable
+     *
+     * @return mixed
      */
     public function transaction(Closure $callback)
     {
