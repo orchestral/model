@@ -5,6 +5,16 @@ title: Model Change Log
 
 ## Version 3.3 {#v3-3}
 
+### v3.3.2 {#v3-3-2}
+
+* Allow to directly attach and detach an instance of `Orchestra\Model\Role` via `Orchestra\Model\User`.
+* Remove following traits on `Orchestra\Model\User`:
+    - `Orchestra\Notifier\Notifiable`
+    - `Illuminate\Auth\Passwords\CanResetPassword`
+* Remove following contracts on `Orchestra\Model\User`:
+    - `Orchestra\Contracts\Notification\Recipient`
+    - `Illuminate\Contracts\Auth\CanResetPassword`
+
 ### v3.3.1 {#v3-3-1}
 
 * Allow `Orchestra\Model\Traits\OwnedBy` and `Orchestra\Model\Traits\Owns` to accept `null` instead of just `Illuminate\Database\Eloquent\Model`.
