@@ -4,6 +4,7 @@ use Orchestra\Notifier\Notifiable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Hash;
 use Orchestra\Model\Traits\Searchable;
+use Orchestra\Model\Traits\CheckRoles;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,7 +16,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Eloquent implements Authorizable, CanResetPasswordContract, Recipient, UserContract
 {
-    use Authenticatable, CanResetPassword, Notifiable, Searchable, SoftDeletes;
+    use Authenticatable, CanResetPassword, CheckRoles, Notifiable, Searchable, SoftDeletes;
 
     /**
      * The database table used by the model.
@@ -121,6 +122,94 @@ class User extends Eloquent implements Authorizable, CanResetPasswordContract, R
     }
 
     /**
+     * Activate current user.
+     *
+     * @return $this
+     */
+    public function activate()
+    {
+        $this->setAttribute('status', self::VERIFIED);
+
+        return $this;
+    }
+
+    /**
+     * Deactivate current user.
+     *
+     * @return $this
+     */
+    public function deactivate()
+    {
+        $this->setAttribute('status', self::UNVERIFIED);
+
+        return $this;
+    }
+
+    /**
+     * Suspend current user.
+     *
+     * @return $this
+     */
+    public function suspend()
+    {
+        $this->setAttribute('status', self::SUSPENDED);
+
+        return $this;
+    }
+
+    /**
+     * Determine if the current user account activated or not.
+     *
+     * @return bool
+     */
+    public function isActivated()
+    {
+        return ($this->getAttribute('status') == self::VERIFIED);
+    }
+
+    /**
+     * Determine if the current user account suspended or not.
+     *
+     * @return bool
+     */
+    public function isSuspended()
+    {
+        return ($this->getAttribute('status') == self::SUSPENDED);
+    }
+
+    /**
+     * Assign role to user.
+     *
+     * @param  \Orchestra\Model\Role|int|array  $roles
+     *
+     * @return void
+     */
+    public function attachRole($roles)
+    {
+        if ($roles instanceof Role) {
+            $roles = [$roles->getKey()];
+        }
+
+        $this->roles()->sync((array) $roles, false);
+    }
+
+    /**
+     * Un-assign role from user.
+     *
+     * @param  \Orchestra\Model\Role|int|array  $roles
+     *
+     * @return void
+     */
+    public function detachRole($roles)
+    {
+        if ($roles instanceof Role) {
+            $roles = [$roles->getKey()];
+        }
+
+        $this->roles()->detach((array) $roles);
+    }
+
+    /**
      * Get roles name as an array.
      *
      * @return \Illuminate\Support\Collection|array
@@ -137,93 +226,17 @@ class User extends Eloquent implements Authorizable, CanResetPasswordContract, R
     }
 
     /**
-     * Activate current user.
-     *
-     * @return \Orchestra\Model\User
-     */
-    public function activate()
-    {
-        $this->setAttribute('status', self::VERIFIED);
-
-        return $this;
-    }
-
-    /**
-     * Assign role to user.
-     *
-     * @param  int|array  $roles
-     *
-     * @return void
-     */
-    public function attachRole($roles)
-    {
-        $this->roles()->sync((array) $roles, false);
-    }
-
-    /**
-     * Deactivate current user.
-     *
-     * @return \Orchestra\Model\User
-     */
-    public function deactivate()
-    {
-        $this->setAttribute('status', self::UNVERIFIED);
-
-        return $this;
-    }
-
-    /**
-     * Un-assign role from user.
-     *
-     * @param  int|array  $roles
-     *
-     * @return void
-     */
-    public function detachRole($roles)
-    {
-        $this->roles()->detach((array) $roles);
-    }
-
-    /**
      * Determine if current user has the given role.
      *
      * @param  \Illuminate\Contracts\Support\Arrayable|array|string  $roles
      *
      * @return bool
+     *
+     * @deprecated v3.1.x and to be remove in v3.3.x
      */
     public function is($roles)
     {
-        $userRoles = $this->getRoles();
-
-        if ($userRoles instanceof Arrayable) {
-            $userRoles = $userRoles->toArray();
-        }
-
-        // For a pre-caution, we should return false in events where user
-        // roles not an array.
-        if (! is_array($userRoles)) {
-            return false;
-        }
-
-        // We should ensure that all given roles match the current user,
-        // consider it as a AND condition instead of OR.
-        foreach ((array) $roles as $role) {
-            if (! in_array($role, $userRoles)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * Determine if the current user account activated or not.
-     *
-     * @return bool
-     */
-    public function isActivated()
-    {
-        return ($this->getAttribute('status') == self::VERIFIED);
+        return $this->hasRoles($roles);
     }
 
     /**
@@ -232,30 +245,12 @@ class User extends Eloquent implements Authorizable, CanResetPasswordContract, R
      * @param  \Illuminate\Contracts\Support\Arrayable|array|string  $roles
      *
      * @return bool
+     *
+     * @deprecated v3.1.x and to be remove in v3.3.x
      */
     public function isAny($roles)
     {
-        $userRoles = $this->getRoles();
-
-        if ($userRoles instanceof Arrayable) {
-            $userRoles = $userRoles->toArray();
-        }
-
-        // For a pre-caution, we should return false in events where user
-        // roles not an array.
-        if (! is_array($userRoles)) {
-            return false;
-        }
-
-        // We should ensure that any given roles match the current user,
-        // consider it as OR condition.
-        foreach ((array) $roles as $role) {
-            if (in_array($role, $userRoles)) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->hasAnyRoles($roles);
     }
 
     /**
@@ -264,10 +259,12 @@ class User extends Eloquent implements Authorizable, CanResetPasswordContract, R
      * @param  \Illuminate\Contracts\Support\Arrayable|array|string  $roles
      *
      * @return bool
+     *
+     * @deprecated v3.1.x and to be remove in v3.3.x
      */
     public function isNot($roles)
     {
-        return ! $this->is($roles);
+        return ! $this->hasRoles($roles);
     }
 
     /**
@@ -276,20 +273,12 @@ class User extends Eloquent implements Authorizable, CanResetPasswordContract, R
      * @param  \Illuminate\Contracts\Support\Arrayable|array|string  $roles
      *
      * @return bool
+     *
+     * @deprecated v3.1.x and to be remove in v3.3.x
      */
     public function isNotAny($roles)
     {
-        return ! $this->isAny($roles);
-    }
-
-    /**
-     * Determine if the current user account suspended or not.
-     *
-     * @return bool
-     */
-    public function isSuspended()
-    {
-        return ($this->getAttribute('status') == self::SUSPENDED);
+        return ! $this->hasAnyRoles($roles);
     }
 
     /**
@@ -304,17 +293,5 @@ class User extends Eloquent implements Authorizable, CanResetPasswordContract, R
     public function notify($subject, $view = null, array $data = [])
     {
         return $this->sendNotification($this, $subject, $view, $data);
-    }
-
-    /**
-     * Suspend current user.
-     *
-     * @return \Orchestra\Model\User
-     */
-    public function suspend()
-    {
-        $this->setAttribute('status', self::SUSPENDED);
-
-        return $this;
     }
 }
