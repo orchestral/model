@@ -78,140 +78,71 @@ class UserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Orchestra\Model\User::is() method.
+     * Test Orchestra\Model\User::hasRoles() method.
      *
      * @test
      */
-    public function testIsMethod()
+    public function testHasRolesMethod()
     {
         $model = m::mock('\Orchestra\Model\User[getRoles]');
 
         $model->shouldReceive('getRoles')->times(4)->andReturn(['admin', 'editor']);
 
-        $this->assertTrue($model->is('admin'));
-        $this->assertFalse($model->is('user'));
+        $this->assertTrue($model->hasRoles('admin'));
+        $this->assertFalse($model->hasRoles('user'));
 
-        $this->assertTrue($model->is(['admin', 'editor']));
-        $this->assertFalse($model->is(['admin', 'user']));
+        $this->assertTrue($model->hasRoles(['admin', 'editor']));
+        $this->assertFalse($model->hasRoles(['admin', 'user']));
     }
 
     /**
-     * Test Orchestra\Support\Auth::is() method when invalid roles is
+     * Test Orchestra\Support\Auth::hasRoles() method when invalid roles is
      * returned.
      *
      * @test
      */
-    public function testIsMethodWhenInvalidRolesIsReturned()
+    public function testHasRolesMethodWhenInvalidRolesIsReturned()
     {
         $model = m::mock('\Orchestra\Model\User[getRoles]');
 
         $model->shouldReceive('getRoles')->times(4)->andReturn('foo');
 
-        $this->assertFalse($model->is('admin'));
-        $this->assertFalse($model->is('user'));
+        $this->assertFalse($model->hasRoles('admin'));
+        $this->assertFalse($model->hasRoles('user'));
 
-        $this->assertFalse($model->is(['admin', 'editor']));
-        $this->assertFalse($model->is(['admin', 'user']));
+        $this->assertFalse($model->hasRoles(['admin', 'editor']));
+        $this->assertFalse($model->hasRoles(['admin', 'user']));
     }
 
     /**
-     * Test Orchestra\Model\User::isNot() method.
+     * Test Orchestra\Model\User::hasAnyRoles() method.
      *
      * @test
      */
-    public function testIsNotMethod()
-    {
-        $model = m::mock('\Orchestra\Model\User[getRoles]');
-
-        $model->shouldReceive('getRoles')->times(4)->andReturn(['admin', 'editor']);
-
-        $this->assertTrue($model->isNot('user'));
-        $this->assertFalse($model->isNot('admin'));
-
-        $this->assertTrue($model->isNot(['superadmin', 'user']));
-        $this->assertFalse($model->isNot(['admin', 'editor']));
-    }
-
-    /**
-     * Test Orchestra\Support\Auth::isNot() method when invalid roles is
-     * returned.
-     *
-     * @test
-     */
-    public function testIsNotMethodWhenInvalidRolesIsReturned()
-    {
-        $model = m::mock('\Orchestra\Model\User[getRoles]');
-
-        $model->shouldReceive('getRoles')->times(4)->andReturn('foo');
-
-        $this->assertTrue($model->isNot('admin'));
-        $this->assertTrue($model->isNot('user'));
-
-        $this->assertTrue($model->isNot(['admin', 'editor']));
-        $this->assertTrue($model->isNot(['admin', 'user']));
-    }
-
-    /**
-     * Test Orchestra\Model\User::isAny() method.
-     *
-     * @test
-     */
-    public function testIsAnyMethod()
+    public function testHasAnyRolesMethod()
     {
         $model = m::mock('\Orchestra\Model\User[getRoles]');
 
         $model->shouldReceive('getRoles')->twice()->andReturn(['admin', 'editor']);
 
-        $this->assertTrue($model->isAny(['admin', 'user']));
-        $this->assertFalse($model->isAny(['superadmin', 'user']));
+        $this->assertTrue($model->hasAnyRoles(['admin', 'user']));
+        $this->assertFalse($model->hasAnyRoles(['superadmin', 'user']));
     }
 
     /**
-     * Test Orchestra\Support\Auth::isAny() method when invalid roles is
+     * Test Orchestra\Support\Auth::hasAnyRoles() method when invalid roles is
      * returned.
      *
      * @test
      */
-    public function testIsAnyMethodWhenInvalidRolesIsReturned()
+    public function testhasAnyRolesMethodWhenInvalidRolesIsReturned()
     {
         $model = m::mock('\Orchestra\Model\User[getRoles]');
 
         $model->shouldReceive('getRoles')->twice()->andReturn('foo');
 
-        $this->assertFalse($model->isAny(['admin', 'editor']));
-        $this->assertFalse($model->isAny(['admin', 'user']));
-    }
-
-    /**
-     * Test Orchestra\Model\User::isNotAny() method.
-     *
-     * @test
-     */
-    public function testIsNotAnyMethod()
-    {
-        $model = m::mock('\Orchestra\Model\User[getRoles]');
-
-        $model->shouldReceive('getRoles')->times(3)->andReturn(['admin', 'editor']);
-
-        $this->assertTrue($model->isNotAny(['administrator', 'user']));
-        $this->assertFalse($model->isNotAny(['user', 'editor']));
-        $this->assertFalse($model->isNotAny(['admin', 'editor']));
-    }
-
-    /**
-     * Test Orchestra\Support\Auth::isNotAny() method when invalid roles is
-     * returned.
-     *
-     * @test
-     */
-    public function testIsNotAnyMethodWhenInvalidRolesIsReturned()
-    {
-        $model = m::mock('\Orchestra\Model\User[getRoles]');
-
-        $model->shouldReceive('getRoles')->twice()->andReturn('foo');
-
-        $this->assertTrue($model->isNotAny(['admin', 'editor']));
-        $this->assertTrue($model->isNotAny(['admin', 'user']));
+        $this->assertFalse($model->hasAnyRoles(['admin', 'editor']));
+        $this->assertFalse($model->hasAnyRoles(['admin', 'user']));
     }
 
     /**

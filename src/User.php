@@ -5,6 +5,7 @@ namespace Orchestra\Model;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Hash;
 use Orchestra\Model\Traits\Searchable;
+use Orchestra\Model\Traits\CheckRoles;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,7 +14,7 @@ use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 
 class User extends Eloquent implements Authorizable, UserContract
 {
-    use Authenticatable, Searchable, SoftDeletes;
+    use Authenticatable, CheckRoles, Searchable, SoftDeletes;
 
     /**
      * The database table used by the model.
@@ -99,19 +100,23 @@ class User extends Eloquent implements Authorizable, UserContract
     }
 
     /**
-     * Get roles name as an array.
+     * Get the e-mail address where notification are sent.
      *
-     * @return \Illuminate\Support\Collection|array
+     * @return string
      */
-    public function getRoles()
+    public function getRecipientEmail()
     {
-        // If the relationship is already loaded, avoid re-querying the
-        // database and instead fetch the collection.
-        if (! $this->relationLoaded('roles')) {
-            $this->load('roles');
-        }
+        return $this->getEmailForPasswordReset();
+    }
 
-        return $this->getRelation('roles')->pluck('name');
+    /**
+     * Get the fullname where notification are sent.
+     *
+     * @return string
+     */
+    public function getRecipientName()
+    {
+        return $this->getAttribute('fullname');
     }
 
     /**
@@ -127,22 +132,6 @@ class User extends Eloquent implements Authorizable, UserContract
     }
 
     /**
-     * Assign role to user.
-     *
-     * @param  \Orchestra\Model\Role|int|array  $roles
-     *
-     * @return void
-     */
-    public function attachRole($roles)
-    {
-        if ($roles instanceof Role) {
-            $roles = [$roles->getKey()];
-        }
-
-        $this->roles()->sync((array) $roles, false);
-    }
-
-    /**
      * Deactivate current user.
      *
      * @return $this
@@ -155,51 +144,15 @@ class User extends Eloquent implements Authorizable, UserContract
     }
 
     /**
-     * Un-assign role from user.
+     * Suspend current user.
      *
-     * @param  \Orchestra\Model\Role|int|array  $roles
-     *
-     * @return void
+     * @return $this
      */
-    public function detachRole($roles)
+    public function suspend()
     {
-        if ($roles instanceof Role) {
-            $roles = [$roles->getKey()];
-        }
+        $this->setAttribute('status', self::SUSPENDED);
 
-        $this->roles()->detach((array) $roles);
-    }
-
-    /**
-     * Determine if current user has the given role.
-     *
-     * @param  \Illuminate\Contracts\Support\Arrayable|array|string  $roles
-     *
-     * @return bool
-     */
-    public function is($roles)
-    {
-        $userRoles = $this->getRoles();
-
-        if ($userRoles instanceof Arrayable) {
-            $userRoles = $userRoles->toArray();
-        }
-
-        // For a pre-caution, we should return false in events where user
-        // roles not an array.
-        if (! is_array($userRoles)) {
-            return false;
-        }
-
-        // We should ensure that all given roles match the current user,
-        // consider it as a AND condition instead of OR.
-        foreach ((array) $roles as $role) {
-            if (! in_array($role, $userRoles)) {
-                return false;
-            }
-        }
-
-        return true;
+        return $this;
     }
 
     /**
@@ -213,62 +166,6 @@ class User extends Eloquent implements Authorizable, UserContract
     }
 
     /**
-     * Determine if current user has any of the given role.
-     *
-     * @param  \Illuminate\Contracts\Support\Arrayable|array|string  $roles
-     *
-     * @return bool
-     */
-    public function isAny($roles)
-    {
-        $userRoles = $this->getRoles();
-
-        if ($userRoles instanceof Arrayable) {
-            $userRoles = $userRoles->toArray();
-        }
-
-        // For a pre-caution, we should return false in events where user
-        // roles not an array.
-        if (! is_array($userRoles)) {
-            return false;
-        }
-
-        // We should ensure that any given roles match the current user,
-        // consider it as OR condition.
-        foreach ((array) $roles as $role) {
-            if (in_array($role, $userRoles)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Determine if current user does not has any of the given role.
-     *
-     * @param  \Illuminate\Contracts\Support\Arrayable|array|string  $roles
-     *
-     * @return bool
-     */
-    public function isNot($roles)
-    {
-        return ! $this->is($roles);
-    }
-
-    /**
-     * Determine if current user does not has any of the given role.
-     *
-     * @param  \Illuminate\Contracts\Support\Arrayable|array|string  $roles
-     *
-     * @return bool
-     */
-    public function isNotAny($roles)
-    {
-        return ! $this->isAny($roles);
-    }
-
-    /**
      * Determine if the current user account suspended or not.
      *
      * @return bool
@@ -279,14 +176,42 @@ class User extends Eloquent implements Authorizable, UserContract
     }
 
     /**
-     * Suspend current user.
+     * Assign role to user.
+     *
+     * @param  \Orchestra\Model\Role|int|array  $roles
      *
      * @return $this
      */
-    public function suspend()
+    public function attachRole($roles)
     {
-        $this->setAttribute('status', self::SUSPENDED);
+        return $this->attachRoles($roles);
+    }
 
-        return $this;
+    /**
+     * Un-assign role from user.
+     *
+     * @param  \Orchestra\Model\Role|int|array  $roles
+     *
+     * @return $this
+     */
+    public function detachRole($roles)
+    {
+        return $this->detachRoles($roles);
+    }
+
+    /**
+     * Get roles name as an array.
+     *
+     * @return \Illuminate\Support\Collection|array
+     */
+    public function getRoles()
+    {
+        // If the relationship is already loaded, avoid re-querying the
+        // database and instead fetch the collection.
+        if (! $this->relationLoaded('roles')) {
+            $this->load('roles');
+        }
+
+        return $this->getRelation('roles')->pluck('name');
     }
 }
