@@ -181,15 +181,11 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
      *
      * @param  \Orchestra\Model\Role|int|array  $roles
      *
-     * @return void
+     * @return $this
      */
     public function attachRole($roles)
     {
-        if ($roles instanceof Role) {
-            $roles = [$roles->getKey()];
-        }
-
-        $this->roles()->sync((array) $roles, false);
+        return $this->attachRoles($roles);
     }
 
     /**
@@ -197,15 +193,11 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
      *
      * @param  \Orchestra\Model\Role|int|array  $roles
      *
-     * @return void
+     * @return $this
      */
     public function detachRole($roles)
     {
-        if ($roles instanceof Role) {
-            $roles = [$roles->getKey()];
-        }
-
-        $this->roles()->detach((array) $roles);
+        return $this->detachRoles($roles);
     }
 
     /**
@@ -288,6 +280,8 @@ class User extends Eloquent implements UserContract, CanResetPasswordContract, R
      * @param  array  $data
      *
      * @return \Orchestra\Contracts\Notification\Receipt
+     *
+     * @deprecated v3.1.x and to be remove in v3.3.x
      */
     public function notify($subject, $view = null, array $data = [])
     {

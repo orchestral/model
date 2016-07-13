@@ -68,6 +68,42 @@ trait CheckRoles
         return false;
     }
 
+    /**
+     * Assign roles to user.
+     *
+     * @param  \Orchestra\Model\Role|int|array  $roles
+     *
+     * @return $this
+     */
+    public function attachRoles($roles)
+    {
+        if ($roles instanceof Role) {
+            $roles = [$roles->getKey()];
+        }
+
+        $this->roles()->sync((array) $roles, false);
+
+        return $this;
+    }
+
+    /**
+     * Un-assign roles from user.
+     *
+     * @param  \Orchestra\Model\Role|int|array  $roles
+     *
+     * @return $this
+     */
+    public function detachRoles($roles)
+    {
+        if ($roles instanceof Role) {
+            $roles = [$roles->getKey()];
+        }
+
+        $this->roles()->detach((array) $roles);
+
+        return $this;
+    }
+
      /**
      * Get roles name as an array.
      *
