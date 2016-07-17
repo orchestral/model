@@ -46,6 +46,17 @@ title: Model Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.9 {#v3-1-9}
+
+* Allow to directly attach or detach `Orchestra\Model\Role` from `Orchestra\Model\User`.
+* Add `Orchestra\Model\Traits\CheckRoles` to handle Laravel 5.3 breaking change by adding `Illuminate\Database\Eloquent\Model::is()` method.
+* Deprecate the following methods:
+    - `Orchestra\Model\User::notify()`
+    - `Orchestra\Model\User::is()`
+    - `Orchestra\Model\User::isAny()`
+    - `Orchestra\Model\User::isNot()`
+    - `Orchestra\Model\User::isNotAny()`
+
 ### v3.1.8 {#v3-1-8}
 
 * Allow `Orchestra\Model\Traits\OwnedByTrait` and `Orchestra\Model\Traits\OwnsTrait` to accept `null` instead of just `Illuminate\Database\Eloquent\Model`.
