@@ -28,4 +28,16 @@ abstract class Eloquent extends Model
     {
         return $this->getConnection()->transaction($callback);
     }
+
+    /**
+     * Transform each attribute in the model using a callback.
+     *
+     * @param  callable  $callback
+     *
+     * @return \Illuminate\Support\Fluent
+     */
+    public function transform(callable $callback)
+    {
+        return new Illuminate\Support\Fluent($callback($this));
+    }
 }
