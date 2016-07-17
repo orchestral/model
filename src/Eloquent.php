@@ -1,6 +1,7 @@
 <?php namespace Orchestra\Model;
 
 use Closure;
+use Illuminate\Support\Fluent;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class Eloquent extends Model
@@ -38,6 +39,6 @@ abstract class Eloquent extends Model
      */
     public function transform(callable $callback)
     {
-        return new Illuminate\Support\Fluent($callback($this));
+        return new Fluent($callback($this));
     }
 }
