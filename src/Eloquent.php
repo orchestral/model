@@ -3,6 +3,7 @@
 namespace Orchestra\Model;
 
 use Closure;
+use Illuminate\Support\Fluent;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class Eloquent extends Model
@@ -29,5 +30,17 @@ abstract class Eloquent extends Model
     public function transaction(Closure $callback)
     {
         return $this->getConnection()->transaction($callback);
+    }
+
+    /**
+     * Transform each attribute in the model using a callback.
+     *
+     * @param  callable  $callback
+     *
+     * @return \Illuminate\Support\Fluent
+     */
+    public function transform(callable $callback)
+    {
+        return new Fluent($callback($this));
     }
 }
