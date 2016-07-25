@@ -104,7 +104,7 @@ trait CheckRoles
         return $this;
     }
 
-     /**
+    /**
      * Get roles name as an array.
      *
      * @return \Illuminate\Support\Collection|array

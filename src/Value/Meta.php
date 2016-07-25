@@ -51,6 +51,7 @@ class Meta extends Fluent
      * Transform each item in the attributes using a callback.
      *
      * @param  callable  $callback
+     *
      * @return $this
      */
     public function transform(callable $callback)
