@@ -5,11 +5,11 @@ title: Model Change Log
 
 ## Version 3.2 {#v3-2}
 
-### v3.2.8 {#v3-2-8}
+### v3.2.9 {#v3-2-9}
 
 * Add `Orchestra\Model\Value\Meta::transform()` method.
 
-### v3.2.7 {#v3-2-7}
+### v3.2.8 {#v3-2-8}
 
 * Allow to directly attach or detach `Orchestra\Model\Role` from `Orchestra\Model\User`.
 * Add `Orchestra\Model\Eloquent::transform()` method.
