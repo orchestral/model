@@ -46,4 +46,17 @@ class Meta extends Fluent
 
         return $this;
     }
+
+    /**
+     * Transform each item in the attributes using a callback.
+     *
+     * @param  callable  $callback
+     * @return $this
+     */
+    public function transform(callable $callback)
+    {
+        $this->attributes = $callback($this);
+
+        return $this;
+    }
 }
