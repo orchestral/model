@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Hash;
 use Orchestra\Model\Traits\Searchable;
 use Orchestra\Model\Traits\CheckRoles;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Orchestra\Contracts\Authorization\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
