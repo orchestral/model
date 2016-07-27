@@ -5,6 +5,19 @@ title: Model Change Log
 
 ## Version 3.3 {#v3-3}
 
+### v3.3.3 {#v3-3-3}
+
+* Allow to directly attach or detach `Orchestra\Model\Role` from `Orchestra\Model\User`.
+* Add `Orchestra\Model\Eloquent::transform()` method.
+* Add `Orchestra\Model\Traits\CheckRoles` to handle Laravel 5.3 breaking change by adding `Illuminate\Database\Eloquent\Model::is()` method.
+* Remove/replaced deprecated methods:
+    - `Orchestra\Model\User::notify()`
+    - `Orchestra\Model\User::is()`
+    - `Orchestra\Model\User::isAny()`
+    - `Orchestra\Model\User::isNot()`
+    - `Orchestra\Model\User::isNotAny()`
+* Add `Orchestra\Model\Value\Meta::transform()` method.
+
 ### v3.3.2 {#v3-3-2}
 
 * Allow to directly attach and detach an instance of `Orchestra\Model\Role` via `Orchestra\Model\User`.
