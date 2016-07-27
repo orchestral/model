@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Model\Traits;
+<?php
+
+namespace Orchestra\Model\Traits;
 
 use Illuminate\Contracts\Support\Arrayable;
 
@@ -104,7 +106,7 @@ trait CheckRoles
         return $this;
     }
 
-     /**
+    /**
      * Get roles name as an array.
      *
      * @return \Illuminate\Support\Collection|array
