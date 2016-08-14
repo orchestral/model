@@ -1,7 +1,7 @@
 <?php namespace Orchestra\Model\Value;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Fluent;
+use Orchestra\Support\Fluent;
 
 class Meta extends Fluent
 {
@@ -43,20 +43,6 @@ class Meta extends Fluent
     public function forget($key)
     {
         Arr::forget($this->attributes, $key);
-
-        return $this;
-    }
-
-    /**
-     * Transform each item in the attributes using a callback.
-     *
-     * @param  callable  $callback
-     *
-     * @return $this
-     */
-    public function transform(callable $callback)
-    {
-        $this->attributes = $callback($this);
 
         return $this;
     }
