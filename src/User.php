@@ -8,11 +8,10 @@ use Orchestra\Model\Traits\Searchable;
 use Orchestra\Model\Traits\CheckRoles;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Orchestra\Contracts\Notification\Recipient;
 use Orchestra\Contracts\Authorization\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 
-class User extends Eloquent implements Authorizable, Recipient, UserContract
+class User extends Eloquent implements Authorizable, UserContract
 {
     use Authenticatable, CheckRoles, Searchable, SoftDeletes;
 
@@ -97,26 +96,6 @@ class User extends Eloquent implements Authorizable, Recipient, UserContract
         }
 
         $this->attributes['password'] = $value;
-    }
-
-    /**
-     * Get the e-mail address where notification are sent.
-     *
-     * @return string
-     */
-    public function getRecipientEmail()
-    {
-        return $this->getEmailForPasswordReset();
-    }
-
-    /**
-     * Get the fullname where notification are sent.
-     *
-     * @return string
-     */
-    public function getRecipientName()
-    {
-        return $this->getAttribute('fullname');
     }
 
     /**
