@@ -8,10 +8,11 @@ use Orchestra\Model\Traits\Searchable;
 use Orchestra\Model\Traits\CheckRoles;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Orchestra\Contracts\Notification\Recipient;
 use Orchestra\Contracts\Authorization\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 
-class User extends Eloquent implements Authorizable, UserContract
+class User extends Eloquent implements Authorizable, Recipient, UserContract
 {
     use Authenticatable, CheckRoles, Searchable, SoftDeletes;
 
