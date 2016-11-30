@@ -11,14 +11,14 @@ class UserWithRoleScope implements Scope
     /**
      * The selected role.
      *
-     * @var string
+     * @var string|array
      */
     protected $role;
 
     /**
      * Construct the scope.
      *
-     * @param  string  $role
+     * @param  string|array  $role
      */
     public function __construct($role)
     {
@@ -40,7 +40,7 @@ class UserWithRoleScope implements Scope
         }
 
         $builder->whereHas('roles', function ($query) {
-            $query->where('name', '=', $this->role);
+            $query->whereIn('name', (array) $this->role);
         });
     }
 }
