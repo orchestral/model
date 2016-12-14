@@ -3,7 +3,7 @@
 namespace Orchestra\Model;
 
 use Closure;
-use Illuminate\Support\Fluent;
+use Orchestra\Support\Fluent;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class Eloquent extends Model
