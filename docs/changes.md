@@ -5,6 +5,16 @@ title: Model Change Log
 
 ## Version 3.3 {#v3-3}
 
+### v3.3.5 {#v3-3-5}
+
+* Add `Orchestra\Model\Scopes\UserWithRoleScope`.
+* Use explicit relationship name for `User` to `Role` belongs to many relationship.
+
+### v3.3.4 {#v3-3-4}
+
+* Removed `getRecipientEmail()` and `getRecipientName()` from `Orchestra\Model\User`.
+* `Orchestra\Model\Value\Meta` should extends `Orchestra\Support\Fluent`.
+
 ### v3.3.3 {#v3-3-3}
 
 * Allow to directly attach or detach `Orchestra\Model\Role` from `Orchestra\Model\User`.

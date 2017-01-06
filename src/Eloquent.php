@@ -3,10 +3,11 @@
 namespace Orchestra\Model;
 
 use Closure;
-use Illuminate\Support\Fluent;
+use Orchestra\Support\Fluent;
 use Illuminate\Database\Eloquent\Model;
+use Orchestra\Contracts\Support\Transformable;
 
-abstract class Eloquent extends Model
+abstract class Eloquent extends Model implements Transformable
 {
     /**
      * Determine if the model instance uses soft deletes.

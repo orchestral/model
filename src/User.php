@@ -57,7 +57,7 @@ class User extends Eloquent implements Authorizable, UserContract
      */
     public function roles()
     {
-        return $this->belongsToMany(Role::class, 'user_role')->withTimestamps();
+        return $this->belongsToMany(Role::class, 'user_role', 'user_id', 'role_id')->withTimestamps();
     }
 
     /**
@@ -96,26 +96,6 @@ class User extends Eloquent implements Authorizable, UserContract
         }
 
         $this->attributes['password'] = $value;
-    }
-
-    /**
-     * Get the e-mail address where notification are sent.
-     *
-     * @return string
-     */
-    public function getRecipientEmail()
-    {
-        return $this->getEmailForPasswordReset();
-    }
-
-    /**
-     * Get the fullname where notification are sent.
-     *
-     * @return string
-     */
-    public function getRecipientName()
-    {
-        return $this->getAttribute('fullname');
     }
 
     /**
