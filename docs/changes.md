@@ -5,6 +5,10 @@ title: Model Change Log
 
 ## Version 3.3 {#v3-3}
 
+### v3.3.6 {#v3-3-6}
+
+* Use `Orchestra\Support\Fluent`.
+
 ### v3.3.5 {#v3-3-5}
 
 * Add `Orchestra\Model\Scopes\UserWithRoleScope`.
