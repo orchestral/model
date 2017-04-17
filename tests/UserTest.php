@@ -2,12 +2,13 @@
 
 use Mockery as m;
 use Orchestra\Model\User;
+use PHPUnit\Framework\TestCase;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Facade;
 use Orchestra\Support\Traits\Testing\MockEloquentConnection;
 
-class UserTest extends \PHPUnit_Framework_TestCase
+class UserTest extends TestCase
 {
     use MockEloquentConnection;
 

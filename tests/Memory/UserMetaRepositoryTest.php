@@ -2,10 +2,11 @@
 
 use Mockery as m;
 use Illuminate\Support\Fluent;
+use PHPUnit\Framework\TestCase;
 use Illuminate\Container\Container;
 use Orchestra\Model\Memory\UserMetaRepository;
 
-class UserMetaRepositoryTest extends \PHPUnit_Framework_TestCase
+class UserMetaRepositoryTest extends TestCase
 {
     /**
      * Application instance.

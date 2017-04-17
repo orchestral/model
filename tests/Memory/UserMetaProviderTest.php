@@ -1,10 +1,11 @@
 <?php namespace Orchestra\Model\TestCase;
 
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 use Illuminate\Container\Container;
 use Orchestra\Model\Memory\UserMetaProvider;
 
-class UserMetaProviderTest extends \PHPUnit_Framework_TestCase
+class UserMetaProviderTest extends TestCase
 {
     /**
      * Application instance.
