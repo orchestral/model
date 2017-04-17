@@ -16,13 +16,7 @@ trait Metable
      */
     public function getMetaAttribute($value)
     {
-        $meta = [];
-
-        if (! is_null($value)) {
-            $meta = json_decode($value, true);
-        }
-
-        return new Meta($meta);
+        return $this->accessMetaAttribute($value);
     }
 
     /**
@@ -35,6 +29,21 @@ trait Metable
     public function setMetaAttribute($value = null)
     {
         $this->attributes['meta'] = $this->mutateMetaAttribute($value);
+    }
+
+    /**
+     * Get original meta data.
+     *
+     * @param  string  $key
+     * @param  mixed  $default
+     *
+     * @return mixed
+     */
+    public function getOriginalMetaData($key, $default = null)
+    {
+        $meta = $this->accessMetaAttribute($this->getOriginal('meta'));
+
+        return $meta->get($key, $default);
     }
 
     /**
@@ -72,6 +81,24 @@ trait Metable
         foreach ($key as $name => $value) {
             $this->putMetaData($name, $value);
         }
+    }
+
+    /**
+     * Access meta attribute.
+     *
+     * @param  mixed  $value
+     *
+     * @return \Orchestra\Model\Value\Meta
+     */
+    protected function accessMetaAttribute($value)
+    {
+        $meta = [];
+
+        if (! is_null($value)) {
+            $meta = json_decode($value, true);
+        }
+
+        return new Meta($meta);
     }
 
     /**
