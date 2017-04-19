@@ -5,6 +5,10 @@ title: Model Change Log
 
 ## Version 3.3 {#v3-3}
 
+### v3.3.7 {#v3-3-7}
+
+* Add `Orchestra\Model\Value\Metable::getOriginalMetaData()`.
+
 ### v3.3.6 {#v3-3-6}
 
 * Use `Orchestra\Support\Fluent`.
