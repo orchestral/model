@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Model\TestCase;
+<?php
+
+namespace Orchestra\Model\TestCase;
 
 use Mockery as m;
 use Orchestra\Model\UserMeta;
@@ -12,7 +14,7 @@ class UserMetaTest extends TestCase
     /**
      * Teardown the test environment.
      */
-    public function tearDown()
+    protected function tearDown()
     {
         m::close();
     }

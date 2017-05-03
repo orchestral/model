@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Model\TestCase;
+<?php
+
+namespace Orchestra\Model\TestCase;
 
 use Mockery as m;
 use Orchestra\Model\Role;
@@ -12,7 +14,7 @@ class RoleTest extends TestCase
     /**
      * Setup the test environment.
      */
-    public function setUp()
+    protected function setUp()
     {
         Role::setDefaultRoles(['admin' => 10, 'member' => 20]);
     }
@@ -20,7 +22,7 @@ class RoleTest extends TestCase
     /**
      * Teardown the test environment.
      */
-    public function tearDown()
+    protected function tearDown()
     {
         m::close();
     }

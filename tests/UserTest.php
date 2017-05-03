@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Model\TestCase;
+<?php
+
+namespace Orchestra\Model\TestCase;
 
 use Mockery as m;
 use Orchestra\Model\User;
@@ -15,7 +17,7 @@ class UserTest extends TestCase
     /**
      * Setup the test environment.
      */
-    public function setUp()
+    protected function setUp()
     {
         Facade::clearResolvedInstances();
         Facade::setFacadeApplication(new Container());
@@ -24,7 +26,7 @@ class UserTest extends TestCase
     /**
      * Teardown the test environment.
      */
-    public function tearDown()
+    protected function tearDown()
     {
         m::close();
     }
