@@ -1,20 +1,23 @@
-<?php namespace Orchestra\Model\TestCase;
+<?php
+
+namespace Orchestra\Model\TestCase;
 
 use Mockery as m;
 use Orchestra\Model\User;
+use PHPUnit\Framework\TestCase;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Facade;
 use Orchestra\Support\Traits\Testing\MockEloquentConnection;
 
-class UserTest extends \PHPUnit_Framework_TestCase
+class UserTest extends TestCase
 {
     use MockEloquentConnection;
 
     /**
      * Setup the test environment.
      */
-    public function setUp()
+    protected function setUp()
     {
         Facade::clearResolvedInstances();
         Facade::setFacadeApplication(new Container());
@@ -23,7 +26,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
     /**
      * Teardown the test environment.
      */
-    public function tearDown()
+    protected function tearDown()
     {
         m::close();
     }

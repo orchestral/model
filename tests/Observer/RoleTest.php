@@ -1,14 +1,17 @@
-<?php namespace Orchestra\Model\Observer\TestCase;
+<?php
+
+namespace Orchestra\Model\TestCase\Observer;
 
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 use Orchestra\Model\Observer\Role as RoleObserver;
 
-class RoleTest extends \PHPUnit_Framework_TestCase
+class RoleTest extends TestCase
 {
     /**
      * Teardown the test environment.
      */
-    public function tearDown()
+    protected function tearDown()
     {
         m::close();
     }

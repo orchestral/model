@@ -1,17 +1,20 @@
-<?php namespace Orchestra\Model\TestCase;
+<?php
+
+namespace Orchestra\Model\TestCase;
 
 use Mockery as m;
 use Orchestra\Model\Role;
+use PHPUnit\Framework\TestCase;
 use Orchestra\Support\Traits\Testing\MockEloquentConnection;
 
-class RoleTest extends \PHPUnit_Framework_TestCase
+class RoleTest extends TestCase
 {
     use MockEloquentConnection;
 
     /**
      * Setup the test environment.
      */
-    public function setUp()
+    protected function setUp()
     {
         Role::setDefaultRoles(['admin' => 10, 'member' => 20]);
     }
@@ -19,7 +22,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
     /**
      * Teardown the test environment.
      */
-    public function tearDown()
+    protected function tearDown()
     {
         m::close();
     }
@@ -62,7 +65,9 @@ class RoleTest extends \PHPUnit_Framework_TestCase
                 ->andReturn($processor = m::mock('Illuminate\Database\Query\Processors\Processor'));
 
         $grammar->shouldReceive('compileSelect')->once()->andReturn('SELECT * FROM `roles` WHERE id=?');
-        $connection->shouldReceive('select')->once()->with('SELECT * FROM `roles` WHERE id=?', [10], true)->andReturn(null);
+        $connection->shouldReceive('getName')->once()->andReturn('mysql')
+            ->shouldReceive('select')->once()
+                ->with('SELECT * FROM `roles` WHERE id=?', [10], true)->andReturn(null);
         $processor->shouldReceive('processSelect')->once()->andReturn([]);
 
         $model->admin();
@@ -89,7 +94,9 @@ class RoleTest extends \PHPUnit_Framework_TestCase
                 ->andReturn($processor = m::mock('Illuminate\Database\Query\Processors\Processor'));
 
         $grammar->shouldReceive('compileSelect')->once()->andReturn('SELECT * FROM `roles` WHERE id=?');
-        $connection->shouldReceive('select')->once()->with('SELECT * FROM `roles` WHERE id=?', [20], true)->andReturn(null);
+        $connection->shouldReceive('getName')->once()->andReturn('mysql')
+            ->shouldReceive('select')->once()
+                ->with('SELECT * FROM `roles` WHERE id=?', [20], true)->andReturn(null);
         $processor->shouldReceive('processSelect')->once()->andReturn([]);
 
         $model->member();

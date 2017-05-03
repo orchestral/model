@@ -1,8 +1,11 @@
-<?php namespace Orchestra\Model\TestCase;
+<?php
+
+namespace Orchestra\Model\TestCase;
 
 use Orchestra\Model\Eloquent;
+use PHPUnit\Framework\TestCase;
 
-class EloquentTest extends \PHPUnit_Framework_TestCase
+class EloquentTest extends TestCase
 {
     public function testIsSoftDeletingMethod()
     {

@@ -1,10 +1,13 @@
-<?php namespace Orchestra\Model\TestCase;
+<?php
+
+namespace Orchestra\Model\TestCase\Memory;
 
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 use Illuminate\Container\Container;
 use Orchestra\Model\Memory\UserMetaProvider;
 
-class UserMetaProviderTest extends \PHPUnit_Framework_TestCase
+class UserMetaProviderTest extends TestCase
 {
     /**
      * Application instance.
@@ -16,7 +19,7 @@ class UserMetaProviderTest extends \PHPUnit_Framework_TestCase
     /**
      * Setup the test environment.
      */
-    public function setUp()
+    protected function setUp()
     {
         $this->app = new Container();
     }
@@ -24,7 +27,7 @@ class UserMetaProviderTest extends \PHPUnit_Framework_TestCase
     /**
      * Teardown the test environment.
      */
-    public function tearDown()
+    protected function tearDown()
     {
         unset($this->app);
         m::close();

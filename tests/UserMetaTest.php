@@ -1,17 +1,20 @@
-<?php namespace Orchestra\Model\TestCase;
+<?php
+
+namespace Orchestra\Model\TestCase;
 
 use Mockery as m;
 use Orchestra\Model\UserMeta;
+use PHPUnit\Framework\TestCase;
 use Orchestra\Support\Traits\Testing\MockEloquentConnection;
 
-class UserMetaTest extends \PHPUnit_Framework_TestCase
+class UserMetaTest extends TestCase
 {
     use MockEloquentConnection;
 
     /**
      * Teardown the test environment.
      */
-    public function tearDown()
+    protected function tearDown()
     {
         m::close();
     }
