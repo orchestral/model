@@ -4,8 +4,8 @@ namespace Orchestra\Model;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Hash;
-use Orchestra\Model\Traits\Searchable;
 use Orchestra\Model\Traits\CheckRoles;
+use Orchestra\Model\Traits\Searchable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Orchestra\Contracts\Authorization\Authorizable;
@@ -26,8 +26,8 @@ class User extends Eloquent implements Authorizable, UserContract
      * Available user status as constant.
      */
     const UNVERIFIED = 0;
-    const SUSPENDED  = 63;
-    const VERIFIED   = 1;
+    const SUSPENDED = 63;
+    const VERIFIED = 1;
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -141,7 +141,7 @@ class User extends Eloquent implements Authorizable, UserContract
      */
     public function isActivated()
     {
-        return ($this->getAttribute('status') == self::VERIFIED);
+        return $this->getAttribute('status') == self::VERIFIED;
     }
 
     /**
@@ -151,7 +151,7 @@ class User extends Eloquent implements Authorizable, UserContract
      */
     public function isSuspended()
     {
-        return ($this->getAttribute('status') == self::SUSPENDED);
+        return $this->getAttribute('status') == self::SUSPENDED;
     }
 
     /**

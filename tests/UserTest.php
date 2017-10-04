@@ -195,7 +195,7 @@ class UserTest extends TestCase
             })
             ->shouldReceive('orWhere')->twice()->with(m::type('Closure'))->andReturnUsing(function ($q) use ($query, $keyword) {
                 $q($query);
-            });;
+            });
 
         $this->assertEquals($query, $model->scopeSearch($query, $keyword, $roles));
     }

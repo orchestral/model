@@ -104,7 +104,7 @@ class UserMetaRepository extends Handler implements HandlerContract
             $key = $meta->getAttribute('name');
 
             $this->addKey("{$key}/user-{$userId}", [
-                'id'    => $meta->getAttribute('id'),
+                'id' => $meta->getAttribute('id'),
                 'value' => $value,
             ]);
 
@@ -131,7 +131,7 @@ class UserMetaRepository extends Handler implements HandlerContract
         // We should be able to ignore this if user id is empty or checksum
         // return the same value (no change occured).
         if ($this->check($key, $value) || empty($userId)) {
-            return ;
+            return;
         }
 
         $this->saving($name, $userId, $value, $isNew);
@@ -155,7 +155,8 @@ class UserMetaRepository extends Handler implements HandlerContract
         // would be extremely weird if that is used for other purposed.
         if (is_null($value) || $value === ':to-be-deleted:') {
             ! is_null($meta) && $meta->delete();
-            return ;
+
+            return;
         }
 
         // If the content is a new configuration, let push it as a insert

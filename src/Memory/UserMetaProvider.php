@@ -10,14 +10,14 @@ class UserMetaProvider extends Provider
     /**
      * Get value of a key.
      *
-     * @param  string  $key        A string of key to search.
-     * @param  mixed   $default    Default value if key doesn't exist.
+     * @param  string  $key        a string of key to search
+     * @param  mixed   $default    default value if key doesn't exist
      *
      * @return mixed
      */
     public function get($key = null, $default = null)
     {
-        $key   = str_replace('.', '/user-', $key);
+        $key = str_replace('.', '/user-', $key);
         $value = Arr::get($this->items, $key);
 
         // We need to consider if the value pending to be deleted,
@@ -44,14 +44,14 @@ class UserMetaProvider extends Provider
     /**
      * Set a value from a key.
      *
-     * @param  string  $key        A string of key to add the value.
-     * @param  mixed   $value      The value.
+     * @param  string  $key        a string of key to add the value
+     * @param  mixed   $value      the value
      *
      * @return mixed
      */
     public function put($key, $value = '')
     {
-        $key   = str_replace('.', '/user-', $key);
+        $key = str_replace('.', '/user-', $key);
         $value = value($value);
 
         $this->set($key, $value);
@@ -62,7 +62,7 @@ class UserMetaProvider extends Provider
     /**
      * Delete value of a key.
      *
-     * @param  string   $key        A string of key to delete.
+     * @param  string   $key        a string of key to delete
      *
      * @return bool
      */
