@@ -23,8 +23,8 @@ class Meta extends Fluent
     /**
      * Set a value from a key.
      *
-     * @param  string  $key    A string of key to add the value.
-     * @param  mixed   $value  The value.
+     * @param  string  $key    a string of key to add the value
+     * @param  mixed   $value  the value
      *
      * @return $this
      */

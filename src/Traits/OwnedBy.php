@@ -7,6 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 trait OwnedBy
 {
     /**
+     * Scope query to get model which are owned by the specified model.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  \Illuminate\Database\Eloquent\Model  $related
+     * @param  string|null  $key
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOwnedBy($query, Model $related, $key = null)
+    {
+        if (is_null($key)) {
+            $key = $related->getForeignKey();
+        }
+
+        return $query->where($key, $related->getKey());
+    }
+
+    /**
      * Check if related model actually owns the relationship.
      *
      * @param  \Illuminate\Database\Eloquent\Model|null  $related

@@ -16,7 +16,7 @@ abstract class Eloquent extends Model implements Transformable
      */
     public function isSoftDeleting()
     {
-        return (property_exists($this, 'forceDeleting') && $this->forceDeleting === false);
+        return property_exists($this, 'forceDeleting') && $this->forceDeleting === false;
     }
 
     /**

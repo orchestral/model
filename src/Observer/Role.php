@@ -76,7 +76,7 @@ class Role
     public function updating(Eloquent $model)
     {
         $original = $model->getOriginal('name');
-        $current  = $model->getAttribute('name');
+        $current = $model->getAttribute('name');
 
         if ($this->isRestoringModel($model)) {
             $this->acl->addRole($current);

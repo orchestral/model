@@ -7,6 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 trait Owns
 {
     /**
+     * Scope query to get model which related model actually owns the relationship.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  \Illuminate\Database\Eloquent\Model  $related
+     * @param  string|null  $foreignKey
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOwns($query, Model $related, $foreignKey = null)
+    {
+        if (is_null($foreignKey)) {
+            $foreignKey = $this->getForeignKey();
+        }
+
+        return $query->where(
+            $this->getKeyName(), $related->getAttribute($foreignKey)
+        );
+    }
+
+    /**
      * Check if related model actually owns the relationship.
      *
      * @param  \Illuminate\Database\Eloquent\Model|null  $related
@@ -49,4 +69,11 @@ trait Owns
      * @return mixed
      */
     abstract public function getKey();
+
+    /**
+     * Get the primary key for the model.
+     *
+     * @return string
+     */
+    abstract public function getKeyName();
 }

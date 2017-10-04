@@ -62,8 +62,8 @@ class UserMetaRepositoryTest extends TestCase
             ->shouldReceive('where')->once()->with('user_id', '=', 1)->andReturnSelf()
             ->shouldReceive('get')->once()->andReturn([
                 new Meta([
-                    'name'  => 'foo',
-                    'id'    => 2,
+                    'name' => 'foo',
+                    'id' => 2,
                     'value' => 'foobar',
                 ]),
             ]);
@@ -84,10 +84,10 @@ class UserMetaRepositoryTest extends TestCase
         $app = $this->app;
 
         $items = [
-            'foo/user-1'    => 'foobar',
+            'foo/user-1' => 'foobar',
             'foobar/user-1' => 'foo',
-            'foo/user-2'    => ':to-be-deleted:',
-            'foo/user-'     => '',
+            'foo/user-2' => ':to-be-deleted:',
+            'foo/user-' => '',
         ];
 
         $app->instance('Orchestra\Model\UserMeta', $eloquent = m::mock('UserMeta'));

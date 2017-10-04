@@ -54,9 +54,9 @@ class UserMetaProviderTest extends TestCase
         $items->setAccessible(true);
 
         $items->setValue($stub, [
-            'foo/user-1'    => '',
+            'foo/user-1' => '',
             'foobar/user-1' => 'foo',
-            'foo/user-2'    => ':to-be-deleted:',
+            'foo/user-2' => ':to-be-deleted:',
         ]);
 
         $this->assertTrue($stub->finish());
@@ -101,7 +101,7 @@ class UserMetaProviderTest extends TestCase
         $items->setAccessible(true);
 
         $items->setValue($stub, [
-            'foo/user-1'   => 'foobar',
+            'foo/user-1' => 'foobar',
             'hello/user-1' => 'foobar',
         ]);
 

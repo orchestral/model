@@ -28,7 +28,7 @@ class Role extends Eloquent
      * @var array
      */
     protected static $defaultRoles = [
-        'admin'  => 1,
+        'admin' => 1,
         'member' => 2,
     ];
 
