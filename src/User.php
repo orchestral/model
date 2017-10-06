@@ -4,8 +4,6 @@ namespace Orchestra\Model;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Hash;
-use Orchestra\Model\Traits\CheckRoles;
-use Orchestra\Model\Traits\Searchable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Orchestra\Contracts\Authorization\Authorizable;
@@ -13,7 +11,10 @@ use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 
 class User extends Eloquent implements Authorizable, UserContract
 {
-    use Authenticatable, CheckRoles, Searchable, SoftDeletes;
+    use Authenticatable,
+        SoftDeletes,
+        Traits\CheckRoles,
+        Traits\Searchable;
 
     /**
      * The database table used by the model.
