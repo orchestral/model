@@ -95,7 +95,7 @@ trait Metable
         $meta = [];
 
         if (! is_null($value)) {
-            $meta = json_decode($value, true);
+            $meta = $this->fromJson($value);
         }
 
         return new Meta($meta);
@@ -120,7 +120,7 @@ trait Metable
             $value = (array) $value;
         }
 
-        return json_encode($value);
+        return $this->castAttributeAsJson('meta', $value);
     }
 
     /**
