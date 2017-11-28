@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/model`.
 
+## 3.5.2
+
+Released: 2017-11-28
+
+### Changes
+
+* Use available `fromJson()` and `castAttributeAsJson()` on `Orchestra\Model\Traits\Metable`.
+
 ## 3.5.1
 
 Released: 2017-10-07
