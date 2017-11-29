@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/model`.
 
+## 3.5.3
+
+Released: 2017-11-29
+
+### Changes
+
+* Remove `orchestra/notifier` dependencies.
+
 ## 3.5.2
 
 Released: 2017-11-28
