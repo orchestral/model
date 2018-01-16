@@ -13,7 +13,7 @@ trait CheckRoles
      *
      * @return bool
      */
-    public function hasRoles($roles)
+    public function hasRoles($roles): bool
     {
         $userRoles = $this->getRoles();
 
@@ -45,7 +45,7 @@ trait CheckRoles
      *
      * @return bool
      */
-    public function hasAnyRoles($roles)
+    public function hasAnyRoles($roles): bool
     {
         $userRoles = $this->getRoles();
 
@@ -77,7 +77,7 @@ trait CheckRoles
      *
      * @return $this
      */
-    public function attachRoles($roles)
+    public function attachRoles($roles): self
     {
         if ($roles instanceof Role) {
             $roles = [$roles->getKey()];
@@ -95,7 +95,7 @@ trait CheckRoles
      *
      * @return $this
      */
-    public function detachRoles($roles)
+    public function detachRoles($roles): self
     {
         if ($roles instanceof Role) {
             $roles = [$roles->getKey()];
@@ -109,7 +109,7 @@ trait CheckRoles
     /**
      * Get roles name as an array.
      *
-     * @return \Illuminate\Support\Collection|array
+     * @return \Illuminate\Support\Collection
      */
     abstract public function getRoles();
 }

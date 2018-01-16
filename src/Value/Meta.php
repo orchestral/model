@@ -15,7 +15,7 @@ class Meta extends Fluent
      *
      * @return mixed
      */
-    public function get($key, $default = null)
+    public function get(string $key, $default = null)
     {
         return Arr::get($this->attributes, $key, $default);
     }
@@ -28,7 +28,7 @@ class Meta extends Fluent
      *
      * @return $this
      */
-    public function put($key, $value = '')
+    public function put(string $key, $value = ''): self
     {
         Arr::set($this->attributes, $key, $value);
 
@@ -42,7 +42,7 @@ class Meta extends Fluent
      *
      * @return $this
      */
-    public function forget($key)
+    public function forget(string $key): self
     {
         Arr::forget($this->attributes, $key);
 

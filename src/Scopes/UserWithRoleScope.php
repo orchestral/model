@@ -33,7 +33,7 @@ class UserWithRoleScope implements Scope
      *
      * @return void
      */
-    public function apply(Builder $builder, Model $model)
+    public function apply(Builder $builder, Model $model): void
     {
         if (empty($this->role)) {
             return;

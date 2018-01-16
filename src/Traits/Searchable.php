@@ -13,7 +13,7 @@ trait Searchable
      *
      * @return array
      */
-    public function getSearchableColumns()
+    public function getSearchableColumns(): array
     {
         return property_exists($this, 'searchable') ? $this->searchable : [];
     }

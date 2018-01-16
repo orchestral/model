@@ -11,7 +11,7 @@ trait RefreshOnCreate
      *
      * @return void
      */
-    public static function bootRefreshOnCreate()
+    public static function bootRefreshOnCreate(): void
     {
         static::created(function ($model) {
             $model->refresh();

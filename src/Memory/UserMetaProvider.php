@@ -15,7 +15,7 @@ class UserMetaProvider extends Provider
      *
      * @return mixed
      */
-    public function get($key = null, $default = null)
+    public function get(string $key = null, $default = null)
     {
         $key = str_replace('.', '/user-', $key);
         $value = Arr::get($this->items, $key);
@@ -49,7 +49,7 @@ class UserMetaProvider extends Provider
      *
      * @return mixed
      */
-    public function put($key, $value = '')
+    public function put(string $key, $value = '')
     {
         $key = str_replace('.', '/user-', $key);
         $value = value($value);
@@ -66,10 +66,12 @@ class UserMetaProvider extends Provider
      *
      * @return bool
      */
-    public function forget($key = null)
+    public function forget(string $key = null): bool
     {
         $key = str_replace('.', '/user-', $key);
 
-        return Arr::set($this->items, $key, ':to-be-deleted:');
+        Arr::set($this->items, $key, ':to-be-deleted:');
+
+        return true;
     }
 }

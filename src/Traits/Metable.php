@@ -14,7 +14,7 @@ trait Metable
      *
      * @return \Orchestra\Model\Value\Meta
      */
-    public function getMetaAttribute($value)
+    public function getMetaAttribute($value): Meta
     {
         return $this->accessMetaAttribute($value);
     }
@@ -26,7 +26,7 @@ trait Metable
      *
      * @return void
      */
-    public function setMetaAttribute($value = null)
+    public function setMetaAttribute($value = null): void
     {
         $this->attributes['meta'] = $this->mutateMetaAttribute($value);
     }
@@ -39,7 +39,7 @@ trait Metable
      *
      * @return mixed
      */
-    public function getOriginalMetaData($key, $default = null)
+    public function getOriginalMetaData(string $key, $default = null)
     {
         $meta = $this->accessMetaAttribute($this->getOriginal('meta'));
 
@@ -54,7 +54,7 @@ trait Metable
      *
      * @return mixed
      */
-    public function getMetaData($key, $default = null)
+    public function getMetaData(string $key, $default = null)
     {
         $meta = $this->getAttribute('meta');
 
@@ -69,7 +69,7 @@ trait Metable
      *
      * @return mixed
      */
-    public function putMetaData($key, $value = null)
+    public function putMetaData(string $key, $value = null)
     {
         if (! is_array($key)) {
             $meta = $this->getAttribute('meta');
@@ -90,7 +90,7 @@ trait Metable
      *
      * @return \Orchestra\Model\Value\Meta
      */
-    protected function accessMetaAttribute($value)
+    protected function accessMetaAttribute($value): Meta
     {
         $meta = [];
 

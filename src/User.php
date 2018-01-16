@@ -2,6 +2,7 @@
 
 namespace Orchestra\Model;
 
+use Illuminate\Support\Collection;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Builder;
@@ -70,7 +71,7 @@ class User extends Eloquent implements Authorizable, UserContract
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeSearch(Builder $query, $keyword = '', $roles = [])
+    public function scopeSearch(Builder $query, string $keyword = '', array $roles = []): Builder
     {
         $query->with('roles')->whereNotNull('users.id');
 
@@ -90,7 +91,7 @@ class User extends Eloquent implements Authorizable, UserContract
      *
      * @return void
      */
-    public function setPasswordAttribute($value)
+    public function setPasswordAttribute(string $value): void
     {
         if (Hash::needsRehash($value)) {
             $value = Hash::make($value);
@@ -104,7 +105,7 @@ class User extends Eloquent implements Authorizable, UserContract
      *
      * @return $this
      */
-    public function activate()
+    public function activate(): self
     {
         $this->setAttribute('status', self::VERIFIED);
 
@@ -116,7 +117,7 @@ class User extends Eloquent implements Authorizable, UserContract
      *
      * @return $this
      */
-    public function deactivate()
+    public function deactivate(): self
     {
         $this->setAttribute('status', self::UNVERIFIED);
 
@@ -128,7 +129,7 @@ class User extends Eloquent implements Authorizable, UserContract
      *
      * @return $this
      */
-    public function suspend()
+    public function suspend(): self
     {
         $this->setAttribute('status', self::SUSPENDED);
 
@@ -140,7 +141,7 @@ class User extends Eloquent implements Authorizable, UserContract
      *
      * @return bool
      */
-    public function isActivated()
+    public function isActivated(): bool
     {
         return $this->getAttribute('status') == self::VERIFIED;
     }
@@ -150,7 +151,7 @@ class User extends Eloquent implements Authorizable, UserContract
      *
      * @return bool
      */
-    public function isSuspended()
+    public function isSuspended(): bool
     {
         return $this->getAttribute('status') == self::SUSPENDED;
     }
@@ -162,7 +163,7 @@ class User extends Eloquent implements Authorizable, UserContract
      *
      * @return $this
      */
-    public function attachRole($roles)
+    public function attachRole($roles): self
     {
         return $this->attachRoles($roles);
     }
@@ -174,7 +175,7 @@ class User extends Eloquent implements Authorizable, UserContract
      *
      * @return $this
      */
-    public function detachRole($roles)
+    public function detachRole($roles): self
     {
         return $this->detachRoles($roles);
     }
@@ -182,9 +183,9 @@ class User extends Eloquent implements Authorizable, UserContract
     /**
      * Get roles name as an array.
      *
-     * @return \Illuminate\Support\Collection|array
+     * @return \Illuminate\Support\Collection
      */
-    public function getRoles()
+    public function getRoles(): Collection
     {
         // If the relationship is already loaded, avoid re-querying the
         // database and instead fetch the collection.

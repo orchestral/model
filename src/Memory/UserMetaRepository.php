@@ -29,11 +29,11 @@ class UserMetaRepository extends Handler implements HandlerContract
      *
      * @param  string  $name
      * @param  array  $config
-     * @param  \Illuminate\Contracts\Container\Container  $repository
+     * @param  \Illuminate\Contracts\Container\Container  $container
      */
-    public function __construct($name, array $config, Container $repository)
+    public function __construct(string $name, array $config, Container $container)
     {
-        $this->repository = $repository;
+        $this->repository = $container->make(UserMeta::class);
 
         parent::__construct($name, $config);
     }
@@ -43,7 +43,7 @@ class UserMetaRepository extends Handler implements HandlerContract
      *
      * @return array
      */
-    public function initiate()
+    public function initiate(): array
     {
         return [];
     }
@@ -51,11 +51,11 @@ class UserMetaRepository extends Handler implements HandlerContract
     /**
      * Get value from database.
      *
-     * @param  string   $key
+     * @param  string  $key
      *
      * @return mixed
      */
-    public function retrieve($key)
+    public function retrieve(string $key)
     {
         list($name, $userId) = explode('/user-', $key);
 
@@ -75,7 +75,7 @@ class UserMetaRepository extends Handler implements HandlerContract
      *
      * @return bool
      */
-    public function finish(array $items = [])
+    public function finish(array $items = []): bool
     {
         foreach ($items as $key => $value) {
             $this->save($key, $value);
@@ -90,9 +90,9 @@ class UserMetaRepository extends Handler implements HandlerContract
      * @param  string|int  $userId
      * @param  \Illuminate\Support\Collection|array  $data
      *
-     * @return void
+     * @return array
      */
-    protected function processRetrievedData($userId, $data = [])
+    protected function processRetrievedData($userId, $data = []): array
     {
         $items = [];
 
@@ -117,12 +117,12 @@ class UserMetaRepository extends Handler implements HandlerContract
     /**
      * Save user meta to memory.
      *
-     * @param  mixed    $key
-     * @param  mixed    $value
+     * @param  string  $key
+     * @param  mixed  $value
      *
      * @return void
      */
-    protected function save($key, $value)
+    protected function save(string $key, $value): void
     {
         $isNew = $this->isNewKey($key);
 
@@ -147,7 +147,7 @@ class UserMetaRepository extends Handler implements HandlerContract
      *
      * @return void
      */
-    protected function saving($name, $userId, $value = null, $isNew = true)
+    protected function saving(string $name, $userId, $value = null, bool $isNew = true): void
     {
         $meta = $this->getModel()->search($name, $userId)->first();
 
@@ -177,8 +177,8 @@ class UserMetaRepository extends Handler implements HandlerContract
      *
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function getModel()
+    public function getModel(): UserMeta
     {
-        return $this->repository->make(UserMeta::class)->newInstance();
+        return $this->repository->newInstance();
     }
 }

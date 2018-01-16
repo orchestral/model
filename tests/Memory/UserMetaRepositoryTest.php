@@ -56,7 +56,7 @@ class UserMetaRepositoryTest extends TestCase
     {
         $app = $this->app;
 
-        $app->instance('Orchestra\Model\UserMeta', $eloquent = m::mock('UserMeta'));
+        $app->instance('Orchestra\Model\UserMeta', $eloquent = m::mock('\Orchestra\Model\UserMeta'));
 
         $eloquent->shouldReceive('newInstance')->once()->andReturn($eloquent)
             ->shouldReceive('where')->once()->with('user_id', '=', 1)->andReturnSelf()
@@ -90,7 +90,7 @@ class UserMetaRepositoryTest extends TestCase
             'foo/user-' => '',
         ];
 
-        $app->instance('Orchestra\Model\UserMeta', $eloquent = m::mock('UserMeta'));
+        $app->instance('Orchestra\Model\UserMeta', $eloquent = m::mock('\Orchestra\Model\UserMeta'));
 
         $eloquent->shouldReceive('newInstance')->times(4)->andReturn($eloquent)
             ->shouldReceive('search')->once()->with('foo', 1)

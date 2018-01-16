@@ -33,7 +33,7 @@ class Role
      *
      * @return void
      */
-    public function creating(Eloquent $model)
+    public function creating(Eloquent $model): void
     {
         $this->acl->addRole($model->getAttribute('name'));
     }
@@ -45,7 +45,7 @@ class Role
      *
      * @return void
      */
-    public function saving(Eloquent $model)
+    public function saving(Eloquent $model): void
     {
         $keyword = Keyword::make($model->getAttribute('name'));
 
@@ -61,7 +61,7 @@ class Role
      *
      * @return void
      */
-    public function deleting(Eloquent $model)
+    public function deleting(Eloquent $model): void
     {
         $this->acl->removeRole($model->getAttribute('name'));
     }
@@ -73,7 +73,7 @@ class Role
      *
      * @return void
      */
-    public function updating(Eloquent $model)
+    public function updating(Eloquent $model): void
     {
         $original = $model->getOriginal('name');
         $current = $model->getAttribute('name');
@@ -92,7 +92,7 @@ class Role
      *
      * @return bool
      */
-    protected function isRestoringModel(Eloquent $model)
+    protected function isRestoringModel(Eloquent $model): bool
     {
         if (! $model->isSoftDeleting()) {
             return false;
