@@ -5,6 +5,7 @@ namespace Orchestra\Model\TestCase;
 use Mockery as m;
 use Orchestra\Model\User;
 use PHPUnit\Framework\TestCase;
+use Illuminate\Support\Collection;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Facade;
@@ -89,7 +90,7 @@ class UserTest extends TestCase
     {
         $model = m::mock('\Orchestra\Model\User[getRoles]');
 
-        $model->shouldReceive('getRoles')->times(4)->andReturn(['admin', 'editor']);
+        $model->shouldReceive('getRoles')->times(4)->andReturn(new Collection(['admin', 'editor']));
 
         $this->assertTrue($model->hasRoles('admin'));
         $this->assertFalse($model->hasRoles('user'));
@@ -108,7 +109,7 @@ class UserTest extends TestCase
     {
         $model = m::mock('\Orchestra\Model\User[getRoles]');
 
-        $model->shouldReceive('getRoles')->times(4)->andReturn('foo');
+        $model->shouldReceive('getRoles')->times(4)->andReturn(new Collection(['foo']));
 
         $this->assertFalse($model->hasRoles('admin'));
         $this->assertFalse($model->hasRoles('user'));
@@ -126,7 +127,7 @@ class UserTest extends TestCase
     {
         $model = m::mock('\Orchestra\Model\User[getRoles]');
 
-        $model->shouldReceive('getRoles')->twice()->andReturn(['admin', 'editor']);
+        $model->shouldReceive('getRoles')->twice()->andReturn(new Collection(['admin', 'editor']));
 
         $this->assertTrue($model->hasAnyRoles(['admin', 'user']));
         $this->assertFalse($model->hasAnyRoles(['superadmin', 'user']));
@@ -142,7 +143,7 @@ class UserTest extends TestCase
     {
         $model = m::mock('\Orchestra\Model\User[getRoles]');
 
-        $model->shouldReceive('getRoles')->twice()->andReturn('foo');
+        $model->shouldReceive('getRoles')->twice()->andReturn(new Collection(['foo']));
 
         $this->assertFalse($model->hasAnyRoles(['admin', 'editor']));
         $this->assertFalse($model->hasAnyRoles(['admin', 'user']));
@@ -161,9 +162,9 @@ class UserTest extends TestCase
         $model->shouldReceive('relationLoaded')->once()->andReturn(false)
             ->shouldReceive('load')->once()->with('roles')->andReturnNull()
             ->shouldReceive('getRelation')->once()->with('roles')->andReturn($relationship);
-        $relationship->shouldReceive('pluck')->once()->andReturn(['admin', 'editor']);
+        $relationship->shouldReceive('pluck')->once()->andReturn(new Collection(['admin', 'editor']));
 
-        $this->assertEquals(['admin', 'editor'], $model->getRoles());
+        $this->assertEquals(new Collection(['admin', 'editor']), $model->getRoles());
     }
 
     /**
