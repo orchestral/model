@@ -37,11 +37,11 @@ class UserMeta extends Eloquent
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @param  string  $name
-     * @param  int  $userId
+     * @param  int|string  $userId
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeSearch(Builder $query, string $name, int $userId): Builder
+    public function scopeSearch(Builder $query, string $name, $userId): Builder
     {
         return $query->where('user_id', '=', $userId)
                     ->where('name', '=', $name);

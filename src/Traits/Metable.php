@@ -67,15 +67,16 @@ trait Metable
      * @param  string  $key
      * @param  mixed  $value
      *
-     * @return mixed
+     * @return void
      */
     public function putMetaData(string $key, $value = null)
     {
         if (! is_array($key)) {
             $meta = $this->getAttribute('meta');
             $meta->put($key, $value);
+            $this->setMetaAttribute($meta);
 
-            return $this->setMetaAttribute($meta);
+            return;
         }
 
         foreach ($key as $name => $value) {
@@ -106,7 +107,7 @@ trait Metable
      *
      * @param  mixed  $value
      *
-     * @return mixed
+     * @return string|null
      */
     protected function mutateMetaAttribute($value)
     {
