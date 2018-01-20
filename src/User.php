@@ -185,7 +185,7 @@ class User extends Eloquent implements Authorizable, UserContract
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getRoles(): Collection
+    public function getRoles()
     {
         // If the relationship is already loaded, avoid re-querying the
         // database and instead fetch the collection.
