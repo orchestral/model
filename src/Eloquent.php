@@ -22,6 +22,38 @@ abstract class Eloquent extends Model implements Transformable
     }
 
     /**
+     * Save the model to the database if exists.
+     *
+     * @param  array  $options
+     *
+     * @return bool
+     */
+    public function saveIfExists(array $options = []): bool
+    {
+        if ($this->exists === false) {
+            return false;
+        }
+
+        return $this->save($options);
+    }
+
+    /**
+     * Save the model to the database using transaction if exists.
+     *
+     * @param  array  $options
+     *
+     * @return bool
+     */
+    public function saveIfExistsOrFail(array $options = []): bool
+    {
+        if ($this->exists === false) {
+            return false;
+        }
+
+        return $this->saveOrFail($options);
+    }
+
+    /**
      * Execute a Closure within a transaction.
      *
      * @param  \Closure  $callback
@@ -40,7 +72,7 @@ abstract class Eloquent extends Model implements Transformable
      *
      * @param  callable  $callback
      *
-     * @return \Illuminate\Support\Fluent
+     * @return \Orchestra\Support\Fluent
      */
     public function transform(callable $callback)
     {
