@@ -2,7 +2,6 @@
 
 namespace Orchestra\Model\Traits;
 
-use Illuminate\Support\Collection;
 use Illuminate\Contracts\Support\Arrayable;
 
 trait CheckRoles
@@ -112,5 +111,5 @@ trait CheckRoles
      *
      * @return \Illuminate\Support\Collection
      */
-    abstract public function getRoles(): Collection;
+    abstract public function getRoles();
 }
