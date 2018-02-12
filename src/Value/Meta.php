@@ -15,7 +15,7 @@ class Meta extends Fluent
      *
      * @return mixed
      */
-    public function get(string $key, $default = null)
+    public function get($key, $default = null)
     {
         return Arr::get($this->attributes, $key, $default);
     }
