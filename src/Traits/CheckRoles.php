@@ -2,6 +2,7 @@
 
 namespace Orchestra\Model\Traits;
 
+use Orchestra\Model\Role;
 use Illuminate\Contracts\Support\Arrayable;
 
 trait CheckRoles
@@ -83,7 +84,7 @@ trait CheckRoles
             $roles = [$roles->getKey()];
         }
 
-        $this->roles()->sync((array) $roles, false);
+        $this->roles()->sync($roles, false);
 
         return $this;
     }
@@ -101,7 +102,7 @@ trait CheckRoles
             $roles = [$roles->getKey()];
         }
 
-        $this->roles()->detach((array) $roles);
+        $this->roles()->detach($roles);
 
         return $this;
     }

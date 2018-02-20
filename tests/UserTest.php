@@ -62,7 +62,7 @@ class UserTest extends TestCase
         $model->shouldReceive('roles')->once()->andReturn($relationship);
         $relationship->shouldReceive('sync')->once()->with([2], false)->andReturnNull();
 
-        $model->attachRole(2);
+        $model->attachRole([2]);
     }
 
     /**
@@ -78,7 +78,7 @@ class UserTest extends TestCase
         $model->shouldReceive('roles')->once()->andReturn($relationship);
         $relationship->shouldReceive('detach')->once()->with([2])->andReturnNull();
 
-        $model->detachRole(2);
+        $model->detachRole([2]);
     }
 
     /**
