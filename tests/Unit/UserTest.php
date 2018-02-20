@@ -58,11 +58,9 @@ class UserTest extends TestCase
     }
 
     /**
-     * Test Orchestra\Model\User::hasAnyRoles() method.
-     *
      * @test
      */
-    public function testHasAnyRolesMethod()
+    public function it_can_check_whether_user_has_any_roles()
     {
         $model = m::mock('\Orchestra\Model\User[getRoles]');
 
@@ -73,12 +71,9 @@ class UserTest extends TestCase
     }
 
     /**
-     * Test Orchestra\Support\Auth::hasAnyRoles() method when invalid roles is
-     * returned.
-     *
      * @test
      */
-    public function testhasAnyRolesMethodWhenInvalidRolesIsReturned()
+    public function it_can_check_whether_user_has_any_roles_given_invalid_data()
     {
         $model = m::mock('\Orchestra\Model\User[getRoles]');
 

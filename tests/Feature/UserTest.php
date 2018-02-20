@@ -11,6 +11,9 @@ class UserTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * Setup the test environment.
+     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -18,9 +21,7 @@ class UserTest extends TestCase
         $this->withFactories(__DIR__.'/../factories');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_belongs_to_many_roles()
     {
         $model = new User();
@@ -31,9 +32,7 @@ class UserTest extends TestCase
         $this->assertInstanceOf('\Orchestra\Model\Role', $roles->getQuery()->getModel());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_attach_roles()
     {
         $user = User::faker()->create();
@@ -42,9 +41,7 @@ class UserTest extends TestCase
         $this->assertTrue($user->hasRoles('Member'));
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_detach_roles()
     {
         $user = User::faker()->create();
@@ -57,9 +54,7 @@ class UserTest extends TestCase
         $this->assertFalse($user->hasRoles('Member'));
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_get_list_of_roles()
     {
         $user = User::faker()->create();
@@ -68,9 +63,7 @@ class UserTest extends TestCase
         $this->assertEquals(['Administrator', 'Member'], $user->getRoles()->all());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_manually_set_remember_token()
     {
         $user = User::faker()->create();
@@ -79,17 +72,13 @@ class UserTest extends TestCase
         $this->assertSame('foobar', $user->getRememberToken());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_get_remember_token_name()
     {
         $this->assertEquals('remember_token', (new User())->getRememberTokenName());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_get_remember_token_value()
     {
         $user = User::faker()->create([
@@ -99,9 +88,7 @@ class UserTest extends TestCase
         $this->assertEquals('foobar', $user->getRememberToken());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_deactivate_the_user()
     {
         $user = User::faker()->create([
@@ -112,9 +99,7 @@ class UserTest extends TestCase
         $this->assertFalse($user->isActivated());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_suspend_the_user()
     {
         $user = User::faker()->create([
@@ -125,9 +110,7 @@ class UserTest extends TestCase
         $this->assertTrue($user->isSuspended());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_activate_the_user()
     {
         $user = User::faker()->create([
@@ -141,9 +124,7 @@ class UserTest extends TestCase
         $this->assertTrue($user->isActivated());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_activate_and_suspend_the_user()
     {
         $user = User::faker()->create([
@@ -158,11 +139,7 @@ class UserTest extends TestCase
         $this->assertTrue($user->isSuspended());
     }
 
-    /**
-     * Test Orchestra\Model\User::getAuthIdentifier() method.
-     *
-     * @test
-     */
+    /** @test */
     public function testGetAuthIdentifierMethod()
     {
         $user = User::faker()->create([
@@ -172,11 +149,7 @@ class UserTest extends TestCase
         $this->assertEquals(1983, $user->getAuthIdentifier());
     }
 
-    /**
-     * Test Orchestra\Model\User::getAuthPassword() method.
-     *
-     * @test
-     */
+    /** @test */
     public function it_will_hash_upon_changing_the_password()
     {
         $user = User::faker()->create();
@@ -191,11 +164,7 @@ class UserTest extends TestCase
         $this->assertEquals('foobar', $user->getAuthPassword());
     }
 
-    /**
-     * Test Orchestra\Model\User::getAuthPassword() method without rehash.
-     *
-     * @test
-     */
+    /** @test */
     public function it_can_get_password_without_rehash()
     {
         $user = User::faker()->create();

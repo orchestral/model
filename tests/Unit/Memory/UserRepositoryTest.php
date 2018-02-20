@@ -6,9 +6,9 @@ use Mockery as m;
 use Illuminate\Support\Fluent;
 use PHPUnit\Framework\TestCase;
 use Illuminate\Container\Container;
-use Orchestra\Model\Memory\UserMetaRepository;
+use Orchestra\Model\Memory\UserRepository;
 
-class UserMetaRepositoryTest extends TestCase
+class UserRepositoryTest extends TestCase
 {
     /**
      * Application instance.
@@ -35,20 +35,20 @@ class UserMetaRepositoryTest extends TestCase
     }
 
     /**
-     * Test Orchestra\Model\Memory\UserMetaRepository::initiate()
+     * Test Orchestra\Model\Memory\UserRepository::initiate()
      * method.
      *
      * @test
      */
     public function testInitiateMethod()
     {
-        $stub = new UserMetaRepository('meta', [], $this->app);
+        $stub = new UserRepository('meta', [], $this->app);
 
         $this->assertEquals([], $stub->initiate());
     }
 
     /**
-     * Test Orchestra\Model\Memory\UserMetaRepository::initiate() method.
+     * Test Orchestra\Model\Memory\UserRepository::initiate() method.
      *
      * @test
      */
@@ -68,14 +68,14 @@ class UserMetaRepositoryTest extends TestCase
                 ]),
             ]);
 
-        $stub = new UserMetaRepository('meta', [], $app);
+        $stub = new UserRepository('meta', [], $app);
 
         $this->assertEquals('foobar', $stub->retrieve('foo/user-1'));
         $this->assertNull($stub->retrieve('foobar/user-1'));
     }
 
     /**
-     * Test Orchestra\Model\Memory\UserMetaRepository::finish() method.
+     * Test Orchestra\Model\Memory\UserRepository::finish() method.
      *
      * @test
      */
@@ -108,7 +108,7 @@ class UserMetaRepositoryTest extends TestCase
         $fooQuery->shouldReceive('first')->andReturn($eloquent);
         $foobarQuery->shouldReceive('first')->andReturnNull();
 
-        $stub = new UserMetaRepository('meta', [], $app);
+        $stub = new UserRepository('meta', [], $app);
 
         $this->assertTrue($stub->finish($items));
     }

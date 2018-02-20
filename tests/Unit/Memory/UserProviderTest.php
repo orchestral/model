@@ -4,49 +4,29 @@ namespace Orchestra\Model\TestCase\Unit\Memory;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
-use Illuminate\Container\Container;
-use Orchestra\Model\Memory\UserMetaProvider;
+use Orchestra\Model\Memory\UserProvider;
 
-class UserMetaProviderTest extends TestCase
+class UserProviderTest extends TestCase
 {
-    /**
-     * Application instance.
-     *
-     * @var Illuminate\Model\Memory\Application
-     */
-    private $app = null;
-
-    /**
-     * Setup the test environment.
-     */
-    protected function setUp()
-    {
-        $this->app = new Container();
-    }
-
     /**
      * Teardown the test environment.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
-        unset($this->app);
         m::close();
     }
 
     /**
-     * Test Orchestra\Model\Memory\UserMetaRepository::initiate()
-     * method.
-     *
      * @test
      */
-    public function testInitiateMethod()
+    public function it_can_be_initiated()
     {
-        $handler = m::mock('\Orchestra\Model\Memory\UserMetaRepository');
+        $handler = m::mock('\Orchestra\Model\Memory\UserRepository');
 
         $handler->shouldReceive('initiate')->once()->andReturn([])
             ->shouldReceive('finish')->once()->andReturn(true);
 
-        $stub = new UserMetaProvider($handler);
+        $stub = new UserProvider($handler);
 
         $refl = new \ReflectionObject($stub);
         $items = $refl->getProperty('items');
@@ -63,37 +43,32 @@ class UserMetaProviderTest extends TestCase
     }
 
     /**
-     * Test Orchestra\Model\Memory\UserMetaRepository::get() method.
-     *
      * @test
      */
-    public function testGetMethod()
+    public function it_can_get_an_item()
     {
-        $handler = m::mock('\Orchestra\Model\Memory\UserMetaRepository');
+        $handler = m::mock('\Orchestra\Model\Memory\UserRepository');
 
         $handler->shouldReceive('initiate')->once()->andReturn([])
             ->shouldReceive('retrieve')->once()->with('foo/user-1')->andReturn('foobar')
             ->shouldReceive('retrieve')->once()->with('foobar/user-1')->andReturnNull();
 
-        $stub = new UserMetaProvider($handler);
+        $stub = new UserProvider($handler);
 
-        $this->assertEquals('foobar', $stub->get('foo.1'));
-        $this->assertEquals(null, $stub->get('foobar.1'));
+        $this->assertSame('foobar', $stub->get('foo.1'));
+        $this->assertNull($stub->get('foobar.1'));
     }
 
     /**
-     * Test Orchestra\Model\Memory\UserMetaRepository::forget()
-     * method.
-     *
      * @test
      */
-    public function testForgetMethod()
+    public function it_can_forget_an_item()
     {
-        $handler = m::mock('\Orchestra\Model\Memory\UserMetaRepository');
+        $handler = m::mock('\Orchestra\Model\Memory\UserRepository');
 
         $handler->shouldReceive('initiate')->once()->andReturn([]);
 
-        $stub = new UserMetaProvider($handler);
+        $stub = new UserProvider($handler);
 
         $refl = new \ReflectionObject($stub);
         $items = $refl->getProperty('items');
@@ -105,8 +80,10 @@ class UserMetaProviderTest extends TestCase
             'hello/user-1' => 'foobar',
         ]);
 
-        $this->assertEquals('foobar', $stub->get('foo.1'));
+        $this->assertSame('foobar', $stub->get('foo.1'));
+
         $stub->forget('foo.1');
+
         $this->assertNull($stub->get('foo.1'));
     }
 }

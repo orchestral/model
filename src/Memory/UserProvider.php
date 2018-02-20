@@ -5,13 +5,13 @@ namespace Orchestra\Model\Memory;
 use Illuminate\Support\Arr;
 use Orchestra\Memory\Provider;
 
-class UserMetaProvider extends Provider
+class UserProvider extends Provider
 {
     /**
      * Get value of a key.
      *
-     * @param  string  $key        a string of key to search
-     * @param  mixed   $default    default value if key doesn't exist
+     * @param  string  $key
+     * @param  mixed   $default
      *
      * @return mixed
      */
@@ -44,8 +44,8 @@ class UserMetaProvider extends Provider
     /**
      * Set a value from a key.
      *
-     * @param  string  $key        a string of key to add the value
-     * @param  mixed   $value      the value
+     * @param  string  $key
+     * @param  mixed   $value
      *
      * @return mixed
      */
@@ -62,7 +62,7 @@ class UserMetaProvider extends Provider
     /**
      * Delete value of a key.
      *
-     * @param  string   $key        a string of key to delete
+     * @param  string   $key
      *
      * @return bool
      */
