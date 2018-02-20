@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Model\TestCase\Observer;
+namespace Orchestra\Model\TestCase\Unit\Observer;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
@@ -16,13 +16,8 @@ class RoleTest extends TestCase
         m::close();
     }
 
-    /**
-     * Test Orchestra\Model\Observer\Role::creating()
-     * method.
-     *
-     * @test
-     */
-    public function testCreatingMethod()
+    /** @test */
+    public function it_observe_creating_event()
     {
         $acl = m::mock('Orchestra\Contracts\Authorization\Factory');
         $model = m::mock('\Orchestra\Model\Role');
@@ -34,13 +29,8 @@ class RoleTest extends TestCase
         $stub->creating($model);
     }
 
-    /**
-     * Test Orchestra\Model\Observer\Role::deleting()
-     * method.
-     *
-     * @test
-     */
-    public function testDeletingMethod()
+    /** @test */
+    public function it_observe_deleting_event()
     {
         $acl = m::mock('Orchestra\Contracts\Authorization\Factory');
         $model = m::mock('\Orchestra\Model\Role');
@@ -52,13 +42,8 @@ class RoleTest extends TestCase
         $stub->deleting($model);
     }
 
-    /**
-     * Test Orchestra\Model\Observer\Role::updating()
-     * method.
-     *
-     * @test
-     */
-    public function testUpdatingMethod()
+    /** @test */
+    public function it_observe_updating_event()
     {
         $acl = m::mock('Orchestra\Contracts\Authorization\Factory');
         $model = m::mock('\Orchestra\Model\Role');
@@ -73,13 +58,8 @@ class RoleTest extends TestCase
         $stub->updating($model);
     }
 
-    /**
-     * Test Orchestra\Model\Observer\Role::updating()
-     * method for restoring.
-     *
-     * @test
-     */
-    public function testUpdatingMethodForRestoring()
+    /** @test */
+    public function it_observe_updating_event_for_restoring()
     {
         $acl = m::mock('Orchestra\Contracts\Authorization\Factory');
         $model = m::mock('\Orchestra\Model\Role');

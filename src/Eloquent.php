@@ -9,7 +9,7 @@ use Orchestra\Contracts\Support\Transformable;
 
 abstract class Eloquent extends Model implements Transformable
 {
-    use Traits\Faker;
+    use Concerns\Faker;
 
     /**
      * Determine if the model instance uses soft deletes.

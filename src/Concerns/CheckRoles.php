@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Model\Traits;
+namespace Orchestra\Model\Concerns;
 
 use Illuminate\Contracts\Support\Arrayable;
 
@@ -85,6 +85,8 @@ trait CheckRoles
 
         $this->roles()->sync((array) $roles, false);
 
+        unset($this->relations['roles']);
+
         return $this;
     }
 
@@ -102,6 +104,8 @@ trait CheckRoles
         }
 
         $this->roles()->detach((array) $roles);
+
+        unset($this->relations['roles']);
 
         return $this;
     }

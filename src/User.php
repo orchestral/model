@@ -13,9 +13,9 @@ use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 class User extends Eloquent implements Authorizable, UserContract
 {
     use Authenticatable,
-        SoftDeletes,
-        Traits\CheckRoles,
-        Traits\Searchable;
+        Concerns\CheckRoles,
+        Concerns\Searchable,
+        SoftDeletes;
 
     /**
      * The database table used by the model.

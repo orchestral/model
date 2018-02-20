@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Model\TestCase\Memory;
+namespace Orchestra\Model\TestCase\Unit\Memory;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
