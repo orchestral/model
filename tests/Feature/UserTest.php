@@ -3,6 +3,7 @@
 namespace Orchestra\Model\TestCase\Feature;
 
 use Mockery as m;
+use Orchestra\Model\Role;
 use Orchestra\Model\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -10,16 +11,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class UserTest extends TestCase
 {
     use RefreshDatabase;
-
-    /**
-     * Setup the test environment.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->withFactories(__DIR__.'/../factories');
-    }
 
     /** @test */
     public function it_belongs_to_many_roles()
@@ -176,5 +167,81 @@ class UserTest extends TestCase
         $user->password = 'foo';
 
         $this->assertEquals('foo', $user->getAuthPassword());
+    }
+
+    /** @test */
+    public function it_can_search_user_based_on_keyword_and_roles()
+    {
+        $user = User::faker()->create();
+        $user->attachRole(1);
+
+        $keyword = substr($user->fullname, 0, 1);
+
+        $search = User::search($keyword, [1])->first();
+
+        $this->assertSame($user->email, $search->email);
+    }
+
+    /** @test */
+    public function it_can_check_whether_user_has_roles()
+    {
+        $user = User::faker()->create();
+        $editor = Role::faker()->create([
+            'name' => 'Editor',
+        ]);
+        $user->attachRoles([1, $editor->id]);
+
+        $this->assertTrue($user->hasRoles('Administrator'));
+        $this->assertFalse($user->hasRoles('User'));
+
+        $this->assertTrue($user->hasRoles(['Administrator', 'Editor']));
+        $this->assertFalse($user->hasRoles(['Administrator', 'User']));
+
+        $user = User::faker()->create();
+        $role = Role::faker()->create([
+            'name' => 'Foo',
+        ]);
+
+        $user->attachRole($role);
+
+        $this->assertFalse($user->hasRoles('Administrator'));
+        $this->assertFalse($user->hasRoles('User'));
+
+        $this->assertFalse($user->hasRoles(['Administrator', 'Editor']));
+        $this->assertFalse($user->hasRoles(['Administrator', 'User']));
+    }
+
+    /** @test */
+    public function it_can_check_whether_user_has_any_roles()
+    {
+        $user = User::faker()->create();
+        $user->attachRoles([1, 2]);
+
+        $this->assertTrue($user->hasAnyRoles(['Administrator', 'User']));
+        $this->assertFalse($user->hasAnyRoles(['Superadmin', 'User']));
+    }
+
+
+    /** @test */
+    public function it_can_check_whether_user_has_any_roles_given_invalid_data()
+    {
+        $user = User::faker()->create();
+        $user->attachRole(1);
+
+        $this->assertFalse($user->hasAnyRoles(['admin', 'editor']));
+        $this->assertFalse($user->hasAnyRoles(['admin', 'user']));
+    }
+
+    /** @test */
+    public function it_can_search_user_based_on_keyword_and_roles_not_found()
+    {
+        $user = User::faker()->create();
+        $user->attachRole(1);
+
+        $keyword = substr($user->fullname, 0, 1);
+
+        $search = User::search($keyword, [2])->first();
+
+        $this->assertNull($search);
     }
 }
