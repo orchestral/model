@@ -36,6 +36,9 @@ class UserTest extends TestCase
     public function it_can_detach_roles()
     {
         $user = User::faker()->create();
+
+        $this->assertFalse($user->hasRoles('Member'));
+
         $user->attachRole(2);
 
         $this->assertTrue($user->hasRoles('Member'));

@@ -104,7 +104,7 @@ trait CheckRoles
             $roles = [$roles->getKey()];
         }
 
-        $this->roles()->detach((array) $roles);
+        $this->roles()->detach($roles);
 
         unset($this->relations['roles']);
 
