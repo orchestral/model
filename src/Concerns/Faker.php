@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Model\Traits;
+namespace Orchestra\Model\Concerns;
 
 use Illuminate\Database\Eloquent\FactoryBuilder;
 

@@ -2,19 +2,9 @@
 
 namespace Orchestra\Model\Traits;
 
-use Orchestra\Support\Traits\QueryFilter;
+use Orchestra\Model\Concerns\Searchable as Concern;
 
 trait Searchable
 {
-    use QueryFilter;
-
-    /**
-     * Get searchable attributes.
-     *
-     * @return array
-     */
-    public function getSearchableColumns(): array
-    {
-        return property_exists($this, 'searchable') ? $this->searchable : [];
-    }
+    use Concern;
 }
