@@ -2,6 +2,19 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/model`.
 
+## 3.5.5
+
+Released: 2018-02-21
+
+## Added
+
+* Add `Orchestra\Model\Eloquent::saveIfExists()`.
+* Add `Orchestra\Model\Eloquent::saveIfExistsOrFail()`.
+
+### Changes
+
+* Unset `roles` relationship when sync, attach or detach roles.
+
 ## 3.5.3
 
 Released: 2017-11-29
