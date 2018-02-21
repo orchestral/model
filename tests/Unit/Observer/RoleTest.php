@@ -11,7 +11,7 @@ class RoleTest extends TestCase
     /**
      * Teardown the test environment.
      */
-    protected function tearDown(): void
+    protected function tearDown()
     {
         m::close();
     }
