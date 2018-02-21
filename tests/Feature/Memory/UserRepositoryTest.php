@@ -2,11 +2,8 @@
 
 namespace Orchestra\Model\TestCase\Feature\Memory;
 
-use Mockery as m;
 use Orchestra\Model\User;
 use Orchestra\Model\UserMeta;
-use Illuminate\Support\Fluent;
-use Illuminate\Container\Container;
 use Orchestra\Model\Memory\UserRepository;
 use Orchestra\Model\TestCase\Feature\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -15,9 +12,7 @@ class UserRepositoryTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_be_initiated()
     {
         $stub = new UserRepository('meta', [], $this->app);
@@ -25,11 +20,7 @@ class UserRepositoryTest extends TestCase
         $this->assertEquals([], $stub->initiate());
     }
 
-    /**
-     * Test Orchestra\Model\Memory\UserRepository::initiate() method.
-     *
-     * @test
-     */
+    /** @test */
     public function it_can_retrieve_data()
     {
         $user = User::faker()->create();
@@ -44,9 +35,7 @@ class UserRepositoryTest extends TestCase
         $this->assertNull($stub->retrieve('foobar/user-1'));
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_update_and_remove_items_on_close()
     {
         $users = User::faker()->times(2)->create();

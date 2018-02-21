@@ -3,7 +3,6 @@
 namespace Orchestra\Model\Concerns;
 
 use Orchestra\Model\Role;
-use Illuminate\Contracts\Support\Arrayable;
 
 trait CheckRoles
 {

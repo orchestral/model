@@ -2,7 +2,6 @@
 
 namespace Orchestra\Model\TestCase\Feature;
 
-use Mockery as m;
 use Orchestra\Model\User;
 use Orchestra\Model\UserMeta;
 use Illuminate\Foundation\Testing\RefreshDatabase;
