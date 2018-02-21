@@ -13,9 +13,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class UserMetaProviderTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * @test
-     */
+
+    /** @test */
     public function it_can_be_initiated_and_close()
     {
         $users = User::faker()->times(2)->create();
@@ -37,9 +36,7 @@ class UserMetaProviderTest extends TestCase
         $this->assertDatabaseMissing('user_meta', ['name' => 'foo', 'user_id' => $users[1]->id]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_get_an_item()
     {
         $user = User::faker()->create();
@@ -54,9 +51,7 @@ class UserMetaProviderTest extends TestCase
         $this->assertNull($stub->get('foobar.1'));
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_forget_an_item()
     {
 

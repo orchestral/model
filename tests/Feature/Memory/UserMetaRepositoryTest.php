@@ -15,9 +15,7 @@ class UserMetaRepositoryTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_be_initiated()
     {
         $stub = new UserMetaRepository('meta', [], $this->app);
@@ -25,11 +23,7 @@ class UserMetaRepositoryTest extends TestCase
         $this->assertEquals([], $stub->initiate());
     }
 
-    /**
-     * Test Orchestra\Model\Memory\UserMetaRepository::initiate() method.
-     *
-     * @test
-     */
+    /** @test */
     public function it_can_retrieve_data()
     {
         $user = User::faker()->create();
@@ -44,9 +38,7 @@ class UserMetaRepositoryTest extends TestCase
         $this->assertNull($stub->retrieve('foobar/user-1'));
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_update_and_remove_items_on_close()
     {
         $users = User::faker()->times(2)->create();

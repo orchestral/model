@@ -11,11 +11,7 @@ class RoleTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Test Orchestra\Model\Role::users() method.
-     *
-     * @test
-     */
+    /** @test */
     public function it_belongs_to_many_user()
     {
         $model = new Role();
@@ -26,9 +22,7 @@ class RoleTest extends TestCase
         $this->assertInstanceOf(User::class, $stub->getQuery()->getModel());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_fetch_admin_role()
     {
         $admin = Role::admin();
@@ -37,9 +31,7 @@ class RoleTest extends TestCase
         $this->assertSame('Administrator', $admin->name);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_swap_admin_role()
     {
         $role = Role::faker()->create([
@@ -53,11 +45,7 @@ class RoleTest extends TestCase
         $this->assertSame('Boss', $admin->name);
     }
 
-    /**
-     * Test Orchestra\Model\Role::member() method.
-     *
-     * @test
-     */
+    /** @test */
     public function it_can_fetch_member_role()
     {
         $member = Role::member();
@@ -67,9 +55,7 @@ class RoleTest extends TestCase
     }
 
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_swap_member_role()
     {
         $role = Role::faker()->create([
