@@ -3,7 +3,6 @@
 namespace Orchestra\Model\Concerns;
 
 use Orchestra\Model\Role;
-use Illuminate\Contracts\Support\Arrayable;
 
 trait CheckRoles
 {
@@ -16,17 +15,7 @@ trait CheckRoles
      */
     public function hasRoles($roles): bool
     {
-        $userRoles = $this->getRoles();
-
-        if ($userRoles instanceof Arrayable) {
-            $userRoles = $userRoles->toArray();
-        }
-
-        // For a pre-caution, we should return false in events where user
-        // roles not an array.
-        if (! is_array($userRoles)) {
-            return false;
-        }
+        $userRoles = $this->getRoles()->all();
 
         // We should ensure that all given roles match the current user,
         // consider it as a AND condition instead of OR.
@@ -48,17 +37,7 @@ trait CheckRoles
      */
     public function hasAnyRoles($roles): bool
     {
-        $userRoles = $this->getRoles();
-
-        if ($userRoles instanceof Arrayable) {
-            $userRoles = $userRoles->toArray();
-        }
-
-        // For a pre-caution, we should return false in events where user
-        // roles not an array.
-        if (! is_array($userRoles)) {
-            return false;
-        }
+        $userRoles = $this->getRoles()->all();
 
         // We should ensure that any given roles match the current user,
         // consider it as OR condition.
@@ -116,5 +95,5 @@ trait CheckRoles
      *
      * @return \Illuminate\Support\Collection
      */
-    abstract public function getRoles();
+    abstract public function getRoles(): Collection;
 }

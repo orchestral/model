@@ -7,6 +7,7 @@ use Orchestra\Model\Role;
 use Orchestra\Model\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class UserTest extends TestCase
 {
@@ -19,8 +20,8 @@ class UserTest extends TestCase
 
         $roles = $model->roles();
 
-        $this->assertInstanceOf('\Illuminate\Database\Eloquent\Relations\BelongsToMany', $roles);
-        $this->assertInstanceOf('\Orchestra\Model\Role', $roles->getQuery()->getModel());
+        $this->assertInstanceOf(BelongsToMany::class, $roles);
+        $this->assertInstanceOf(Role::class, $roles->getQuery()->getModel());
     }
 
     /** @test */
@@ -223,7 +224,6 @@ class UserTest extends TestCase
         $this->assertTrue($user->hasAnyRoles(['Administrator', 'User']));
         $this->assertFalse($user->hasAnyRoles(['Superadmin', 'User']));
     }
-
 
     /** @test */
     public function it_can_check_whether_user_has_any_roles_given_invalid_data()

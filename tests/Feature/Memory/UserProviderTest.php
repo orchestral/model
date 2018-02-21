@@ -2,7 +2,6 @@
 
 namespace Orchestra\Model\TestCase\Feature\Memory;
 
-use Mockery as m;
 use Orchestra\Model\User;
 use Orchestra\Model\UserMeta;
 use Orchestra\Model\Memory\UserProvider;
@@ -13,9 +12,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class UserProviderTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * @test
-     */
+
+    /** @test */
     public function it_can_be_initiated_and_close()
     {
         $users = User::faker()->times(2)->create();
@@ -37,9 +35,7 @@ class UserProviderTest extends TestCase
         $this->assertDatabaseMissing('user_meta', ['name' => 'foo', 'user_id' => $users[1]->id]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_get_an_item()
     {
         $user = User::faker()->create();
@@ -54,12 +50,9 @@ class UserProviderTest extends TestCase
         $this->assertNull($stub->get('foobar.1'));
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_can_forget_an_item()
     {
-
         $user = User::faker()->create();
 
         UserMeta::insert([
