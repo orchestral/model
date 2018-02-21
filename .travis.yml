@@ -9,10 +9,14 @@ php:
 
 env:
   global:
-    - setup=basic
     - coverage=no
+  matrix:
+    - setup=basic
+    - setup=lowest
+    - setup=stable
 
 before_script:
+  - travis_retry composer self-update
   - composer config discard-changes true
   - if [[ $setup = 'basic' ]]; then travis_retry composer install --prefer-dist --no-interaction; fi
   - if [[ $setup = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable; fi
@@ -28,10 +32,6 @@ after_script:
 
 matrix:
   include:
-    - php: 7.0
-      env: setup=lowest
-    - php: 7.0
-      env: setup=stable
     - php: 7.0
       env: setup=coveralls coverage=yes
   allow_failures:

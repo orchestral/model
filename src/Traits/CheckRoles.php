@@ -86,6 +86,8 @@ trait CheckRoles
 
         $this->roles()->sync($roles, false);
 
+        unset($this->relations['roles']);
+
         return $this;
     }
 
@@ -103,6 +105,8 @@ trait CheckRoles
         }
 
         $this->roles()->detach($roles);
+
+        unset($this->relations['roles']);
 
         return $this;
     }

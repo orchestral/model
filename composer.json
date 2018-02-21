@@ -16,6 +16,11 @@
             "Orchestra\\Model\\" : "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Orchestra\\Model\\TestCase\\" : "tests/"
+        }
+    },
     "require": {
         "php": ">=7.0",
         "orchestra/contracts": "~3.5.0",
@@ -23,10 +28,9 @@
         "orchestra/support": "~3.5.0"
     },
     "require-dev": {
-        "illuminate/auth": "~5.5.0",
-        "illuminate/database": "~5.5.0",
+        "orchestra/auth": "~3.5.0",
         "mockery/mockery": "~1.0",
-        "phpunit/phpunit": "~6.0"
+        "orchestra/testbench": "~3.5.5"
     },
     "extra": {
         "branch-alias": {
