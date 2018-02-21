@@ -54,7 +54,6 @@ class RoleTest extends TestCase
         $this->assertSame('Member', $member->name);
     }
 
-
     /** @test */
     public function it_can_swap_member_role()
     {

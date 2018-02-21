@@ -2,11 +2,8 @@
 
 namespace Orchestra\Model\TestCase\Feature\Memory;
 
-use Mockery as m;
 use Orchestra\Model\User;
 use Orchestra\Model\UserMeta;
-use Illuminate\Support\Fluent;
-use Illuminate\Container\Container;
 use Orchestra\Model\Memory\UserMetaRepository;
 use Orchestra\Model\TestCase\Feature\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;

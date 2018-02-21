@@ -225,7 +225,6 @@ class UserTest extends TestCase
         $this->assertFalse($user->hasAnyRoles(['Superadmin', 'User']));
     }
 
-
     /** @test */
     public function it_can_check_whether_user_has_any_roles_given_invalid_data()
     {

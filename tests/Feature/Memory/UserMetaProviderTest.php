@@ -2,7 +2,6 @@
 
 namespace Orchestra\Model\TestCase\Feature\Memory;
 
-use Mockery as m;
 use Orchestra\Model\User;
 use Orchestra\Model\UserMeta;
 use Orchestra\Model\Memory\UserMetaProvider;
@@ -54,7 +53,6 @@ class UserMetaProviderTest extends TestCase
     /** @test */
     public function it_can_forget_an_item()
     {
-
         $user = User::faker()->create();
 
         UserMeta::insert([
