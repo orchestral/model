@@ -7,6 +7,7 @@ use Orchestra\Model\Role;
 use Orchestra\Model\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class UserTest extends TestCase
 {
@@ -19,8 +20,8 @@ class UserTest extends TestCase
 
         $roles = $model->roles();
 
-        $this->assertInstanceOf('\Illuminate\Database\Eloquent\Relations\BelongsToMany', $roles);
-        $this->assertInstanceOf('\Orchestra\Model\Role', $roles->getQuery()->getModel());
+        $this->assertInstanceOf(BelongsToMany::class, $roles);
+        $this->assertInstanceOf(Role::class, $roles->getQuery()->getModel());
     }
 
     /** @test */

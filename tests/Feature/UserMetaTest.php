@@ -6,6 +6,7 @@ use Mockery as m;
 use Orchestra\Model\User;
 use Orchestra\Model\UserMeta;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserMetaTest extends TestCase
 {
@@ -17,8 +18,8 @@ class UserMetaTest extends TestCase
         $model = new UserMeta();
         $stub = $model->users();
 
-        $this->assertInstanceOf('\Illuminate\Database\Eloquent\Relations\BelongsTo', $stub);
-        $this->assertInstanceOf('\Orchestra\Model\User', $stub->getQuery()->getModel());
+        $this->assertInstanceOf(BelongsTo::class, $stub);
+        $this->assertInstanceOf(User::class, $stub->getQuery()->getModel());
     }
 
     /** @test */

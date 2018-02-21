@@ -3,7 +3,9 @@
 namespace Orchestra\Model\TestCase\Feature;
 
 use Orchestra\Model\Role;
+use Orchestra\Model\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class RoleTest extends TestCase
 {
@@ -20,8 +22,8 @@ class RoleTest extends TestCase
 
         $stub = $model->users();
 
-        $this->assertInstanceOf('\Illuminate\Database\Eloquent\Relations\BelongsToMany', $stub);
-        $this->assertInstanceOf('\Orchestra\Model\User', $stub->getQuery()->getModel());
+        $this->assertInstanceOf(BelongsToMany::class, $stub);
+        $this->assertInstanceOf(User::class, $stub->getQuery()->getModel());
     }
 
     /**
