@@ -69,7 +69,7 @@ trait Metable
      *
      * @return void
      */
-    public function putMetaData($key, $value = null)
+    public function putMetaData($key, $value = null): void
     {
         if (! is_array($key)) {
             $meta = $this->getAttribute('meta');
