@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/model`.
 
+## 3.5.6
+
+Released: 2018-02-27
+
+### Fixes
+
+* Fixes type-hint declarations.
+
 ## 3.5.5
 
 Released: 2018-02-21
