@@ -3,6 +3,7 @@
 namespace Orchestra\Model\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 trait OwnedBy
 {
@@ -15,7 +16,7 @@ trait OwnedBy
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeOwnedBy($query, Model $related, $key = null)
+    public function scopeOwnedBy(Builder $query, Model $related, ?string $key = null): Builder
     {
         if (is_null($key)) {
             $key = $related->getForeignKey();
@@ -32,7 +33,7 @@ trait OwnedBy
      *
      * @return bool
      */
-    public function ownedBy(Model $related = null, $key = null)
+    public function ownedBy(Model $related = null, ?string $key = null): bool
     {
         if (is_null($related)) {
             return false;

@@ -3,6 +3,7 @@
 namespace Orchestra\Model\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 trait Owns
 {
@@ -15,7 +16,7 @@ trait Owns
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeOwns($query, Model $related, $foreignKey = null)
+    public function scopeOwns(Builder $query, Model $related, ?string $foreignKey = null): Builder
     {
         if (is_null($foreignKey)) {
             $foreignKey = $this->getForeignKey();
@@ -34,7 +35,7 @@ trait Owns
      *
      * @return bool
      */
-    public function owns(Model $related = null, $foreignKey = null)
+    public function owns(Model $related = null, ?string $foreignKey = null): bool
     {
         if (is_null($related)) {
             return false;
