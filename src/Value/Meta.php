@@ -28,7 +28,7 @@ class Meta extends Fluent
      *
      * @return $this
      */
-    public function put(string $key, $value = ''): self
+    public function put(string $key, $value = '')
     {
         Arr::set($this->attributes, $key, $value);
 
@@ -42,7 +42,7 @@ class Meta extends Fluent
      *
      * @return $this
      */
-    public function forget(string $key): self
+    public function forget(string $key)
     {
         Arr::forget($this->attributes, $key);
 

@@ -57,7 +57,7 @@ trait CheckRoles
      *
      * @return $this
      */
-    public function attachRoles($roles): self
+    public function attachRoles($roles)
     {
         if ($roles instanceof Role) {
             $roles = [$roles->getKey()];
@@ -77,7 +77,7 @@ trait CheckRoles
      *
      * @return $this
      */
-    public function detachRoles($roles): self
+    public function detachRoles($roles)
     {
         if ($roles instanceof Role) {
             $roles = [$roles->getKey()];
