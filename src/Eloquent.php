@@ -5,11 +5,26 @@ namespace Orchestra\Model;
 use Closure;
 use Orchestra\Support\Fluent;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Expression;
 use Orchestra\Contracts\Support\Transformable;
 
 abstract class Eloquent extends Model implements Transformable
 {
     use Concerns\Faker;
+
+    /**
+     * Get qualified column name.
+     *
+     * @param  string  $column
+     *
+     * @return string
+     */
+    public static function column(string $column): string
+    {
+        return new Expression(
+            (new static())->qualifyColumn($column)
+        );
+    }
 
     /**
      * Determine if the model instance uses soft deletes.
