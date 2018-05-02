@@ -8,6 +8,7 @@ This repository contains the model code of the Orchestra Platform. If you want t
 [![Total Downloads](https://poser.pugx.org/orchestra/model/downloads)](https://packagist.org/packages/orchestra/model)
 [![Latest Unstable Version](https://poser.pugx.org/orchestra/model/v/unstable)](//packagist.org/packages/orchestra/model)
 [![License](https://poser.pugx.org/orchestra/model/license)](https://packagist.org/packages/orchestra/model)
+[![Coverage Status](https://coveralls.io/repos/github/orchestral/model/badge.svg?branch=3.6)](https://coveralls.io/github/orchestral/model?branch=3.6)
 
 ## Resources
 
@@ -26,7 +27,7 @@ Laravel    | Model
  5.3.x     | 3.3.x
  5.4.x     | 3.4.x
  5.5.x     | 3.5.x
- 5.6.x     | 3.6.x@dev
+ 5.6.x     | 3.6.x
 
 ## Installation
 
