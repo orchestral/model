@@ -64,12 +64,12 @@ trait Metable
     /**
      * Put meta data.
      *
-     * @param  string  $key
+     * @param  string|array  $key
      * @param  mixed  $value
      *
      * @return void
      */
-    public function putMetaData(string $key, $value = null)
+    public function putMetaData($key, $value = null): void
     {
         if (! is_array($key)) {
             $meta = $this->getAttribute('meta');

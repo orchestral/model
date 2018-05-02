@@ -29,7 +29,7 @@
     },
     "require-dev": {
         "orchestra/auth": "~3.7.0",
-        "mockery/mockery": "~1.0",
+        "mockery/mockery": "^1.0",
         "orchestra/testbench": "~3.7.0"
     },
     "extra": {

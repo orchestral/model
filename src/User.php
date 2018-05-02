@@ -66,12 +66,12 @@ class User extends Eloquent implements Authorizable, UserContract
      * Search user based on keyword as roles.
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  string  $keyword
+     * @param  string|null  $keyword
      * @param  array  $roles
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeSearch(Builder $query, string $keyword = '', array $roles = []): Builder
+    public function scopeSearch(Builder $query, $keyword = '', array $roles = []): Builder
     {
         $query->with('roles')->whereNotNull('users.id');
 
@@ -105,7 +105,7 @@ class User extends Eloquent implements Authorizable, UserContract
      *
      * @return $this
      */
-    public function activate(): self
+    public function activate()
     {
         $this->setAttribute('status', self::VERIFIED);
 
@@ -117,7 +117,7 @@ class User extends Eloquent implements Authorizable, UserContract
      *
      * @return $this
      */
-    public function deactivate(): self
+    public function deactivate()
     {
         $this->setAttribute('status', self::UNVERIFIED);
 
@@ -129,7 +129,7 @@ class User extends Eloquent implements Authorizable, UserContract
      *
      * @return $this
      */
-    public function suspend(): self
+    public function suspend()
     {
         $this->setAttribute('status', self::SUSPENDED);
 
@@ -163,7 +163,7 @@ class User extends Eloquent implements Authorizable, UserContract
      *
      * @return $this
      */
-    public function attachRole($roles): self
+    public function attachRole($roles)
     {
         return $this->attachRoles($roles);
     }
@@ -175,7 +175,7 @@ class User extends Eloquent implements Authorizable, UserContract
      *
      * @return $this
      */
-    public function detachRole($roles): self
+    public function detachRole($roles)
     {
         return $this->detachRoles($roles);
     }

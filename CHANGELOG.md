@@ -2,6 +2,37 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/model`.
 
+## 3.6.0
+
+Released: 2018-05-02
+
+### Added
+
+* Added `Orchestra\Model\Eloquent::column()`.
+* Added `Orchestra\Model\Listeners\UserAccess`.
+
+### Changes
+
+* Update support to Laravel Framework 5.6.
+* Rename the following classes:
+    - `Orchestra\Model\Memory\UserMetaProvider` to `Orchestra\Model\Memory\UserProvider`.
+    - `Orchestra\Model\Memory\UserMetaRepository` to `Orchestra\Model\Memory\UserRepository`.
+* Rename the following traits:
+    - `Orchestra\Model\Traits\CheckRoles` to `Orchestra\Model\Concerns\CheckRoles`.
+    - `Orchestra\Model\Traits\Faker` to `Orchestra\Model\Concerns\Faker`.
+    - `Orchestra\Model\Traits\Metable` to `Orchestra\Model\Concerns\Metable`.
+    - `Orchestra\Model\Traits\OwnedBy` to `Orchestra\Model\Concerns\OwnedBy`.
+    - `Orchestra\Model\Traits\Owns` to `Orchestra\Model\Concerns\Owns`.
+    - `Orchestra\Model\Traits\Searchable` to `Orchestra\Model\Concerns\Searchable`.
+
+## 3.5.6
+
+Released: 2018-02-27
+
+### Fixes
+
+* Fixes type-hint declarations.
+
 ## 3.5.5
 
 Released: 2018-02-21
@@ -59,11 +90,3 @@ Released: 2017-09-03
 ### Changes
 
 * Update support to Laravel Framework 5.5.
-
-## 3.4.0
-
-Released: 2017-05-03
-
-### Changes
-
-* Update support to Laravel Framework 5.4.
