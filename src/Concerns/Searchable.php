@@ -9,6 +9,20 @@ trait Searchable
     use QueryFilter;
 
     /**
+     * Search devices based on keyword.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string                                $keyword
+     * @param array                                 $columns
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeSearch(Builder $query, string $keyword = '', ?array $columns = null): Builder
+    {
+        return $this->setupWildcardQueryFilter($query, $keyword, $columns ?? $this->getSearchableColumns());
+    }
+
+    /**
      * Get searchable attributes.
      *
      * @return array
