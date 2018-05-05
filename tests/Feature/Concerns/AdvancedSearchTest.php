@@ -3,7 +3,6 @@
 namespace Orchestra\Model\TestCase\Feature\Concerns;
 
 use Orchestra\Model\User;
-use Orchestra\Model\Concerns\AdvancedSearch;
 use Orchestra\Model\TestCase\Feature\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 

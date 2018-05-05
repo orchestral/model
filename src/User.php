@@ -68,10 +68,11 @@ class User extends Eloquent implements Authorizable, UserContract
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @param  string|null  $keyword
      * @param  array  $roles
+     * @param  array|null  $columns
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeSearch(Builder $query, $keyword = '', array $roles = []): Builder
+    public function scopeSearch(Builder $query, $keyword = '', array $roles = [], ?array $columns = null): Builder
     {
         $query->with('roles')->whereNotNull('users.id');
 
@@ -81,7 +82,7 @@ class User extends Eloquent implements Authorizable, UserContract
             });
         }
 
-        return $this->setupWildcardQueryFilter($query, $keyword, $this->getSearchableColumns());
+        return $this->setupWildcardQueryFilter($query, $keyword, $columns ?? $this->getSearchableColumns());
     }
 
     /**
