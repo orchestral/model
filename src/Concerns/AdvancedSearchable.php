@@ -11,17 +11,17 @@ trait AdvancedSearchable
     use Searchable;
 
     /**
-     * Build search from query builder.
+     * Advanced search from query builder.
      *
      * @param  \Illuminate\Database\Query\Builder $query
-     * @param  string  $search
+     * @param  string|null  $search
      * @param  array|null  $columns
      *
      * @return \Illuminate\Database\Query\Builder
      */
-    public function scopeAdvancedSearch(Builder $query, string $search, ?array $columns = null): Builder
+    public function scopeAdvancedSearch(Builder $query, ?string $search, ?array $columns = null): Builder
     {
-        ['basic' => $basic, 'advanced' => $advanced] = $this->resolveSearchKeywords($search);
+        ['basic' => $basic, 'advanced' => $advanced] = $this->resolveSearchKeywords($search ?? '');
         $rules = $this->getSearchableRules();
         $others = [];
 
