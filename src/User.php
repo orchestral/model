@@ -13,8 +13,8 @@ use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 class User extends Eloquent implements Authorizable, UserContract
 {
     use Authenticatable,
+        Concerns\AdvancedSearchable,
         Concerns\CheckRoles,
-        Concerns\Searchable,
         SoftDeletes;
 
     /**

@@ -87,9 +87,7 @@ class AdvancedSearchTest extends TestCase
 
 class StubUser extends User
 {
-    use AdvancedSearch;
-
-    protected function advancedSearchableRules(): array
+    public function getSearchableRules(): array
     {
         return [
             'is:inactive' => function ($query) {
