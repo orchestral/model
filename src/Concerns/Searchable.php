@@ -2,6 +2,7 @@
 
 namespace Orchestra\Model\Concerns;
 
+use Illuminate\Database\Eloquent\Builder;
 use Orchestra\Support\Traits\QueryFilter;
 
 trait Searchable
