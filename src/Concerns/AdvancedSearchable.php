@@ -14,10 +14,12 @@ trait AdvancedSearchable
      * Build search from query builder.
      *
      * @param  \Illuminate\Database\Query\Builder $query
+     * @param  string  $search
+     * @param  array|null  $columns
      *
      * @return \Illuminate\Database\Query\Builder
      */
-    public function scopeAdvancedSearch(Builder $query, string $search): Builder
+    public function scopeAdvancedSearch(Builder $query, string $search, ?array $columns = null): Builder
     {
         ['basic' => $basic, 'advanced' => $advanced] = $this->resolveSearchKeywords($search);
         $rules = $this->getSearchableRules();
@@ -55,7 +57,7 @@ trait AdvancedSearchable
             }
         }
 
-        return $this->setupWildcardQueryFilter($query, $basic, $this->getSearchableColumns());
+        return $this->setupWildcardQueryFilter($query, $basic, $columns ?? $this->getSearchableColumns());
     }
 
     /**
