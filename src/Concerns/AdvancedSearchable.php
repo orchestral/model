@@ -5,10 +5,11 @@ namespace Orchestra\Model\Concerns;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
+use Orchestra\Support\Traits\QueryFilter;
 
 trait AdvancedSearchable
 {
-    use Searchable;
+    use QueryFilter;
 
     /**
      * Advanced search from query builder.
@@ -57,7 +58,11 @@ trait AdvancedSearchable
             }
         }
 
-        return $this->setupWildcardQueryFilter($query, $basic, $columns ?? $this->getSearchableColumns());
+        if (is_null($columns) && method_exists($this, 'getSearchableColumns')) {
+            $columns = $this->getSearchableColumns();
+        }
+
+        return $this->setupWildcardQueryFilter($query, $basic, $columns ?? []);
     }
 
     /**
