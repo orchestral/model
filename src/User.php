@@ -63,33 +63,6 @@ class User extends Eloquent implements Authorizable, UserContract
     }
 
     /**
-     * Search user based on keyword as roles.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  string|null  $keyword
-     * @param  array  $roles
-     * @param  array|null  $columns
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeSearch(Builder $query, $keyword = '', array $roles = [], ?array $columns = null): Builder
-    {
-        $query->with('roles')->whereNotNull('users.id');
-
-        if (! empty($roles)) {
-            $query->whereHas('roles', function ($query) use ($roles) {
-                $query->whereIn('roles.id', $roles);
-            });
-        }
-
-        if (is_null($columns) && method_exists($this, 'getSearchableColumns')) {
-            $columns = $this->getSearchableColumns();
-        }
-
-        return $this->setupWildcardQueryFilter($query, $keyword, $columns ?? []);
-    }
-
-    /**
      * Set `password` mutator.
      *
      * @param  string  $value

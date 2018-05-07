@@ -5,11 +5,10 @@ namespace Orchestra\Model\Concerns;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
-use Orchestra\Support\Traits\QueryFilter;
 
 trait AdvancedSearchable
 {
-    use QueryFilter;
+    use Searchable;
 
     /**
      * Advanced search from query builder.
