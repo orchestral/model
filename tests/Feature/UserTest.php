@@ -174,14 +174,27 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function it_can_search_user_based_on_keyword_and_roles()
+    public function it_can_search_user_based_on_keyword_and_roles_id()
     {
         $user = User::faker()->create();
         $user->attachRole(1);
 
         $keyword = substr($user->fullname, 0, 1);
 
-        $search = User::search($keyword)->hasRoles([1])->first();
+        $search = User::search($keyword)->hasRolesId([1])->first();
+
+        $this->assertSame($user->email, $search->email);
+    }
+
+    /** @test */
+    public function it_can_search_user_based_on_keyword_and_roles_name()
+    {
+        $user = User::faker()->create();
+        $user->attachRole(1);
+
+        $keyword = substr($user->fullname, 0, 1);
+
+        $search = User::search($keyword)->hasRoles(['Administrator'])->first();
 
         $this->assertSame($user->email, $search->email);
     }
