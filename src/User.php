@@ -53,6 +53,43 @@ class User extends Eloquent implements Authorizable, UserContract
     protected $searchable = ['email', 'fullname'];
 
     /**
+     * Get searchable rules.
+     *
+     * @return array
+     */
+    public function getSearchableRules(): array
+    {
+        return [
+            'roles:[]' => function (Builder $query, array $roles) {
+                return $query->whereHas('roles', function (Builder $query) use ($roles) {
+                    return $query->whereIn(Role::column('name'), $roles);
+                });
+            },
+        ];
+    }
+
+    /**
+     * Search user based on keyword as roles.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  array  $roles
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeHasRoles(Builder $query, array $roles = []): Builder
+    {
+        $query->with('roles')->whereNotNull('users.id');
+
+        if (! empty($roles)) {
+            $query->whereHas('roles', function ($query) use ($roles) {
+                $query->whereIn('roles.id', $roles);
+            });
+        }
+
+        return $query;
+    }
+
+    /**
      * Has many and belongs to relationship with Role.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

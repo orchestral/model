@@ -181,7 +181,7 @@ class UserTest extends TestCase
 
         $keyword = substr($user->fullname, 0, 1);
 
-        $search = User::search($keyword, [1])->first();
+        $search = User::search($keyword)->hasRoles([1])->first();
 
         $this->assertSame($user->email, $search->email);
     }
