@@ -53,6 +53,64 @@ class User extends Eloquent implements Authorizable, UserContract
     protected $searchable = ['email', 'fullname'];
 
     /**
+     * Get searchable rules.
+     *
+     * @return array
+     */
+    public function getSearchableRules(): array
+    {
+        return [
+            'roles:[]' => function (Builder $query, array $roles) {
+                return $query->whereHas('roles', function (Builder $query) use ($roles) {
+                    return $query->whereIn(Role::column('name'), $roles);
+                });
+            },
+        ];
+    }
+
+    /**
+     * Search user based on keyword as roles.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  array  $roles
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeHasRoles(Builder $query, array $roles = []): Builder
+    {
+        $query->with('roles')->whereNotNull('users.id');
+
+        if (! empty($roles)) {
+            $query->whereHas('roles', function ($query) use ($roles) {
+                $query->whereIn(Role::column('name'), $roles);
+            });
+        }
+
+        return $query;
+    }
+
+    /**
+     * Search user based on keyword as roles id.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  array  $rolesId
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeHasRolesId(Builder $query, array $rolesId = []): Builder
+    {
+        $query->with('roles')->whereNotNull('users.id');
+
+        if (! empty($rolesId)) {
+            $query->whereHas('roles', function ($query) use ($rolesId) {
+                $query->whereIn(Role::column('id'), $rolesId);
+            });
+        }
+
+        return $query;
+    }
+
+    /**
      * Has many and belongs to relationship with Role.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -60,29 +118,6 @@ class User extends Eloquent implements Authorizable, UserContract
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'user_role', 'user_id', 'role_id')->withTimestamps();
-    }
-
-    /**
-     * Search user based on keyword as roles.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  string|null  $keyword
-     * @param  array  $roles
-     * @param  array|null  $columns
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeSearch(Builder $query, $keyword = '', array $roles = [], ?array $columns = null): Builder
-    {
-        $query->with('roles')->whereNotNull('users.id');
-
-        if (! empty($roles)) {
-            $query->whereHas('roles', function ($query) use ($roles) {
-                $query->whereIn('roles.id', $roles);
-            });
-        }
-
-        return $this->setupWildcardQueryFilter($query, $keyword, $columns ?? $this->getSearchableColumns());
     }
 
     /**

@@ -2,6 +2,18 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/model`.
 
+## 3.6.1
+
+Released: 2018-05-08
+
+### Added
+
+* Added `Orchestra\Model\Concerns\AdvancedSearch`.
+
+### Changes
+
+* Include `Orchestra\Model\Concerns\Searchable::scopeSearch()` by default.
+
 ## 3.6.0
 
 Released: 2018-05-02
