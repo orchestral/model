@@ -6,7 +6,7 @@ use Orchestra\Model\User;
 use Orchestra\Model\TestCase\Feature\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class AdvancedSearchTest extends TestCase
+class AdvancedSearchableTest extends TestCase
 {
     use RefreshDatabase;
 
