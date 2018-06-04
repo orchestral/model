@@ -36,11 +36,12 @@ trait AdvancedSearchable
                 $query->unless(empty($results), function ($query) use ($callback, $results, $type) {
                     if ($type === '*') {
                         [, $value] = explode(':', $results[0] ?? null, 2);
+                        $value = trim($value, '"');
                     } else {
                         $value = array_map(function ($text) {
                             [, $value] = explode(':', $text, 2);
 
-                            return $value;
+                            return trim($value, '"');
                         }, $results);
                     }
 
@@ -73,8 +74,6 @@ trait AdvancedSearchable
      */
     protected function resolveSearchKeywords(string $keyword): array
     {
-        $keywords = explode(' ', $keyword);
-
         $basic = [];
         $advanced = [];
 
@@ -84,11 +83,13 @@ trait AdvancedSearchable
             return "{$tag}:";
         }, array_keys($this->getSearchableRules()));
 
-        foreach ($keywords as $index => $keyword) {
-            if (! Str::startsWith($keyword, $tags)) {
-                array_push($basic, $keyword);
-            } else {
-                array_push($advanced, $keyword);
+        if (preg_match_all('/([\w]+:\"[\w\s]*\"|[\w]+:[\w\S]+|[\w\S]+)\s?/', $keyword, $keywords)) {
+            foreach ($keywords[1] as $index => $keyword) {
+                if (! Str::startsWith($keyword, $tags)) {
+                    array_push($basic, $keyword);
+                } else {
+                    array_push($advanced, $keyword);
+                }
             }
         }
 
