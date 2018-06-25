@@ -2,13 +2,21 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/model`.
 
+## 3.6.2
+
+Released: 2018-06-05
+
+### Changes
+
+* Improves `Orchestra\Model\Concerns\AdvancedSearchable` by parsing keyword using regular expression.
+
 ## 3.6.1
 
 Released: 2018-05-08
 
 ### Added
 
-* Added `Orchestra\Model\Concerns\AdvancedSearch`.
+* Added `Orchestra\Model\Concerns\AdvancedSearchable`.
 
 ### Changes
 
