@@ -3,7 +3,7 @@
 namespace Orchestra\Model\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
-use Orchestra\Support\Traits\QueryFilter;
+use Orchestra\Support\Concerns\QueryFilter;
 
 trait Searchable
 {
