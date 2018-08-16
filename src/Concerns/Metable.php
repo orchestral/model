@@ -16,7 +16,7 @@ trait Metable
      */
     public function getMetaAttribute($value): Meta
     {
-        return $this->accessMetaAttribute($value);
+        return $this->accessMetableAttribute($value);
     }
 
     /**
@@ -28,7 +28,7 @@ trait Metable
      */
     public function setMetaAttribute($value = null): void
     {
-        $this->attributes['meta'] = $this->mutateMetaAttribute('meta', $value);
+        $this->attributes['meta'] = $this->mutateMetableAttribute('meta', $value);
     }
 
     /**
@@ -41,7 +41,7 @@ trait Metable
      */
     public function getOriginalMetaData(string $key, $default = null)
     {
-        $meta = $this->accessMetaAttribute($this->getOriginal('meta'));
+        $meta = $this->accessMetableAttribute($this->getOriginal('meta'));
 
         return $meta->get($key, $default);
     }
@@ -91,7 +91,7 @@ trait Metable
      *
      * @return \Orchestra\Model\Value\Meta
      */
-    protected function accessMetaAttribute($value): Meta
+    protected function accessMetableAttribute($value): Meta
     {
         $meta = [];
 
@@ -112,7 +112,7 @@ trait Metable
      *
      * @return string|null
      */
-    protected function mutateMetaAttribute(string $key, $value): ?string
+    protected function mutateMetableAttribute(string $key, $value): ?string
     {
         if (is_null($value)) {
             return $value;
