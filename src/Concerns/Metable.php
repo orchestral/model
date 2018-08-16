@@ -28,7 +28,7 @@ trait Metable
      */
     public function setMetaAttribute($value = null): void
     {
-        $this->attributes['meta'] = $this->mutateMetaAttribute($value);
+        $this->attributes['meta'] = $this->mutateMetaAttribute('meta', $value);
     }
 
     /**
@@ -107,11 +107,12 @@ trait Metable
     /**
      * Get value from mixed content.
      *
+     * @param  string  $key
      * @param  mixed  $value
      *
      * @return string|null
      */
-    protected function mutateMetaAttribute($value)
+    protected function mutateMetaAttribute(string $key, $value): ?string
     {
         if (is_null($value)) {
             return $value;
@@ -123,7 +124,7 @@ trait Metable
             $value = (array) $value;
         }
 
-        return $this->castAttributeAsJson('meta', $value);
+        return $this->castAttributeAsJson($key, $value);
     }
 
     /**
