@@ -16,7 +16,7 @@ trait Metable
      */
     public function getMetaAttribute($value): Meta
     {
-        return $this->accessMetaAttribute($value);
+        return $this->accessMetableAttribute($value);
     }
 
     /**
@@ -28,7 +28,7 @@ trait Metable
      */
     public function setMetaAttribute($value = null): void
     {
-        $this->attributes['meta'] = $this->mutateMetaAttribute($value);
+        $this->attributes['meta'] = $this->mutateMetableAttribute('meta', $value);
     }
 
     /**
@@ -41,7 +41,7 @@ trait Metable
      */
     public function getOriginalMetaData(string $key, $default = null)
     {
-        $meta = $this->accessMetaAttribute($this->getOriginal('meta'));
+        $meta = $this->accessMetableAttribute($this->getOriginal('meta'));
 
         return $meta->get($key, $default);
     }
@@ -91,11 +91,13 @@ trait Metable
      *
      * @return \Orchestra\Model\Value\Meta
      */
-    protected function accessMetaAttribute($value): Meta
+    protected function accessMetableAttribute($value): Meta
     {
         $meta = [];
 
-        if (! is_null($value)) {
+        if ($value instanceof Meta) {
+            return $value;
+        } elseif (! is_null($value)) {
             $meta = $this->fromJson($value);
         }
 
@@ -105,11 +107,12 @@ trait Metable
     /**
      * Get value from mixed content.
      *
+     * @param  string  $key
      * @param  mixed  $value
      *
      * @return string|null
      */
-    protected function mutateMetaAttribute($value)
+    protected function mutateMetableAttribute(string $key, $value): ?string
     {
         if (is_null($value)) {
             return $value;
@@ -121,7 +124,7 @@ trait Metable
             $value = (array) $value;
         }
 
-        return $this->castAttributeAsJson('meta', $value);
+        return $this->castAttributeAsJson($key, $value);
     }
 
     /**

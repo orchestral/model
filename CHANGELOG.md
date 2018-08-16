@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/model`.
 
+## 3.6.3
+
+Released: 2018-08-16
+
+### Changes
+
+* Avoid re-casting `meta` to instance of `Orchestra\Model\Value\Meta` when it already is.
+
 ## 3.6.2
 
 Released: 2018-06-05
