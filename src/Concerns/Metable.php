@@ -95,7 +95,9 @@ trait Metable
     {
         $meta = [];
 
-        if (! is_null($value)) {
+        if ($value instanceof Meta) {
+            return $value;
+        } elseif (! is_null($value)) {
             $meta = $this->fromJson($value);
         }
 
