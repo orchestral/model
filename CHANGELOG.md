@@ -2,6 +2,19 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/model`.
 
+## 3.7.0
+
+Released: 2018-11-19
+
+### Changes
+
+* Update support to Laravel Framework 5.7.
+* `Orchestra\Model\Concerns\Metable::mutateMetableAttribute()` should accept `$key` as first parameter to allow multiple JSON fields.
+
+### Removed
+
+* Remove deprecated `Orchestra\Model\Traits` namespace.
+
 ## 3.6.3
 
 Released: 2018-08-16
