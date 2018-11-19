@@ -3,6 +3,7 @@
 namespace Orchestra\Model;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserMeta extends Eloquent
 {
@@ -27,7 +28,7 @@ class UserMeta extends Eloquent
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function users()
+    public function users(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }

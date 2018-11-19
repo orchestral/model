@@ -3,6 +3,7 @@
 namespace Orchestra\Model;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Role extends Eloquent
 {
@@ -46,7 +47,7 @@ class Role extends Eloquent
      *
      * @return void
      */
-    public static function setDefaultRoles(array $roles)
+    public static function setDefaultRoles(array $roles): void
     {
         static::$defaultRoles = array_merge(static::$defaultRoles, $roles);
     }
@@ -56,7 +57,7 @@ class Role extends Eloquent
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function users()
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'user_role', 'role_id', 'user_id')->withTimestamps();
     }
