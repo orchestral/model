@@ -71,17 +71,39 @@ trait Metable
      */
     public function putMetaData($key, $value = null): void
     {
-        if (! is_array($key)) {
-            $meta = $this->getAttribute('meta');
+        $meta = $this->getAttribute('meta');
+
+        if (is_array($key)) {
+            foreach ($key as $name => $value) {
+                $meta->put($name, $value);
+            }
+        } else {
             $meta->put($key, $value);
-            $this->setMetaAttribute($meta);
-
-            return;
         }
 
-        foreach ($key as $name => $value) {
-            $this->putMetaData($name, $value);
+        $this->setMetaAttribute($meta);
+    }
+
+    /**
+     * Forget meta data.
+     *
+     * @param  string|array  $key
+     *
+     * @return void
+     */
+    public function forgetMetaData($key): void
+    {
+        $meta = $this->getAttribute('meta');
+
+        if (is_array($key)) {
+            foreach ($key as $name) {
+                $meta->forget($name);
+            }
+        } else {
+            $meta->forget($key);
         }
+
+        $this->setMetaAttribute($meta);
     }
 
     /**
