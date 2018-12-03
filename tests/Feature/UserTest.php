@@ -135,7 +135,7 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function testGetAuthIdentifierMethod()
+    public function it_can_get_auth_identifier()
     {
         $user = User::faker()->create([
             'id' => 1983,
