@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/model`.
 
+## 3.6.4
+
+Released: 2018-12-04
+
+### Added
+
+* Add `Orchestra\Model\Concerns\Metable::forgetMetaData()` method helper.
+
 ## 3.6.3
 
 Released: 2018-08-16
