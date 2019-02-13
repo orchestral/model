@@ -18,7 +18,7 @@ trait Owns
      */
     public function scopeOwns(Builder $query, Model $related, ?string $foreignKey = null): Builder
     {
-        if (is_null($foreignKey)) {
+        if (\is_null($foreignKey)) {
             $foreignKey = $this->getForeignKey();
         }
 
@@ -37,11 +37,11 @@ trait Owns
      */
     public function owns(Model $related = null, ?string $foreignKey = null): bool
     {
-        if (is_null($related)) {
+        if (\is_null($related)) {
             return false;
         }
 
-        if (is_null($foreignKey)) {
+        if (\is_null($foreignKey)) {
             $foreignKey = $this->getForeignKey();
         }
 

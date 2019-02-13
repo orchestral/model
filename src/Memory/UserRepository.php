@@ -57,7 +57,7 @@ class UserRepository extends Handler implements HandlerContract
      */
     public function retrieve(string $key)
     {
-        list($name, $userId) = explode('/user-', $key);
+        list($name, $userId) = \explode('/user-', $key);
 
         if (! isset($this->userMeta[$userId])) {
             $data = $this->getModel()->where('user_id', '=', $userId)->get();
@@ -97,7 +97,7 @@ class UserRepository extends Handler implements HandlerContract
         $items = [];
 
         foreach ($data as $meta) {
-            if (! $value = @unserialize($meta->getAttribute('value'))) {
+            if (! $value = @\unserialize($meta->getAttribute('value'))) {
                 $value = $meta->getAttribute('value');
             }
 
@@ -126,7 +126,7 @@ class UserRepository extends Handler implements HandlerContract
     {
         $isNew = $this->isNewKey($key);
 
-        list($name, $userId) = explode('/user-', $key);
+        list($name, $userId) = \explode('/user-', $key);
 
         // We should be able to ignore this if user id is empty or checksum
         // return the same value (no change occured).
@@ -153,22 +153,22 @@ class UserRepository extends Handler implements HandlerContract
 
         // Deleting a configuration is determined by ':to-be-deleted:'. It
         // would be extremely weird if that is used for other purposed.
-        if (is_null($value) || $value === ':to-be-deleted:') {
-            ! is_null($meta) && $meta->delete();
+        if (\is_null($value) || $value === ':to-be-deleted:') {
+            ! \is_null($meta) && $meta->delete();
 
             return;
         }
 
         // If the content is a new configuration, let push it as a insert
         // instead of an update to Eloquent.
-        if (true === $isNew && is_null($meta)) {
+        if (true === $isNew && \is_null($meta)) {
             $meta = $this->getModel();
 
             $meta->setAttribute('name', $name);
             $meta->setAttribute('user_id', $userId);
         }
 
-        $meta->setAttribute('value', serialize($value));
+        $meta->setAttribute('value', \serialize($value));
         $meta->save();
     }
 

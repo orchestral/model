@@ -34,16 +34,12 @@ class AdvancedSearchableTest extends TestCase
     {
         return [
             'name:*' => function () {
-
             },
             'email:*' => function () {
-
             },
-            'work:*' => function() {
-
+            'work:*' => function () {
             },
-            'tags:[]' => function() {
-
+            'tags:[]' => function () {
             },
         ];
     }

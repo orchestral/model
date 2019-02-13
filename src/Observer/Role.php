@@ -100,6 +100,6 @@ class Role
 
         $deleted = $model->getDeletedAtColumn();
 
-        return is_null($model->getAttribute($deleted)) && ! is_null($model->getOriginal($deleted));
+        return \is_null($model->getAttribute($deleted)) && ! \is_null($model->getOriginal($deleted));
     }
 }

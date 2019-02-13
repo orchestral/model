@@ -73,7 +73,7 @@ trait Metable
     {
         $meta = $this->getAttribute('meta');
 
-        if (is_array($key)) {
+        if (\is_array($key)) {
             foreach ($key as $name => $value) {
                 $meta->put($name, $value);
             }
@@ -95,7 +95,7 @@ trait Metable
     {
         $meta = $this->getAttribute('meta');
 
-        if (is_array($key)) {
+        if (\is_array($key)) {
             foreach ($key as $name) {
                 $meta->forget($name);
             }
@@ -119,7 +119,7 @@ trait Metable
 
         if ($value instanceof Meta) {
             return $value;
-        } elseif (! is_null($value)) {
+        } elseif (! \is_null($value)) {
             $meta = $this->fromJson($value);
         }
 
@@ -136,13 +136,13 @@ trait Metable
      */
     protected function mutateMetableAttribute(string $key, $value): ?string
     {
-        if (is_null($value)) {
+        if (\is_null($value)) {
             return $value;
         }
 
         if ($value instanceof Arrayable) {
             $value = $value->toArray();
-        } elseif (! is_array($value)) {
+        } elseif (! \is_array($value)) {
             $value = (array) $value;
         }
 

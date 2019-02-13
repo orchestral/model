@@ -18,7 +18,7 @@ trait OwnedBy
      */
     public function scopeOwnedBy(Builder $query, Model $related, ?string $key = null): Builder
     {
-        if (is_null($key)) {
+        if (\is_null($key)) {
             $key = $related->getForeignKey();
         }
 
@@ -35,11 +35,11 @@ trait OwnedBy
      */
     public function ownedBy(Model $related = null, ?string $key = null): bool
     {
-        if (is_null($related)) {
+        if (\is_null($related)) {
             return false;
         }
 
-        if (is_null($key)) {
+        if (\is_null($key)) {
             $key = $related->getForeignKey();
         }
 

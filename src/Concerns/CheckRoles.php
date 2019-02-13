@@ -20,7 +20,7 @@ trait CheckRoles
         // We should ensure that all given roles match the current user,
         // consider it as a AND condition instead of OR.
         foreach ((array) $roles as $role) {
-            if (! in_array($role, $userRoles)) {
+            if (! \in_array($role, $userRoles)) {
                 return false;
             }
         }
@@ -42,7 +42,7 @@ trait CheckRoles
         // We should ensure that any given roles match the current user,
         // consider it as OR condition.
         foreach ((array) $roles as $role) {
-            if (in_array($role, $userRoles)) {
+            if (\in_array($role, $userRoles)) {
                 return true;
             }
         }
