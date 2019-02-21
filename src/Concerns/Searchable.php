@@ -30,6 +30,6 @@ trait Searchable
      */
     public function getSearchableColumns(): array
     {
-        return property_exists($this, 'searchable') ? $this->searchable : [];
+        return \property_exists($this, 'searchable') ? $this->searchable : [];
     }
 }

@@ -17,23 +17,23 @@ class UserProvider extends Provider
      */
     public function get(string $key = null, $default = null)
     {
-        $key = str_replace('.', '/user-', $key);
+        $key = \str_replace('.', '/user-', $key);
         $value = Arr::get($this->items, $key);
 
         // We need to consider if the value pending to be deleted,
         // in this case return the default.
         if ($value === ':to-be-deleted:') {
-            return value($default);
+            return \value($default);
         }
 
         // If the result is available from data, simply return it so we
         // don't have to fetch the same result again from the database.
-        if (! is_null($value)) {
+        if (! \is_null($value)) {
             return $value;
         }
 
-        if (is_null($value = $this->handler->retrieve($key))) {
-            return value($default);
+        if (\is_null($value = $this->handler->retrieve($key))) {
+            return \value($default);
         }
 
         $this->put($key, $value);
@@ -51,8 +51,8 @@ class UserProvider extends Provider
      */
     public function put(string $key, $value = '')
     {
-        $key = str_replace('.', '/user-', $key);
-        $value = value($value);
+        $key = \str_replace('.', '/user-', $key);
+        $value = \value($value);
 
         $this->set($key, $value);
 
@@ -68,7 +68,7 @@ class UserProvider extends Provider
      */
     public function forget(string $key = null): bool
     {
-        $key = str_replace('.', '/user-', $key);
+        $key = \str_replace('.', '/user-', $key);
 
         Arr::set($this->items, $key, ':to-be-deleted:');
 
