@@ -2,6 +2,7 @@
 
 use Faker\Generator;
 use Orchestra\Model\User;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ $factory->define(User::class, function (Generator $faker) {
         'email' => $faker->safeEmail,
         'fullname' => $faker->name,
         'password' => '$2y$04$Ri4Tj1yi9EnO6EI3lS11suHnymOKbC63D85NeHHo74uk4dHe9eah2',
-        'remember_token' => str_random(10),
+        'remember_token' => Str::random(10),
         'status' => User::VERIFIED,
     ];
 });
