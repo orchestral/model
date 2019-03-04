@@ -144,6 +144,7 @@ class User extends Eloquent implements Authorizable, UserContract
     public function activate()
     {
         $this->setAttribute('status', self::VERIFIED);
+        $this->setAttribute('email_verified_at', now());
 
         return $this;
     }
