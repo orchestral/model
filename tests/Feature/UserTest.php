@@ -110,13 +110,16 @@ class UserTest extends TestCase
     {
         $user = User::faker()->create([
             'status' => 0,
+            'email_verified_at' => null,
         ]);
 
         $this->assertFalse($user->isActivated());
+        $this->assertNull($user->email_verified_at);
 
         $user->activate();
 
         $this->assertTrue($user->isActivated());
+        $this->assertNotNull($user->email_verified_at);
     }
 
     /** @test */
