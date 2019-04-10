@@ -3,7 +3,6 @@
 namespace Orchestra\Model\Concerns;
 
 use Illuminate\Database\Eloquent\FactoryBuilder;
-use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 
 trait Faker
 {
