@@ -17,7 +17,6 @@ trait Faker
 
         \array_unshift($arguments, static::class);
 
-
         return \factory(...$arguments);
     }
 }
