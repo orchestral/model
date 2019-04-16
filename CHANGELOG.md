@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/model`.
 
+## 3.8.1
+
+Released: 2019-04-16
+
+### Changes
+
+* Allow to pass optional parameters to `Orchestra\Model\Concerns\Faker::faker()`.
+
 ## 3.8.0
 
 Released: 2019-03-18

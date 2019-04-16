@@ -3,7 +3,6 @@
 namespace Orchestra\Model\Concerns;
 
 use Illuminate\Database\Eloquent\FactoryBuilder;
-use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 
 trait Faker
 {
@@ -14,6 +13,10 @@ trait Faker
      */
     public static function faker(): FactoryBuilder
     {
-        return \app(EloquentFactory::class)->of(static::class);
+        $arguments = \func_get_args();
+
+        \array_unshift($arguments, static::class);
+
+        return \factory(...$arguments);
     }
 }
