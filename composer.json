@@ -27,7 +27,7 @@
         "orchestra/support": "~3.9.0"
     },
     "require-dev": {
-        "mockery/mockery": "^1.0",
+        "mockery/mockery": "^1.2",
         "orchestra/auth": "~3.9.0",
         "orchestra/memory": "~3.9.0",
         "orchestra/testbench": "~3.9.0"
