@@ -60,8 +60,8 @@ class User extends Eloquent implements Authorizable, UserContract
     public function getSearchableRules(): array
     {
         return [
-            'roles:[]' => function (Builder $query, array $roles) {
-                return $query->whereHas('roles', function (Builder $query) use ($roles) {
+            'roles:[]' => static function (Builder $query, array $roles) {
+                return $query->whereHas('roles', static function (Builder $query) use ($roles) {
                     return $query->whereIn(Role::column('name'), $roles);
                 });
             },
@@ -81,7 +81,7 @@ class User extends Eloquent implements Authorizable, UserContract
         $query->with('roles')->whereNotNull('users.id');
 
         if (! empty($roles)) {
-            $query->whereHas('roles', function ($query) use ($roles) {
+            $query->whereHas('roles', static function ($query) use ($roles) {
                 $query->whereIn(Role::column('name'), $roles);
             });
         }
@@ -102,7 +102,7 @@ class User extends Eloquent implements Authorizable, UserContract
         $query->with('roles')->whereNotNull('users.id');
 
         if (! empty($rolesId)) {
-            $query->whereHas('roles', function ($query) use ($rolesId) {
+            $query->whereHas('roles', static function ($query) use ($rolesId) {
                 $query->whereIn(Role::column('id'), $rolesId);
             });
         }

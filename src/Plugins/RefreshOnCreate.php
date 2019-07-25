@@ -13,7 +13,7 @@ trait RefreshOnCreate
      */
     public static function bootRefreshOnCreate(): void
     {
-        static::created(function ($model) {
+        static::created(static function ($model) {
             $model->refresh();
         });
     }
