@@ -102,7 +102,7 @@ class User extends Eloquent implements Authorizable, UserContract
         $query->with('roles')->whereNotNull('users.id');
 
         if (! empty($rolesId)) {
-            $query->whereHas('roles', function ($query) use ($rolesId) {
+            $query->whereHas('roles', static function ($query) use ($rolesId) {
                 $query->whereIn(Role::column('id'), $rolesId);
             });
         }

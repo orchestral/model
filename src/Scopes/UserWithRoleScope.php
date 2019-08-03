@@ -13,16 +13,16 @@ class UserWithRoleScope implements Scope
      *
      * @var string|array
      */
-    protected $role;
+    protected $roles;
 
     /**
      * Construct the scope.
      *
-     * @param  string|array  $role
+     * @param  string|array  $roles
      */
-    public function __construct($role)
+    public function __construct($roles)
     {
-        $this->role = $role;
+        $this->roles = $roles;
     }
 
     /**
@@ -35,12 +35,14 @@ class UserWithRoleScope implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
-        if (empty($this->role)) {
+        $roles = (array) $this->roles;
+
+        if (empty($roles)) {
             return;
         }
 
-        $builder->whereHas('roles', function ($query) {
-            $query->whereIn('name', (array) $this->role);
+        $builder->whereHas('roles', static function ($query) use ($roles) {
+            $query->whereIn('name', $roles);
         });
     }
 }

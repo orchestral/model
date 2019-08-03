@@ -29,16 +29,16 @@ trait AdvancedSearchable
             if (Str::contains($keyword, ':*') || Str::contains($keyword, ':[]')) {
                 [$tag, $type] = \explode(':', $keyword, 2);
 
-                $results = Arr::where($advanced, function ($value) use ($tag) {
+                $results = Arr::where($advanced, static function ($value) use ($tag) {
                     return Str::startsWith($value, "{$tag}:");
                 });
 
-                $query->unless(empty($results), function ($query) use ($callback, $results, $type) {
+                $query->unless(empty($results), static function ($query) use ($callback, $results, $type) {
                     if ($type === '*') {
                         [, $value] = \explode(':', $results[0] ?? null, 2);
                         $value = \trim($value, '"');
                     } else {
-                        $value = \array_map(function ($text) {
+                        $value = \array_map(static function ($text) {
                             [, $value] = \explode(':', $text, 2);
 
                             return \trim($value, '"');
@@ -50,7 +50,7 @@ trait AdvancedSearchable
                     return $query;
                 });
             } else {
-                $query->when(\in_array($keyword, $advanced), function ($query) use ($callback) {
+                $query->when(\in_array($keyword, $advanced), static function ($query) use ($callback) {
                     \call_user_func($callback, $query);
 
                     return $query;
@@ -77,7 +77,7 @@ trait AdvancedSearchable
         $basic = [];
         $advanced = [];
 
-        $tags = \array_map(function ($value) {
+        $tags = \array_map(static function ($value) {
             [$tag, ] = \explode(':', $value, 2);
 
             return "{$tag}:";
