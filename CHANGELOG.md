@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/model`.
 
+## 3.8.2
+
+Released: 2019-08-04
+
+### Changes
+
+* Use `static function` rather than `function` whenever possible, the PHP engine does not need to instantiate and later GC a `$this` variable for said closure.
+
 ## 3.8.1
 
 Released: 2019-04-16
