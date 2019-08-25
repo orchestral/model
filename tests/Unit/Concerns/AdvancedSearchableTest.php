@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Model\TestCase\Unit\Concerns;
+namespace Orchestra\Model\Tests\Unit\Concerns;
 
 use PHPUnit\Framework\TestCase;
 use Orchestra\Model\Concerns\AdvancedSearchable;

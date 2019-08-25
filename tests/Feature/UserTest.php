@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Model\TestCase\Feature;
+namespace Orchestra\Model\Tests\Feature;
 
 use Mockery as m;
 use Orchestra\Model\Role;
