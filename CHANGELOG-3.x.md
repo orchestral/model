@@ -1,6 +1,18 @@
-# Changelog
+# Changelog for 3.x
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/model`.
+
+## 3.8.3
+
+Released: 2019-09-02
+
+### Added
+
+* Added `Orchestra\Model\Eloquent::usesTransaction()`.
+
+### Deprecated
+
+* Deprecate `Orchestra\Model\Eloquent::transaction()`.
 
 ## 3.8.2
 

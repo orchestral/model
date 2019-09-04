@@ -77,7 +77,7 @@ abstract class Eloquent extends Model implements Transformable
      *
      * @return mixed
      */
-    public function transaction(Closure $callback)
+    public function usesTransaction(Closure $callback)
     {
         return $this->getConnection()->transaction($callback);
     }
