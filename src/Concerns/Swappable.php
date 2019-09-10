@@ -10,9 +10,11 @@ trait Swappable
     /**
      * Make swappable model using hsAliasName.
      *
+     * @param  array  $attributes
+     *
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public static function hs(array $attributes): Model
+    public static function hs(array $attributes = []): Model
     {
         return HS::make(static::hsAliasName(), $attributes);
     }
