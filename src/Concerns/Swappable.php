@@ -20,6 +20,22 @@ trait Swappable
     }
 
     /**
+     * Make swappable model using hsAliasName.
+     *
+     * @param  array  $attributes
+     *
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public static function hsFaker(): Model
+    {
+        $arguments = \func_get_args();
+
+        \array_unshift($arguments, HS::eloquent(static::hsAliasName()));
+
+        return \factory(...$arguments);
+    }
+
+    /**
      * Make swappable model using hsAliasName on write connection.
      *
      * @return \Illuminate\Database\Eloquent\Builder
