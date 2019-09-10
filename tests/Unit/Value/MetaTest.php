@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Model\TestCase\Unit\Value;
+namespace Orchestra\Model\Tests\Unit\Value;
 
 use Orchestra\Model\Value\Meta;
 use PHPUnit\Framework\TestCase;

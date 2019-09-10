@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Model\TestCase\Feature\Concerns;
+namespace Orchestra\Model\Tests\Feature\Concerns;
 
 use Orchestra\Model\User;
 use Orchestra\Model\TestCase\Feature\TestCase;

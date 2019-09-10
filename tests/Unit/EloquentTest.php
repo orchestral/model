@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Model\TestCase\Unit;
+namespace Orchestra\Model\Tests\Unit;
 
 use Orchestra\Model\Eloquent;
 use PHPUnit\Framework\TestCase;

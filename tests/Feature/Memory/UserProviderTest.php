@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Model\TestCase\Feature\Memory;
+namespace Orchestra\Model\Tests\Feature\Memory;
 
 use Orchestra\Model\User;
 use Orchestra\Model\UserMeta;
