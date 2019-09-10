@@ -15,6 +15,7 @@ class User extends Eloquent implements Authorizable, UserContract
     use Authenticatable,
         Concerns\AdvancedSearchable,
         Concerns\CheckRoles,
+        Concerns\Swappable,
         SoftDeletes;
 
     /**
