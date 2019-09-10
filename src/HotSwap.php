@@ -2,6 +2,7 @@
 
 namespace Orchestra\Model;
 
+use RuntimeException;
 use InvalidArgumentException;
 use Illuminate\Database\Eloquent\Model;
 
