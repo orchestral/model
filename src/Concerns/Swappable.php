@@ -20,7 +20,7 @@ trait Swappable
     }
 
     /**
-     * Make swappable model using hsAliasName.
+     * Make swappable model using hsAliasName on write connection.
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
@@ -29,6 +29,17 @@ trait Swappable
         return HS::make(static::hsAliasName(), [])->query()->onWritePdo();
     }
 
+    /**
+     * Make swappable model using hsAliasName on connection.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public static function hsOn(?string $connection = null): Builder
+    {
+        return \tap(HS::make(static::hsAliasName(), []), static function ($instance) use ($connection) {
+            $instance->setConnection($connection);
+        })->newQuery();
+    }
 
     /**
      * Get Hot-swappable alias name.

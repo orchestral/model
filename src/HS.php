@@ -116,7 +116,7 @@ class HS
         $uses = \class_uses_recursive($class);
 
         if (! isset($uses[Concerns\Swappable::class])) {
-            throw new InvalidArgumentException("Given {$class} is not a uses ".Concerns\Swappable::class." trait.");
+            throw new InvalidArgumentException("Given {$class} is not a uses ".Concerns\Swappable::class.' trait.');
         }
     }
 }
