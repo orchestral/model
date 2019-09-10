@@ -22,7 +22,7 @@ trait Swappable
     }
 
     /**
-     * Make swappable model using hsAliasName.
+     * Make swappable faker model using hsAliasName.
      *
      * @param  array  $attributes
      *
@@ -49,6 +49,8 @@ trait Swappable
 
     /**
      * Make swappable model using hsAliasName on connection.
+     *
+     * @param  string|null  $connection
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */

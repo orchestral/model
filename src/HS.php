@@ -54,7 +54,7 @@ class HS
     /**
      * Resolve model class name.
      *
-     * @param  string $alias
+     * @param  string  $alias
      *
      * @return string
      */

@@ -3,6 +3,7 @@
 namespace Orchestra\Model\TestCase\Feature;
 
 use Mockery as m;
+use Orchestra\Model\HS;
 use Orchestra\Model\Role;
 use Orchestra\Model\User;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +13,24 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class UserTest extends TestCase
 {
     use RefreshDatabase;
+
+    /** @test */
+    public function it_implements_hot_swap()
+    {
+        $this->assertSame('User', User::hsAliasName());
+
+        $user = User::hs();
+
+        $this->assertNotInstanceOf(UserStub::class, $user);
+        $this->assertInstanceOf(User::class, $user);
+
+        HS::override('User', UserStub::class);
+
+        $user = User::hs();
+
+        $this->assertInstanceOf(UserStub::class, $user);
+        $this->assertInstanceOf(User::class, $user);
+    }
 
     /** @test */
     public function it_belongs_to_many_roles()
@@ -263,4 +282,9 @@ class UserTest extends TestCase
 
         $this->assertNull($search);
     }
+}
+
+class UserStub extends User
+{
+    //
 }
