@@ -4,6 +4,8 @@ namespace Orchestra\Model\Concerns;
 
 use Orchestra\Model\HS;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\FactoryBuilder;
 
 trait Swappable
 {
@@ -24,9 +26,9 @@ trait Swappable
      *
      * @param  array  $attributes
      *
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return \Illuminate\Database\Eloquent\FactoryBuilder
      */
-    public static function hsFaker(): Model
+    public static function hsFaker(): FactoryBuilder
     {
         $arguments = \func_get_args();
 
