@@ -117,7 +117,7 @@ class User extends Eloquent implements Authorizable, UserContract
      */
     public function roles()
     {
-        return $this->belongsToMany(HotSwap::model('Role'), 'user_role', 'user_id', 'role_id')->withTimestamps();
+        return $this->belongsToMany(HS::eloquent('Role'), 'user_role', 'user_id', 'role_id')->withTimestamps();
     }
 
     /**
@@ -231,5 +231,15 @@ class User extends Eloquent implements Authorizable, UserContract
         }
 
         return $this->getRelation('roles')->pluck('name');
+    }
+
+    /**
+     * Get Hot-swappable alias name.
+     *
+     * @return string
+     */
+    final public static function hsAliasName(): string
+    {
+        return 'User';
     }
 }

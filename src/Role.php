@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Role extends Eloquent
 {
-    use SoftDeletes;
+    use SoftDeletes,
+        Concerns\Swappable;
 
     /**
      * The database table used by the model.
@@ -59,7 +60,7 @@ class Role extends Eloquent
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(HotSwap::model('User'), 'user_role', 'role_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(HS::eloquent('User'), 'user_role', 'role_id', 'user_id')->withTimestamps();
     }
 
     /**
@@ -80,5 +81,15 @@ class Role extends Eloquent
     public static function member()
     {
         return static::find(static::$defaultRoles['member']);
+    }
+
+    /**
+     * Get Hot-swappable alias name.
+     *
+     * @return string
+     */
+    final public static function hsAliasName(): string
+    {
+        return 'Role';
     }
 }
