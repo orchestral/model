@@ -22,5 +22,5 @@ trait Swappable
      *
      * @return string
      */
-    abstract protected static function hsAliasName(): string;
+    abstract public static function hsAliasName(): string;
 }
