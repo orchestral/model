@@ -87,6 +87,19 @@ class HS
     }
 
     /**
+     * Flush hot-swap mapping.
+     *
+     * @return void
+     */
+    public static function flush(): void
+    {
+        static::$swappable = [
+            'Role' => Role::class,
+            'User' => User::class,
+        ];
+    }
+
+    /**
      * Validate class is an eloquent model.
      *
      * @param  string  $class

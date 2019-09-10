@@ -12,6 +12,16 @@ class RoleTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * Teardown the test environment.
+     */
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        HS::flush();
+    }
+
     /** @test */
     public function it_implements_hot_swap()
     {

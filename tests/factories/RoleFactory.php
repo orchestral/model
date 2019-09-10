@@ -14,7 +14,7 @@ use Orchestra\Model\Role;
 |
 */
 
-$factory->define(Role::class, function (Generator $faker) {
+$factory->define(Role::hsFinder(), function (Generator $faker) {
     return [
         'name' => $faker->name,
     ];

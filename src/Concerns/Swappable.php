@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\FactoryBuilder;
 trait Swappable
 {
     /**
-     * Make swappable model using hsAliasName.
+     * Make Hot-swappable model.
      *
      * @param  array  $attributes
      *
@@ -22,7 +22,7 @@ trait Swappable
     }
 
     /**
-     * Make swappable faker model using hsAliasName.
+     * Make Hot-swappable faker model.
      *
      * @param  array  $attributes
      *
@@ -32,13 +32,13 @@ trait Swappable
     {
         $arguments = \func_get_args();
 
-        \array_unshift($arguments, HS::eloquent(static::hsAliasName()));
+        \array_unshift($arguments, static::hsFinder());
 
         return \factory(...$arguments);
     }
 
     /**
-     * Make swappable model using hsAliasName on write connection.
+     * Make Hot-swappable model on write connection.
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
@@ -48,7 +48,7 @@ trait Swappable
     }
 
     /**
-     * Make swappable model using hsAliasName on connection.
+     * Make Hot-swappable model on specific connection.
      *
      * @param  string|null  $connection
      *
@@ -59,6 +59,16 @@ trait Swappable
         return \tap(HS::make(static::hsAliasName(), []), static function ($instance) use ($connection) {
             $instance->setConnection($connection);
         })->newQuery();
+    }
+
+    /**
+     * Find Hot-swappable full namespace model.
+     *
+     * @return string
+     */
+    public static function hsFinder(): string
+    {
+        return HS::eloquent(static::hsAliasName());
     }
 
     /**
