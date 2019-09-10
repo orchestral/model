@@ -117,7 +117,7 @@ class User extends Eloquent implements Authorizable, UserContract
      */
     public function roles()
     {
-        return $this->belongsToMany(Role::class, 'user_role', 'user_id', 'role_id')->withTimestamps();
+        return $this->belongsToMany(HotSwap::resolve('Role'), 'user_role', 'user_id', 'role_id')->withTimestamps();
     }
 
     /**

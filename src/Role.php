@@ -59,7 +59,7 @@ class Role extends Eloquent
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'user_role', 'role_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(HotSwap::resolve('User'), 'user_role', 'role_id', 'user_id')->withTimestamps();
     }
 
     /**
