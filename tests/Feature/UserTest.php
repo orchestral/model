@@ -3,6 +3,7 @@
 namespace Orchestra\Model\Tests\Feature;
 
 use Mockery as m;
+use Orchestra\Model\HS;
 use Orchestra\Model\Role;
 use Orchestra\Model\User;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +13,34 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class UserTest extends TestCase
 {
     use RefreshDatabase;
+
+    /**
+     * Teardown the test environment.
+     */
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        HS::flush();
+    }
+
+    /** @test */
+    public function it_implements_hot_swap()
+    {
+        $this->assertSame('User', User::hsAliasName());
+
+        $user = User::hs();
+
+        $this->assertNotInstanceOf(UserStub::class, $user);
+        $this->assertInstanceOf(User::class, $user);
+
+        HS::override('User', UserStub::class);
+
+        $user = User::hs();
+
+        $this->assertInstanceOf(UserStub::class, $user);
+        $this->assertInstanceOf(User::class, $user);
+    }
 
     /** @test */
     public function it_belongs_to_many_roles()
@@ -34,17 +63,38 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function it_can_detach_roles()
+    public function it_can_attach_roles_from_instance_of_role()
     {
         $user = User::faker()->create();
+        $user->attachRole(Role::find(2));
 
-        $this->assertFalse($user->hasRoles('Member'));
+        $this->assertTrue($user->hasRoles('Member'));
+    }
 
-        $user->attachRole(2);
+    /** @test */
+    public function it_can_detach_roles()
+    {
+        $user = \tap(User::faker()->create(), function ($user) {
+            $user->roles()->sync([2]);
+        });
 
         $this->assertTrue($user->hasRoles('Member'));
 
         $user->detachRole(2);
+
+        $this->assertFalse($user->hasRoles('Member'));
+    }
+
+    /** @test */
+    public function it_can_detach_roles_from_instance_of_role()
+    {
+        $user = \tap(User::faker()->create(), function ($user) {
+            $user->roles()->sync([2]);
+        });
+
+        $this->assertTrue($user->hasRoles('Member'));
+
+        $user->detachRole(Role::find(2));
 
         $this->assertFalse($user->hasRoles('Member'));
     }
@@ -263,4 +313,9 @@ class UserTest extends TestCase
 
         $this->assertNull($search);
     }
+}
+
+class UserStub extends User
+{
+    //
 }
