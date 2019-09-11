@@ -26,11 +26,11 @@ trait Swappable
      *
      * @param  array  $attributes
      *
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public static function hsQuery(array $attributes = []): Model
+    public static function hsQuery(): Builder
     {
-        return static::hs($attributes)->newQuery();
+        return static::hs()->newQuery();
     }
 
     /**

@@ -62,7 +62,7 @@ class UserTest extends TestCase
         $this->assertTrue($user->hasRoles('Member'));
     }
 
-     /** @test */
+    /** @test */
     public function it_can_attach_roles_from_instance_of_role()
     {
         $user = User::faker()->create();
