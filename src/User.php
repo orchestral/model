@@ -118,7 +118,7 @@ class User extends Eloquent implements Authorizable, UserContract
      */
     public function roles()
     {
-        return $this->belongsToMany(HS::eloquent('Role'), 'user_role', 'user_id', 'role_id')->withTimestamps();
+        return $this->belongsToMany(Role::hsFinder(), 'user_role', 'user_id', 'role_id')->withTimestamps();
     }
 
     /**

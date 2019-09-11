@@ -60,7 +60,7 @@ class Role extends Eloquent
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(HS::eloquent('User'), 'user_role', 'role_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(User::hsFinder(), 'user_role', 'role_id', 'user_id')->withTimestamps();
     }
 
     /**

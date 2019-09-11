@@ -64,4 +64,5 @@ class NotSwappableModel extends Model
 
 class NotModel
 {
+    //
 }
