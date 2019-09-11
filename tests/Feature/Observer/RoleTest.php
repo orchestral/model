@@ -12,11 +12,6 @@ class RoleTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-    }
-
     /** @test */
     public function it_cant_save_guest_role()
     {

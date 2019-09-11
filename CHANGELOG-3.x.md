@@ -2,6 +2,19 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/model`.
 
+## 3.8.4
+
+Released: 2019-09-11
+
+### Added
+
+* Added `Orchestra\Model\HS`.
+* Added `Orchestra\Model\Concerns\Swappable`.
+
+### Changes
+
+* Improves tests.
+
 ## 3.8.3
 
 Released: 2019-09-02
