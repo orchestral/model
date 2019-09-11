@@ -22,6 +22,18 @@ trait Swappable
     }
 
     /**
+     * Make Hot-swappable model.
+     *
+     * @param  array  $attributes
+     *
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public static function hsQuery(array $attributes = []): Model
+    {
+        return static::hs($attributes)->newQuery();
+    }
+
+    /**
      * Make Hot-swappable faker model.
      *
      * @param  array  $attributes
@@ -44,7 +56,7 @@ trait Swappable
      */
     public static function hsOnWriteConnection(): Builder
     {
-        return HS::make(static::hsAliasName(), [])->query()->onWritePdo();
+        return static::hs()->query()->onWritePdo();
     }
 
     /**
@@ -56,7 +68,7 @@ trait Swappable
      */
     public static function hsOn(?string $connection = null): Builder
     {
-        return \tap(HS::make(static::hsAliasName(), []), static function ($instance) use ($connection) {
+        return \tap(static::hs(), static function ($instance) use ($connection) {
             $instance->setConnection($connection);
         })->newQuery();
     }
