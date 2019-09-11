@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 |
 */
 
-$factory->define(User::class, function (Generator $faker) {
+$factory->define(User::hsFinder(), function (Generator $faker) {
     return [
         'email' => $faker->safeEmail,
         'fullname' => $faker->name,

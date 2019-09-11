@@ -2,6 +2,7 @@
 
 namespace Orchestra\Model\Tests\Feature;
 
+use Orchestra\Model\HS;
 use Orchestra\Model\Role;
 use Orchestra\Model\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -10,6 +11,34 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class RoleTest extends TestCase
 {
     use RefreshDatabase;
+
+    /**
+     * Teardown the test environment.
+     */
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        HS::flush();
+    }
+
+    /** @test */
+    public function it_implements_hot_swap()
+    {
+        $this->assertSame('Role', Role::hsAliasName());
+
+        $user = Role::hs();
+
+        $this->assertNotInstanceOf(RoleStub::class, $user);
+        $this->assertInstanceOf(Role::class, $user);
+
+        HS::override('Role', RoleStub::class);
+
+        $user = Role::hs();
+
+        $this->assertInstanceOf(RoleStub::class, $user);
+        $this->assertInstanceOf(Role::class, $user);
+    }
 
     /** @test */
     public function it_belongs_to_many_user()
@@ -67,4 +96,9 @@ class RoleTest extends TestCase
         $this->assertEquals($role->id, $member->getKey());
         $this->assertSame('Partner', $member->name);
     }
+}
+
+class RoleStub extends Role
+{
+    //
 }
