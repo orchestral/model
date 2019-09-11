@@ -62,18 +62,39 @@ class UserTest extends TestCase
         $this->assertTrue($user->hasRoles('Member'));
     }
 
+     /** @test */
+    public function it_can_attach_roles_from_instance_of_role()
+    {
+        $user = User::faker()->create();
+        $user->attachRole(Role::find(2));
+
+        $this->assertTrue($user->hasRoles('Member'));
+    }
+
     /** @test */
     public function it_can_detach_roles()
     {
-        $user = User::faker()->create();
-
-        $this->assertFalse($user->hasRoles('Member'));
-
-        $user->attachRole(2);
+        $user = \tap(User::faker()->create(), function ($user) {
+            $user->roles()->sync([2]);
+        });
 
         $this->assertTrue($user->hasRoles('Member'));
 
         $user->detachRole(2);
+
+        $this->assertFalse($user->hasRoles('Member'));
+    }
+
+    /** @test */
+    public function it_can_detach_roles_from_instance_of_role()
+    {
+        $user = \tap(User::faker()->create(), function ($user) {
+            $user->roles()->sync([2]);
+        });
+
+        $this->assertTrue($user->hasRoles('Member'));
+
+        $user->detachRole(Role::find(2));
 
         $this->assertFalse($user->hasRoles('Member'));
     }
