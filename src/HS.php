@@ -60,11 +60,7 @@ class HS
      */
     public static function eloquent(string $alias): string
     {
-        if (\array_key_exists($alias, static::$swappable)) {
-            return static::$swappable[$alias];
-        }
-
-        return $alias;
+        return \array_key_exists($alias, static::$swappable) ? static::$swappable[$alias] : $alias;
     }
 
     /**
@@ -111,7 +107,7 @@ class HS
     protected static function validateClassIsEloquentModel(string $class): void
     {
         if (! \is_subclass_of($class, Model::class)) {
-            throw new InvalidArgumentException("Given {$class} is not a subclass of ".Model::class);
+            throw new InvalidArgumentException("Given [{$class}] is not a subclass of [".Model::class.'].');
         }
     }
 
@@ -129,7 +125,7 @@ class HS
         $uses = \class_uses_recursive($class);
 
         if (! isset($uses[Concerns\Swappable::class])) {
-            throw new InvalidArgumentException("Given {$class} is not a uses ".Concerns\Swappable::class.' trait.');
+            throw new InvalidArgumentException("Given [{$class}] doesn't use [".Concerns\Swappable::class.'] trait.');
         }
     }
 }
