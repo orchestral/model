@@ -3,7 +3,7 @@
 namespace Orchestra\Model\Tests\Feature\Concerns;
 
 use Orchestra\Model\User;
-use Orchestra\Model\TestCase\Feature\TestCase;
+use Orchestra\Model\Tests\Feature\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AdvancedSearchableTest extends TestCase
