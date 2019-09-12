@@ -5,7 +5,7 @@ namespace Orchestra\Model;
 use InvalidArgumentException;
 use Illuminate\Database\Eloquent\Model;
 
-class HS
+final class HS
 {
     /**
      * List of swappable models.
