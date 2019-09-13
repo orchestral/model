@@ -2,10 +2,10 @@
 
 namespace Orchestra\Model\Concerns;
 
-use Orchestra\Model\HS;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\FactoryBuilder;
+use Illuminate\Database\Eloquent\Model;
+use Orchestra\Model\HS;
 
 trait Swappable
 {

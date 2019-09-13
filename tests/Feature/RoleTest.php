@@ -2,11 +2,11 @@
 
 namespace Orchestra\Model\Tests\Feature;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Model\HS;
 use Orchestra\Model\Role;
 use Orchestra\Model\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class RoleTest extends TestCase
 {

@@ -2,9 +2,9 @@
 
 namespace Orchestra\Model\Tests\Feature\Concerns;
 
-use Orchestra\Model\User;
-use Orchestra\Model\Tests\Feature\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Orchestra\Model\Tests\Feature\TestCase;
+use Orchestra\Model\User;
 
 class AdvancedSearchableTest extends TestCase
 {

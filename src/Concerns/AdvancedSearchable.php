@@ -2,9 +2,9 @@
 
 namespace Orchestra\Model\Concerns;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Builder;
 
 trait AdvancedSearchable
 {

@@ -2,11 +2,11 @@
 
 namespace Orchestra\Model\Memory;
 
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Arr;
+use Orchestra\Contracts\Memory\Handler as HandlerContract;
 use Orchestra\Memory\Handler;
 use Orchestra\Model\UserMeta;
-use Illuminate\Contracts\Container\Container;
-use Orchestra\Contracts\Memory\Handler as HandlerContract;
 
 class UserRepository extends Handler implements HandlerContract
 {

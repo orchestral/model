@@ -2,8 +2,8 @@
 
 namespace Orchestra\Model\Listeners;
 
-use Orchestra\Model\User;
 use Illuminate\Support\Collection;
+use Orchestra\Model\User;
 
 class UserAccess
 {

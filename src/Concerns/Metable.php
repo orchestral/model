@@ -2,8 +2,8 @@
 
 namespace Orchestra\Model\Concerns;
 
-use Orchestra\Model\Value\Meta;
 use Illuminate\Contracts\Support\Arrayable;
+use Orchestra\Model\Value\Meta;
 
 trait Metable
 {

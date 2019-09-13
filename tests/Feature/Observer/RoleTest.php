@@ -2,11 +2,11 @@
 
 namespace Orchestra\Model\Tests\Feature\Observer;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery as m;
+use Orchestra\Model\Observer\Role as RoleObserver;
 use Orchestra\Model\Role;
 use Orchestra\Model\Tests\Feature\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Orchestra\Model\Observer\Role as RoleObserver;
 
 class RoleTest extends TestCase
 {

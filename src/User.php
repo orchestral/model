@@ -2,13 +2,13 @@
 
 namespace Orchestra\Model;
 
-use Illuminate\Support\Collection;
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Hash;
 use Orchestra\Contracts\Authorization\Authorizable;
-use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 
 class User extends Eloquent implements Authorizable, UserContract
 {
