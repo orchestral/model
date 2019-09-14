@@ -3,8 +3,8 @@
 namespace Orchestra\Model\Tests\Unit\Observer;
 
 use Mockery as m;
-use PHPUnit\Framework\TestCase;
 use Orchestra\Model\Observer\Role as RoleObserver;
+use PHPUnit\Framework\TestCase;
 
 class RoleTest extends TestCase
 {

@@ -2,10 +2,10 @@
 
 namespace Orchestra\Model\Tests\Unit;
 
-use Orchestra\Model\HS;
-use PHPUnit\Framework\TestCase;
 use Illuminate\Database\Eloquent\Model;
 use Orchestra\Model\Concerns\Swappable;
+use Orchestra\Model\HS;
+use PHPUnit\Framework\TestCase;
 
 class HotSwapTest extends TestCase
 {

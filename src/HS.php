@@ -2,17 +2,17 @@
 
 namespace Orchestra\Model;
 
-use InvalidArgumentException;
 use Illuminate\Database\Eloquent\Model;
+use InvalidArgumentException;
 
-class HS
+final class HS
 {
     /**
      * List of swappable models.
      *
      * @var array
      */
-    protected static $swappable = [
+    private static $swappable = [
         'Role' => Role::class,
         'User' => User::class,
     ];
@@ -104,7 +104,7 @@ class HS
      *
      * @return void
      */
-    protected static function validateClassIsEloquentModel(string $class): void
+    private static function validateClassIsEloquentModel(string $class): void
     {
         if (! \is_subclass_of($class, Model::class)) {
             throw new InvalidArgumentException("Given [{$class}] is not a subclass of [".Model::class.'].');
@@ -120,7 +120,7 @@ class HS
      *
      * @return void
      */
-    protected static function validateClassIsSwappable(string $class): void
+    private static function validateClassIsSwappable(string $class): void
     {
         $uses = \class_uses_recursive($class);
 

@@ -1,8 +1,8 @@
 <?php
 
 use Faker\Generator;
-use Orchestra\Model\User;
 use Illuminate\Support\Str;
+use Orchestra\Model\User;
 
 /*
 |--------------------------------------------------------------------------

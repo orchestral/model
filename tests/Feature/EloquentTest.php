@@ -2,8 +2,8 @@
 
 namespace Orchestra\Model\Tests\Feature;
 
-use Orchestra\Model\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Orchestra\Model\User;
 
 class EloquentTest extends TestCase
 {

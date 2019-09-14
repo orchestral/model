@@ -2,8 +2,8 @@
 
 namespace Orchestra\Model\Tests\Unit\Concerns;
 
-use PHPUnit\Framework\TestCase;
 use Orchestra\Model\Concerns\AdvancedSearchable;
+use PHPUnit\Framework\TestCase;
 
 class AdvancedSearchableTest extends TestCase
 {

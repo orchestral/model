@@ -3,10 +3,10 @@
 namespace Orchestra\Model;
 
 use Closure;
-use Orchestra\Support\Fluent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Expression;
 use Orchestra\Contracts\Support\Transformable;
+use Orchestra\Support\Fluent;
 
 abstract class Eloquent extends Model implements Transformable
 {

@@ -2,12 +2,12 @@
 
 namespace Orchestra\Model\Tests\Feature\Concerns;
 
-use Orchestra\Model\Role;
-use Orchestra\Model\Concerns\Swappable;
 use Illuminate\Database\Eloquent\Builder;
-use Orchestra\Model\Tests\Feature\TestCase;
 use Illuminate\Database\Eloquent\FactoryBuilder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Orchestra\Model\Concerns\Swappable;
+use Orchestra\Model\Role;
+use Orchestra\Model\Tests\Feature\TestCase;
 
 class SwappableTest extends TestCase
 {

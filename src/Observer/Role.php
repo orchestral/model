@@ -3,9 +3,9 @@
 namespace Orchestra\Model\Observer;
 
 use InvalidArgumentException;
-use Orchestra\Support\Keyword;
-use Orchestra\Model\Role as Eloquent;
 use Orchestra\Contracts\Authorization\Factory;
+use Orchestra\Model\Role as Eloquent;
+use Orchestra\Support\Keyword;
 
 class Role
 {
