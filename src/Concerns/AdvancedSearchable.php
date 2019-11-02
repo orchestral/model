@@ -3,7 +3,6 @@
 namespace Orchestra\Model\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
-use Laravie\QueryFilter\MatchQuery;
 
 trait AdvancedSearchable
 {
@@ -24,7 +23,7 @@ trait AdvancedSearchable
             $columns = $this->getSearchableColumns();
         }
 
-        return (new MatchQuery(
+        return (new \Laravie\QueryFilter\Taxonomy(
             $search, $this->getSearchableRules(), $columns
         ))->apply($query);
     }

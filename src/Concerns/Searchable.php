@@ -3,7 +3,6 @@
 namespace Orchestra\Model\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
-use Laravie\QueryFilter\SearchQuery;
 
 trait Searchable
 {
@@ -18,7 +17,7 @@ trait Searchable
      */
     public function scopeSearch(Builder $query, ?string $keyword, ?array $columns = null): Builder
     {
-        return (new SearchQuery(
+        return (new \Laravie\QueryFilter\Searchable(
             $keyword ?? '', $columns ?? $this->getSearchableColumns()
         ))->apply($query);
     }
