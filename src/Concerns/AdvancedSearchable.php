@@ -5,6 +5,7 @@ namespace Orchestra\Model\Concerns;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Laravie\QueryFilter\SearchQuery;
 
 trait AdvancedSearchable
 {
@@ -62,7 +63,9 @@ trait AdvancedSearchable
             $columns = $this->getSearchableColumns();
         }
 
-        return $this->filterQueryUsing($query, $basic, $columns ?? []);
+        return (new SearchQuery(
+            $basic, $columns ?? []
+        ))->apply($query);
     }
 
     /**

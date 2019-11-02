@@ -232,7 +232,7 @@ class UserTest extends TestCase
         $user = User::faker()->create();
         $user->attachRole(1);
 
-        $keyword = substr($user->fullname, 0, 1);
+        $keyword = substr($user->fullname, 0, 2);
 
         $search = User::search($keyword)->hasRolesId([1])->first();
 
@@ -245,7 +245,7 @@ class UserTest extends TestCase
         $user = User::faker()->create();
         $user->attachRole(1);
 
-        $keyword = substr($user->fullname, 0, 1);
+        $keyword = substr($user->fullname, 0, 2);
 
         $search = User::search($keyword)->hasRoles(['Administrator'])->first();
 
@@ -307,9 +307,9 @@ class UserTest extends TestCase
         $user = User::faker()->create();
         $user->attachRole(1);
 
-        $keyword = substr($user->fullname, 0, 1);
+        $keyword = substr($user->fullname, 0, 2);
 
-        $search = User::search($keyword, [2])->first();
+        $search = User::search($keyword)->hasRolesId([2])->first();
 
         $this->assertNull($search);
     }
