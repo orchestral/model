@@ -18,11 +18,9 @@ trait Searchable
      */
     public function scopeSearch(Builder $query, ?string $keyword, ?array $columns = null): Builder
     {
-        (new SearchQuery(
+        return (new SearchQuery(
             $keyword ?? '', $columns ?? $this->getSearchableColumns()
         ))->apply($query);
-
-        return $query;
     }
 
     /**
