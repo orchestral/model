@@ -20,7 +20,7 @@ trait Searchable
      */
     public function scopeSearch(Builder $query, ?string $keyword, ?array $columns = null): Builder
     {
-        return $this->setupWildcardQueryFilter($query, $keyword ?? '', $columns ?? $this->getSearchableColumns());
+        return $this->filterQueryUsing($query, $keyword ?? '', $columns ?? $this->getSearchableColumns());
     }
 
     /**

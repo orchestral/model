@@ -62,7 +62,7 @@ trait AdvancedSearchable
             $columns = $this->getSearchableColumns();
         }
 
-        return $this->setupWildcardQueryFilter($query, $basic, $columns ?? []);
+        return $this->filterQueryUsing($query, $basic, $columns ?? []);
     }
 
     /**
