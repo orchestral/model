@@ -28,10 +28,10 @@
         "orchestra/support-core": "^4.0"
     },
     "require-dev": {
-        "mockery/mockery": "^1.2",
+        "mockery/mockery": "^1.2.3",
         "orchestra/auth": "^4.0",
         "orchestra/memory": "^4.0",
-        "orchestra/testbench": "^4.0"
+        "orchestra/testbench": "^4.0.1"
     },
     "extra": {
         "branch-alias": {
