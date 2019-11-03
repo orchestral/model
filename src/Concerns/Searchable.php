@@ -3,24 +3,23 @@
 namespace Orchestra\Model\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
-use Orchestra\Support\Concerns\QueryFilter;
 
 trait Searchable
 {
-    use QueryFilter;
-
     /**
      * Search based on keyword.
      *
      * @param \Illuminate\Database\Eloquent\Builder  $query
-     * @param string|null. $keyword
+     * @param string|null  $keyword
      * @param array|null  $columns
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeSearch(Builder $query, ?string $keyword, ?array $columns = null): Builder
     {
-        return $this->setupWildcardQueryFilter($query, $keyword ?? '', $columns ?? $this->getSearchableColumns());
+        return (new \Laravie\QueryFilter\Searchable(
+            $keyword ?? '', $columns ?? $this->getSearchableColumns()
+        ))->apply($query);
     }
 
     /**

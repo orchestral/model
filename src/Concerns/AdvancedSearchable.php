@@ -3,8 +3,6 @@
 namespace Orchestra\Model\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 
 trait AdvancedSearchable
 {
@@ -21,82 +19,13 @@ trait AdvancedSearchable
      */
     public function scopeAdvancedSearch(Builder $query, ?string $search, ?array $columns = null): Builder
     {
-        ['basic' => $basic, 'advanced' => $advanced] = $this->resolveSearchKeywords($search ?? '');
-        $rules = $this->getSearchableRules();
-        $others = [];
-
-        foreach ($rules as $keyword => $callback) {
-            if (Str::contains($keyword, ':*') || Str::contains($keyword, ':[]')) {
-                [$tag, $type] = \explode(':', $keyword, 2);
-
-                $results = Arr::where($advanced, static function ($value) use ($tag) {
-                    return Str::startsWith($value, "{$tag}:");
-                });
-
-                $query->unless(empty($results), static function ($query) use ($callback, $results, $type) {
-                    if ($type === '*') {
-                        [, $value] = \explode(':', $results[0] ?? null, 2);
-                        $value = \trim($value, '"');
-                    } else {
-                        $value = \array_map(static function ($text) {
-                            [, $value] = \explode(':', $text, 2);
-
-                            return \trim($value, '"');
-                        }, $results);
-                    }
-
-                    \call_user_func($callback, $query, $value);
-
-                    return $query;
-                });
-            } else {
-                $query->when(\in_array($keyword, $advanced), static function ($query) use ($callback) {
-                    \call_user_func($callback, $query);
-
-                    return $query;
-                });
-            }
-        }
-
         if (\is_null($columns) && \method_exists($this, 'getSearchableColumns')) {
             $columns = $this->getSearchableColumns();
         }
 
-        return $this->setupWildcardQueryFilter($query, $basic, $columns ?? []);
-    }
-
-    /**
-     * Resolve search keywords.
-     *
-     * @param  string  $keyword
-     *
-     * @return array
-     */
-    protected function resolveSearchKeywords(string $keyword): array
-    {
-        $basic = [];
-        $advanced = [];
-
-        $tags = \array_map(static function ($value) {
-            [$tag, ] = \explode(':', $value, 2);
-
-            return "{$tag}:";
-        }, \array_keys($this->getSearchableRules()));
-
-        if (\preg_match_all('/([\w]+:\"[\w\s]*\"|[\w]+:[\w\S]+|[\w\S]+)\s?/', $keyword, $keywords)) {
-            foreach ($keywords[1] as $index => $keyword) {
-                if (! Str::startsWith($keyword, $tags)) {
-                    \array_push($basic, $keyword);
-                } else {
-                    \array_push($advanced, $keyword);
-                }
-            }
-        }
-
-        return [
-            'basic' => \implode(' ', $basic),
-            'advanced' => $advanced,
-        ];
+        return (new \Laravie\QueryFilter\Taxonomy(
+            $search, $this->getSearchableRules(), $columns
+        ))->apply($query);
     }
 
     /**
