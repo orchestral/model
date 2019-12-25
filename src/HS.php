@@ -107,7 +107,7 @@ final class HS
     private static function validateClassIsEloquentModel(string $class): void
     {
         if (! \is_subclass_of($class, Model::class)) {
-            throw new InvalidArgumentException("Given [{$class}] is not a subclass of [".Model::class.'].');
+            throw new InvalidArgumentException(\sprintf('Given [%s] is not a subclass of [%s].', $class, Model::class));
         }
     }
 
@@ -125,7 +125,7 @@ final class HS
         $uses = \class_uses_recursive($class);
 
         if (! isset($uses[Concerns\Swappable::class])) {
-            throw new InvalidArgumentException("Given [{$class}] doesn't use [".Concerns\Swappable::class.'] trait.');
+            throw new InvalidArgumentException(\sprintf("Given [%s] doesn't use [%s] trait.", $class, Concerns\Swappable::class));
         }
     }
 }
