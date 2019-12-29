@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Model\Tests\Feature\TestCase;
 use Orchestra\Model\User;
 
-class AdvancedSearchableTest extends TestCase
+class SearchableTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -18,7 +18,7 @@ class AdvancedSearchableTest extends TestCase
             'remember_token' => null,
         ]);
 
-        $query = (new StubUser())->advancedSearch('is:inactive');
+        $query = (new StubUser())->search('is:inactive');
 
         $this->assertSame(3, $query->count());
     }
@@ -28,7 +28,7 @@ class AdvancedSearchableTest extends TestCase
     {
         factory(User::class)->times(2)->create();
 
-        $query = (new StubUser())->advancedSearch('is:inactive');
+        $query = (new StubUser())->search('is:inactive');
 
         $this->assertSame(0, $query->count());
     }
@@ -42,7 +42,7 @@ class AdvancedSearchableTest extends TestCase
             'email' => 'crynobone@gmail.com',
         ]);
 
-        $query = (new StubUser())->advancedSearch('email:crynobone@gmail.com');
+        $query = (new StubUser())->search('email:crynobone@gmail.com');
 
         $this->assertSame(1, $query->count());
 
@@ -57,7 +57,7 @@ class AdvancedSearchableTest extends TestCase
     {
         factory(User::class)->times(2)->create();
 
-        $query = (new StubUser())->advancedSearch('email:crynobone@gmail.com');
+        $query = (new StubUser())->search('email:crynobone@gmail.com');
 
         $this->assertSame(0, $query->count());
     }
@@ -67,7 +67,7 @@ class AdvancedSearchableTest extends TestCase
     {
         factory(User::class)->times(3)->create();
 
-        $query = (new StubUser())->advancedSearch('ids:1 ids:3');
+        $query = (new StubUser())->search('ids:1 ids:3');
 
         $this->assertSame(2, $query->count());
         $this->assertSame([1, 3], $query->pluck('id')->all());
@@ -78,7 +78,7 @@ class AdvancedSearchableTest extends TestCase
     {
         factory(User::class)->times(3)->create();
 
-        $query = (new StubUser())->advancedSearch('ids:10 ids:30');
+        $query = (new StubUser())->search('ids:10 ids:30');
 
         $this->assertSame(0, $query->count());
     }

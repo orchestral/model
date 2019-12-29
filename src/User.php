@@ -13,8 +13,8 @@ use Orchestra\Contracts\Authorization\Authorizable;
 class User extends Eloquent implements Authorizable, UserContract
 {
     use Authenticatable,
-        Concerns\AdvancedSearchable,
         Concerns\CheckRoles,
+        Concerns\Searchable,
         Concerns\Swappable,
         SoftDeletes;
 

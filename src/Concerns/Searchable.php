@@ -3,23 +3,38 @@
 namespace Orchestra\Model\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
+use Laravie\QueryFilter\Taxonomy;
 
 trait Searchable
 {
     /**
-     * Search based on keyword.
+     * Advanced search from query builder.
      *
-     * @param \Illuminate\Database\Eloquent\Builder  $query
-     * @param string|null  $keyword
-     * @param array|null  $columns
+     * @param  \Illuminate\Database\Query\Builder $query
+     * @param  string|null  $searchTerm
+     * @param  array|null  $columns
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Query\Builder
      */
-    public function scopeSearch(Builder $query, ?string $keyword, ?array $columns = null): Builder
+    public function scopeSearch(Builder $query, ?string $searchTerm, ?array $columns = null): Builder
     {
-        return (new \Laravie\QueryFilter\Searchable(
-            $keyword ?? '', $columns ?? $this->getSearchableColumns()
+        if (\is_null($columns) && \method_exists($this, 'getSearchableColumns')) {
+            $columns = $this->getSearchableColumns();
+        }
+
+        return (new Taxonomy(
+            $searchTerm, $this->getSearchableRules(), $columns
         ))->apply($query);
+    }
+
+    /**
+     * Get searchable rules.
+     *
+     * @return array
+     */
+    public function getSearchableRules(): array
+    {
+        return [];
     }
 
     /**
