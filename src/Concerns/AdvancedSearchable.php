@@ -19,22 +19,6 @@ trait AdvancedSearchable
      */
     public function scopeAdvancedSearch(Builder $query, ?string $search, ?array $columns = null): Builder
     {
-        if (\is_null($columns) && \method_exists($this, 'getSearchableColumns')) {
-            $columns = $this->getSearchableColumns();
-        }
-
-        return (new \Laravie\QueryFilter\Taxonomy(
-            $search, $this->getSearchableRules(), $columns
-        ))->apply($query);
-    }
-
-    /**
-     * Get searchable rules.
-     *
-     * @return array
-     */
-    public function getSearchableRules(): array
-    {
-        return [];
+        return $this->scopeSearch($query, $search, $columns);
     }
 }
