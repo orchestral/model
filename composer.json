@@ -23,7 +23,7 @@
     },
     "require": {
         "php": ">=7.2",
-        "laravie/query-filter": "^1.0.2",
+        "laravie/query-filter": "^1.5",
         "orchestra/contracts": "^4.0",
         "orchestra/support-core": "^4.0"
     },
