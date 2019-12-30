@@ -2,6 +2,7 @@
 
 namespace Orchestra\Model\Tests\Feature\Concerns;
 
+use Orchestra\Model\Concerns\AdvancedSearchable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Model\Tests\Feature\TestCase;
 use Orchestra\Model\User;
@@ -86,7 +87,9 @@ class AdvancedSearchableTest extends TestCase
 
 class StubUser extends User
 {
-    public function getSearchableRules(): array
+    use AdvancedSearchable;
+
+    public function getSearchableTerms(): array
     {
         return [
             'is:inactive' => function ($query) {
