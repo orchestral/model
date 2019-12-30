@@ -9,7 +9,7 @@ Released: 2019-12-30
 ### Deprecated
 
 * Deprecate `Orchestra\Model\Concerns\AdvancedSearch`, existing functionality has been merged with `Orchestra\Model\Concerns\Searchable`.
-* Deprecate `getSearchableRules()`, use `getSearchableTerms()` insteads.
+* Deprecate `getSearchableRules()`, use `getSearchableTerms()` instead.
 
 ## 4.2.0
 
