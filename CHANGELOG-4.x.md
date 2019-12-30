@@ -2,6 +2,15 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/model`.
 
+## 4.3.0
+
+Released: 2019-12-30
+
+### Deprecated
+
+* Deprecate `Orchestra\Model\Concerns\AdvancedSearch`, existing functionality has been merged with `Orchestra\Model\Concerns\Searchable`.
+* Deprecate `getSearchableRules()`, use `getSearchableTerms()` instead.
+
 ## 4.2.0
 
 Released: 2019-11-03
