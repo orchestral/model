@@ -58,7 +58,7 @@ class User extends Eloquent implements Authorizable, UserContract
      *
      * @return array
      */
-    public function getSearchableRules(): array
+    public function getSearchableTerms(): array
     {
         return [
             'roles:[]' => static function (Builder $query, array $roles) {
