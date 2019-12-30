@@ -13,8 +13,8 @@ use Orchestra\Contracts\Authorization\Authorizable;
 class User extends Eloquent implements Authorizable, UserContract
 {
     use Authenticatable,
-        Concerns\AdvancedSearchable,
         Concerns\CheckRoles,
+        Concerns\Searchable,
         Concerns\Swappable,
         SoftDeletes;
 
@@ -58,7 +58,7 @@ class User extends Eloquent implements Authorizable, UserContract
      *
      * @return array
      */
-    public function getSearchableRules(): array
+    public function getSearchableTerms(): array
     {
         return [
             'roles:[]' => static function (Builder $query, array $roles) {
