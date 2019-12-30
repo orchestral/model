@@ -86,7 +86,7 @@ class SearchableTest extends TestCase
 
 class StubUser extends User
 {
-    public function getSearchableRules(): array
+    public function getSearchableTerms(): array
     {
         return [
             'is:inactive' => function ($query) {
