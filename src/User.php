@@ -62,9 +62,7 @@ class User extends Eloquent implements Authorizable, UserContract
     {
         return [
             'roles:[]' => static function (Builder $query, array $roles) {
-                return $query->whereHas('roles', static function (Builder $query) use ($roles) {
-                    return $query->whereIn(Role::column('name'), $roles);
-                });
+                return $query->hasRoles($roles);
             },
         ];
     }
