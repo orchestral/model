@@ -22,15 +22,20 @@
         }
     },
     "require": {
-        "php": ">=7.2",
-        "orchestra/contracts": "dev-master",
-        "orchestra/database": "dev-master",
-        "orchestra/support": "dev-master"
+        "php": ">=7.3",
+        "orchestra/contracts": "^6.0",
+        "orchestra/database": "^6.0",
+        "orchestra/support": "^6.0"
     },
     "require-dev": {
-        "orchestra/auth": "dev-master",
-        "orchestra/memory": "dev-master",
-        "orchestra/testbench": "dev-master"
+        "orchestra/auth": "^6.0",
+        "orchestra/memory": "^6.0",
+        "orchestra/testbench": "^6.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "6.0-dev"
+        }
     },
     "config": {
         "sort-packages": true
