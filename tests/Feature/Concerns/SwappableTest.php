@@ -54,8 +54,6 @@ class SwappableTest extends TestCase
 
     /**
      * Get Hot-swappable alias name.
-     *
-     * @return string
      */
     public static function hsAliasName(): string
     {

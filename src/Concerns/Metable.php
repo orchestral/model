@@ -11,8 +11,6 @@ trait Metable
      * `meta` field accessor.
      *
      * @param  mixed  $value
-     *
-     * @return \Orchestra\Model\Value\Meta
      */
     public function getMetaAttribute($value): Meta
     {
@@ -23,8 +21,6 @@ trait Metable
      * `meta` field mutator.
      *
      * @param  mixed  $value
-     *
-     * @return void
      */
     public function setMetaAttribute($value = null): void
     {
@@ -34,7 +30,6 @@ trait Metable
     /**
      * Get original meta data.
      *
-     * @param  string  $key
      * @param  mixed  $default
      *
      * @return mixed
@@ -49,7 +44,6 @@ trait Metable
     /**
      * Get meta data.
      *
-     * @param  string  $key
      * @param  mixed  $default
      *
      * @return mixed
@@ -66,8 +60,6 @@ trait Metable
      *
      * @param  string|array  $key
      * @param  mixed  $value
-     *
-     * @return void
      */
     public function putMetaData($key, $value = null): void
     {
@@ -88,8 +80,6 @@ trait Metable
      * Forget meta data.
      *
      * @param  string|array  $key
-     *
-     * @return void
      */
     public function forgetMetaData($key): void
     {
@@ -110,8 +100,6 @@ trait Metable
      * Access meta attribute.
      *
      * @param  mixed  $value
-     *
-     * @return \Orchestra\Model\Value\Meta
      */
     protected function accessMetableAttribute($value): Meta
     {
@@ -129,10 +117,7 @@ trait Metable
     /**
      * Get value from mixed content.
      *
-     * @param  string  $key
      * @param  mixed  $value
-     *
-     * @return string|null
      */
     protected function mutateMetableAttribute(string $key, $value): ?string
     {

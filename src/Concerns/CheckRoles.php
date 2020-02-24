@@ -2,6 +2,7 @@
 
 namespace Orchestra\Model\Concerns;
 
+use Illuminate\Support\Collection;
 use Orchestra\Model\Role;
 
 trait CheckRoles
@@ -10,8 +11,6 @@ trait CheckRoles
      * Determine if current user has the given role.
      *
      * @param  \Illuminate\Contracts\Support\Arrayable|array|string  $roles
-     *
-     * @return bool
      */
     public function hasRoles($roles): bool
     {
@@ -32,8 +31,6 @@ trait CheckRoles
      * Determine if current user has any of the given role.
      *
      * @param  \Illuminate\Contracts\Support\Arrayable|array|string  $roles
-     *
-     * @return bool
      */
     public function hasAnyRoles($roles): bool
     {
@@ -92,8 +89,6 @@ trait CheckRoles
 
     /**
      * Get roles name as an array.
-     *
-     * @return \Illuminate\Support\Collection
      */
     abstract public function getRoles(): Collection;
 }

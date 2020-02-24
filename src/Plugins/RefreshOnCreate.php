@@ -8,8 +8,6 @@ trait RefreshOnCreate
 {
     /**
      * Boot the refresh on create trait for a model.
-     *
-     * @return void
      */
     public static function bootRefreshOnCreate(): void
     {

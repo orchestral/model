@@ -18,8 +18,6 @@ class Role
 
     /**
      * Construct a new role observer.
-     *
-     * @param  \Orchestra\Contracts\Authorization\Factory  $acl
      */
     public function __construct(Factory $acl)
     {
@@ -28,10 +26,6 @@ class Role
 
     /**
      * On creating observer.
-     *
-     * @param  \Orchestra\Model\Role  $model
-     *
-     * @return void
      */
     public function creating(Eloquent $model): void
     {
@@ -40,10 +34,6 @@ class Role
 
     /**
      * On saving observer.
-     *
-     * @param  \Orchestra\Model\Role  $model
-     *
-     * @return void
      */
     public function saving(Eloquent $model): void
     {
@@ -56,10 +46,6 @@ class Role
 
     /**
      * On deleting observer.
-     *
-     * @param  \Orchestra\Model\Role  $model
-     *
-     * @return void
      */
     public function deleting(Eloquent $model): void
     {
@@ -68,10 +54,6 @@ class Role
 
     /**
      * On updating/restoring observer.
-     *
-     * @param  \Orchestra\Model\Role  $model
-     *
-     * @return void
      */
     public function updating(Eloquent $model): void
     {
@@ -87,10 +69,6 @@ class Role
 
     /**
      * Is restoring model.
-     *
-     * @param  \Orchestra\Model\Role  $model
-     *
-     * @return bool
      */
     protected function isRestoringModel(Eloquent $model): bool
     {

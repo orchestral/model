@@ -10,10 +10,6 @@ trait Searchable
     /**
      * Advanced search from query builder.
      *
-     * @param \Illuminate\Database\Eloquent\Builder  $query
-     * @param string|null  $searchTerm
-     * @param array|null  $columns
-     *
      * @return \Illuminate\Database\Query\Builder
      */
     public function scopeSearch(Builder $query, ?string $searchTerm, ?array $columns = null): Builder
@@ -25,8 +21,6 @@ trait Searchable
 
     /**
      * Get searchable rules.
-     *
-     * @return array
      */
     public function getSearchableTerms(): array
     {
@@ -35,8 +29,6 @@ trait Searchable
 
     /**
      * Get searchable attributes.
-     *
-     * @return array
      */
     public function getSearchableColumns(): array
     {

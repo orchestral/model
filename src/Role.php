@@ -43,10 +43,6 @@ class Role extends Eloquent
 
     /**
      * Set default roles.
-     *
-     * @param  array  $roles
-     *
-     * @return void
      */
     public static function setDefaultRoles(array $roles): void
     {
@@ -55,8 +51,6 @@ class Role extends Eloquent
 
     /**
      * Has many and belongs to relationship with User.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function users(): BelongsToMany
     {
@@ -85,8 +79,6 @@ class Role extends Eloquent
 
     /**
      * Get Hot-swappable alias name.
-     *
-     * @return string
      */
     final public static function hsAliasName(): string
     {

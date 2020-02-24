@@ -14,10 +14,6 @@ abstract class Eloquent extends Model implements Transformable
 
     /**
      * Get qualified column name.
-     *
-     * @param  string  $column
-     *
-     * @return string
      */
     public static function column(string $column): string
     {
@@ -28,8 +24,6 @@ abstract class Eloquent extends Model implements Transformable
 
     /**
      * Determine if the model instance uses soft deletes.
-     *
-     * @return bool
      */
     public function isSoftDeleting(): bool
     {
@@ -38,10 +32,6 @@ abstract class Eloquent extends Model implements Transformable
 
     /**
      * Save the model to the database if exists.
-     *
-     * @param  array  $options
-     *
-     * @return bool
      */
     public function saveIfExists(array $options = []): bool
     {
@@ -54,10 +44,6 @@ abstract class Eloquent extends Model implements Transformable
 
     /**
      * Save the model to the database using transaction if exists.
-     *
-     * @param  array  $options
-     *
-     * @return bool
      */
     public function saveIfExistsOrFail(array $options = []): bool
     {
@@ -71,8 +57,6 @@ abstract class Eloquent extends Model implements Transformable
     /**
      * Execute a Closure within a transaction.
      *
-     * @param  \Closure  $callback
-     *
      * @throws \Throwable
      *
      * @return mixed
@@ -84,8 +68,6 @@ abstract class Eloquent extends Model implements Transformable
 
     /**
      * Transform each attribute in the model using a callback.
-     *
-     * @param  callable  $callback
      *
      * @return \Orchestra\Support\Fluent
      */

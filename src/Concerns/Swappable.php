@@ -11,10 +11,6 @@ trait Swappable
 {
     /**
      * Make Hot-swappable model.
-     *
-     * @param  array  $attributes
-     *
-     * @return \Illuminate\Database\Eloquent\Model
      */
     public static function hs(array $attributes = []): Model
     {
@@ -25,8 +21,6 @@ trait Swappable
      * Make Hot-swappable model.
      *
      * @param  array  $attributes
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public static function hsQuery(): Builder
     {
@@ -37,8 +31,6 @@ trait Swappable
      * Make Hot-swappable faker model.
      *
      * @param  array  $attributes
-     *
-     * @return \Illuminate\Database\Eloquent\FactoryBuilder
      */
     public static function hsFaker(): FactoryBuilder
     {
@@ -51,8 +43,6 @@ trait Swappable
 
     /**
      * Make Hot-swappable model on write connection.
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public static function hsOnWriteConnection(): Builder
     {
@@ -61,10 +51,6 @@ trait Swappable
 
     /**
      * Make Hot-swappable model on specific connection.
-     *
-     * @param  string|null  $connection
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public static function hsOn(?string $connection = null): Builder
     {
@@ -75,8 +61,6 @@ trait Swappable
 
     /**
      * Find Hot-swappable full namespace model.
-     *
-     * @return string
      */
     public static function hsFinder(): string
     {
@@ -85,8 +69,6 @@ trait Swappable
 
     /**
      * Get Hot-swappable alias name.
-     *
-     * @return string
      */
     abstract public static function hsAliasName(): string;
 }

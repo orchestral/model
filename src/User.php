@@ -5,6 +5,7 @@ namespace Orchestra\Model;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
@@ -55,8 +56,6 @@ class User extends Eloquent implements Authorizable, UserContract
 
     /**
      * Get searchable rules.
-     *
-     * @return array
      */
     public function getSearchableTerms(): array
     {
@@ -69,11 +68,6 @@ class User extends Eloquent implements Authorizable, UserContract
 
     /**
      * Search user based on keyword as roles.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  array  $roles
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeHasRoles(Builder $query, array $roles = []): Builder
     {
@@ -90,11 +84,6 @@ class User extends Eloquent implements Authorizable, UserContract
 
     /**
      * Search user based on keyword as roles id.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  array  $rolesId
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeHasRolesId(Builder $query, array $rolesId = []): Builder
     {
@@ -111,20 +100,14 @@ class User extends Eloquent implements Authorizable, UserContract
 
     /**
      * Has many and belongs to relationship with Role.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function roles()
+    public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::hsFinder(), 'user_role', 'user_id', 'role_id')->withTimestamps();
     }
 
     /**
      * Set `password` mutator.
-     *
-     * @param  string  $value
-     *
-     * @return void
      */
     public function setPasswordAttribute(string $value): void
     {
@@ -174,8 +157,6 @@ class User extends Eloquent implements Authorizable, UserContract
 
     /**
      * Determine if the current user account activated or not.
-     *
-     * @return bool
      */
     public function isActivated(): bool
     {
@@ -184,8 +165,6 @@ class User extends Eloquent implements Authorizable, UserContract
 
     /**
      * Determine if the current user account suspended or not.
-     *
-     * @return bool
      */
     public function isSuspended(): bool
     {
@@ -218,8 +197,6 @@ class User extends Eloquent implements Authorizable, UserContract
 
     /**
      * Get roles name as an array.
-     *
-     * @return \Illuminate\Support\Collection
      */
     public function getRoles(): Collection
     {
@@ -234,8 +211,6 @@ class User extends Eloquent implements Authorizable, UserContract
 
     /**
      * Get Hot-swappable alias name.
-     *
-     * @return string
      */
     final public static function hsAliasName(): string
     {
