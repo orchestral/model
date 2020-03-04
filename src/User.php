@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
+use Laravie\Dhosa\Concerns\Swappable;
 use Orchestra\Contracts\Authorization\Authorizable;
 
 class User extends Eloquent implements Authorizable, UserContract
@@ -16,7 +17,7 @@ class User extends Eloquent implements Authorizable, UserContract
     use Authenticatable,
         Concerns\CheckRoles,
         Concerns\Searchable,
-        Concerns\Swappable,
+        Swappable,
         SoftDeletes;
 
     /**

@@ -4,11 +4,12 @@ namespace Orchestra\Model;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravie\Dhosa\Concerns\Swappable;
 
 class Role extends Eloquent
 {
     use SoftDeletes,
-        Concerns\Swappable;
+        Swappable;
 
     /**
      * The database table used by the model.

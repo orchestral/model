@@ -23,6 +23,7 @@
     },
     "require": {
         "php": ">=7.2",
+        "laravie/dhosa": "^1.0",
         "orchestra/contracts": "^5.0",
         "orchestra/database": "^5.0",
         "orchestra/support": "^5.0"

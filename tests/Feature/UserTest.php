@@ -5,8 +5,8 @@ namespace Orchestra\Model\Tests\Feature;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
+use Laravie\Dhosa\HotSwap;
 use Mockery as m;
-use Orchestra\Model\HS;
 use Orchestra\Model\Role;
 use Orchestra\Model\User;
 
@@ -21,7 +21,7 @@ class UserTest extends TestCase
     {
         parent::tearDown();
 
-        HS::flush();
+        HotSwap::flush();
     }
 
     /** @test */
@@ -34,7 +34,7 @@ class UserTest extends TestCase
         $this->assertNotInstanceOf(UserStub::class, $user);
         $this->assertInstanceOf(User::class, $user);
 
-        HS::override('User', UserStub::class);
+        HotSwap::override('User', UserStub::class);
 
         $user = User::hs();
 
