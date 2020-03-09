@@ -39,7 +39,7 @@ Released: 2019-09-11
 
 ### Changes
 
-* Update support to Laravel Framework 6.0.
+* Update support to Laravel Framework v6.
 
 ### Removed
 
