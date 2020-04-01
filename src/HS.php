@@ -20,11 +20,7 @@ final class HS
     /**
      * Register swappable model.
      *
-     * @param  string  $class
-     *
      * @throws \InvalidArgumentException
-     *
-     * @return void
      */
     public static function register(string $class): void
     {
@@ -37,12 +33,7 @@ final class HS
     /**
      * Override swappable model.
      *
-     * @param  string  $alias
-     * @param  string  $class
-     *
      * @throws \InvalidArgumentException
-     *
-     * @return void
      */
     public static function override(string $alias, string $class): void
     {
@@ -53,10 +44,6 @@ final class HS
 
     /**
      * Resolve model class name.
-     *
-     * @param  string  $alias
-     *
-     * @return string
      */
     public static function eloquent(string $alias): string
     {
@@ -66,12 +53,7 @@ final class HS
     /**
      * Make a model instance.
      *
-     * @param  string  $alias
-     * @param  array  $attributes
-     *
      * @throws \InvalidArgumentException
-     *
-     * @return \Illuminate\Database\Eloquent\Model
      */
     public static function make(string $alias, array $attributes = []): Model
     {
@@ -84,8 +66,6 @@ final class HS
 
     /**
      * Flush hot-swap mapping.
-     *
-     * @return void
      */
     public static function flush(): void
     {
@@ -98,11 +78,7 @@ final class HS
     /**
      * Validate class is an eloquent model.
      *
-     * @param  string  $class
-     *
      * @throws \InvalidArgumentException
-     *
-     * @return void
      */
     private static function validateClassIsEloquentModel(string $class): void
     {
@@ -114,11 +90,7 @@ final class HS
     /**
      * Validate class is an eloquent model.
      *
-     * @param  string  $class
-     *
      * @throws \InvalidArgumentException
-     *
-     * @return void
      */
     private static function validateClassIsSwappable(string $class): void
     {

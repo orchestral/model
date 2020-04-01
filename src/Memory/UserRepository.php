@@ -26,10 +26,6 @@ class UserRepository extends Handler implements HandlerContract
 
     /**
      * Setup a new memory handler.
-     *
-     * @param  string  $name
-     * @param  array  $config
-     * @param  \Illuminate\Contracts\Container\Container  $container
      */
     public function __construct(string $name, array $config, Container $container)
     {
@@ -40,8 +36,6 @@ class UserRepository extends Handler implements HandlerContract
 
     /**
      * Initiate the instance.
-     *
-     * @return array
      */
     public function initiate(): array
     {
@@ -50,8 +44,6 @@ class UserRepository extends Handler implements HandlerContract
 
     /**
      * Get value from database.
-     *
-     * @param  string  $key
      *
      * @return mixed
      */
@@ -70,10 +62,6 @@ class UserRepository extends Handler implements HandlerContract
 
     /**
      * Add a finish event.
-     *
-     * @param  array  $items
-     *
-     * @return bool
      */
     public function finish(array $items = []): bool
     {
@@ -89,8 +77,6 @@ class UserRepository extends Handler implements HandlerContract
      *
      * @param  string|int  $userId
      * @param  \Illuminate\Support\Collection|array  $data
-     *
-     * @return array
      */
     protected function processRetrievedData($userId, $data = []): array
     {
@@ -117,10 +103,7 @@ class UserRepository extends Handler implements HandlerContract
     /**
      * Save user meta to memory.
      *
-     * @param  string  $key
      * @param  mixed  $value
-     *
-     * @return void
      */
     protected function save(string $key, $value): void
     {
@@ -140,12 +123,8 @@ class UserRepository extends Handler implements HandlerContract
     /**
      * Process saving the value to memory.
      *
-     * @param  string  $name
      * @param  mixed   $userId
      * @param  mixed   $value
-     * @param  bool    $isNew
-     *
-     * @return void
      */
     protected function saving(string $name, $userId, $value = null, bool $isNew = true): void
     {

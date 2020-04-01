@@ -11,7 +11,7 @@ class UserProvider extends Provider
      * Get value of a key.
      *
      * @param  string  $key
-     * @param  mixed   $default
+     * @param  mixed  $default
      *
      * @return mixed
      */
@@ -44,8 +44,7 @@ class UserProvider extends Provider
     /**
      * Set a value from a key.
      *
-     * @param  string  $key
-     * @param  mixed   $value
+     * @param  mixed  $value
      *
      * @return mixed
      */
@@ -62,9 +61,7 @@ class UserProvider extends Provider
     /**
      * Delete value of a key.
      *
-     * @param  string   $key
-     *
-     * @return bool
+     * @param  string  $key
      */
     public function forget(string $key = null): bool
     {

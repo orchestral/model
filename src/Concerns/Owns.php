@@ -9,12 +9,6 @@ trait Owns
 {
     /**
      * Scope query to get model which related model actually owns the relationship.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  \Illuminate\Database\Eloquent\Model  $related
-     * @param  string|null  $foreignKey
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeOwns(Builder $query, Model $related, ?string $foreignKey = null): Builder
     {
@@ -29,11 +23,6 @@ trait Owns
 
     /**
      * Check if related model actually owns the relationship.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model|null  $related
-     * @param  string|null  $foreignKey
-     *
-     * @return bool
      */
     public function owns(Model $related = null, ?string $foreignKey = null): bool
     {

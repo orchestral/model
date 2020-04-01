@@ -23,6 +23,7 @@
     },
     "require": {
         "php": ">=7.3",
+        "laravie/dhosa": "dev-master",
         "orchestra/contracts": "^6.0",
         "orchestra/database": "^6.0",
         "orchestra/support": "^6.0"

@@ -38,8 +38,6 @@ class Meta extends Fluent
     /**
      * Forget a key.
      *
-     * @param  string  $key
-     *
      * @return $this
      */
     public function forget(string $key)

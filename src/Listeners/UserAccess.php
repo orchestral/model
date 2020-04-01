@@ -9,10 +9,6 @@ class UserAccess
 {
     /**
      * Match current user to roles.
-     *
-     * @param  \Orchestra\Model\User|null  $user
-     *
-     * @return \Illuminate\Support\Collection|null
      */
     public function handle(?User $user): ?Collection
     {

@@ -8,8 +8,6 @@ trait Faker
 {
     /**
      * Initiate faker factory.
-     *
-     * @return \Illuminate\Database\Eloquent\FactoryBuilder
      */
     public static function faker(): FactoryBuilder
     {

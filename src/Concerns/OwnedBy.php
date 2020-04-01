@@ -9,12 +9,6 @@ trait OwnedBy
 {
     /**
      * Scope query to get model which are owned by the specified model.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  \Illuminate\Database\Eloquent\Model  $related
-     * @param  string|null  $key
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeOwnedBy(Builder $query, Model $related, ?string $key = null): Builder
     {
@@ -27,11 +21,6 @@ trait OwnedBy
 
     /**
      * Check if related model actually owns the relationship.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model|null  $related
-     * @param  string|null  $key
-     *
-     * @return bool
      */
     public function ownedBy(Model $related = null, ?string $key = null): bool
     {
