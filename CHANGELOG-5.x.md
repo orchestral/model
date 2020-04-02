@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/model`.
 
+## 5.0.1
+
+Released: 2020-04-02
+
+### Changes
+
+* Readd `Orchestra\Model\Concerns\Swappable` for backward compatibility, do use `Laravie\Dhosa\Concerns\Swappable` whenever possible.
+
 ## 5.0.0
 
 Released: 2020-03-09
