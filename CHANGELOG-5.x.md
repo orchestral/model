@@ -8,6 +8,7 @@ Released: 2020-04-02
 
 ### Changes
 
+* Readd `Orchestra\Model\HS` for backward compatibility, do use `Laravie\Dhosa\HotSwap` whenever possible.
 * Readd `Orchestra\Model\Concerns\Swappable` for backward compatibility, do use `Laravie\Dhosa\Concerns\Swappable` whenever possible.
 
 ## 5.0.0
