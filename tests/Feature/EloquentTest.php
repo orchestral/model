@@ -3,6 +3,7 @@
 namespace Orchestra\Model\Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Orchestra\Model\Testing\Factories\UserFactory;
 use Orchestra\Model\User;
 
 class EloquentTest extends TestCase
@@ -12,7 +13,7 @@ class EloquentTest extends TestCase
     /** @test */
     public function it_cant_use_save_if_exists_when_model_not_saved()
     {
-        $user = User::faker()->make([
+        $user = UserFactory::new()->make([
             'fullname' => 'Mior Muhammad Zaki',
             'email' => 'crynobone@gmail.com',
         ]);
@@ -24,7 +25,7 @@ class EloquentTest extends TestCase
     /** @test */
     public function it_can_use_save_if_exists_when_model_already_saved()
     {
-        $user = User::faker()->create();
+        $user = UserFactory::new()->create();
 
         $user->fullname = 'Mior Muhammad Zaki';
 
@@ -34,7 +35,7 @@ class EloquentTest extends TestCase
     /** @test */
     public function it_cant_use_save_if_exists_or_failed_when_model_not_saved()
     {
-        $user = User::faker()->make([
+        $user = UserFactory::new()->make([
             'fullname' => 'Mior Muhammad Zaki',
             'email' => 'crynobone@gmail.com',
         ]);
@@ -46,7 +47,7 @@ class EloquentTest extends TestCase
     /** @test */
     public function it_can_use_save_if_exists_or_fail_when_model_already_saved()
     {
-        $user = User::faker()->create();
+        $user = UserFactory::new()->create();
 
         $user->fullname = 'Mior Muhammad Zaki';
 
@@ -56,7 +57,7 @@ class EloquentTest extends TestCase
     /** @test */
     public function it_can_be_transformed()
     {
-        $user = User::faker()->create([
+        $user = UserFactory::new()->create([
             'fullname' => 'Mior Muhammad Zaki',
             'email' => 'crynobone@gmail.com',
         ])->transform(function ($user) {

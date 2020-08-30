@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery as m;
 use Orchestra\Model\Observer\Role as RoleObserver;
 use Orchestra\Model\Role;
+use Orchestra\Model\Testing\Factories\RoleFactory;
 use Orchestra\Model\Tests\Feature\TestCase;
 
 class RoleTest extends TestCase
@@ -18,7 +19,7 @@ class RoleTest extends TestCase
         $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('Role [Guest] is not allowed to be used!');
 
-        $role = Role::faker()->create();
+        $role = RoleFactory::new()->create();
 
         $this->swap(
             'Orchestra\Contracts\Authorization\Factory', $acl = m::mock('Orchestra\Contracts\Authorization\Factory')

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravie\Dhosa\HotSwap;
 use Orchestra\Model\Role;
+use Orchestra\Model\Testing\Factories\RoleFactory;
 use Orchestra\Model\User;
 
 class RoleTest extends TestCase
@@ -63,7 +64,7 @@ class RoleTest extends TestCase
     /** @test */
     public function it_can_swap_admin_role()
     {
-        $role = Role::faker()->create([
+        $role = RoleFactory::new()->create([
             'name' => 'Boss',
         ]);
         Role::setDefaultRoles(['admin' => $role->id, 'member' => 2]);
@@ -86,7 +87,7 @@ class RoleTest extends TestCase
     /** @test */
     public function it_can_swap_member_role()
     {
-        $role = Role::faker()->create([
+        $role = RoleFactory::new()->create([
             'name' => 'Partner',
         ]);
         Role::setDefaultRoles(['admin' => 1, 'member' => $role->id]);

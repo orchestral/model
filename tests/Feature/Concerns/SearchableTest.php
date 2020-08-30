@@ -3,6 +3,7 @@
 namespace Orchestra\Model\Tests\Feature\Concerns;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Orchestra\Model\Testing\Factories\UserFactory;
 use Orchestra\Model\Tests\Feature\TestCase;
 use Orchestra\Model\User;
 
@@ -13,8 +14,8 @@ class SearchableTest extends TestCase
     /** @test */
     public function it_can_search_by_exact_rules()
     {
-        factory(User::class)->times(2)->create();
-        factory(User::class)->times(3)->create([
+        UserFactory::new()->times(2)->create();
+        UserFactory::new()->times(3)->create([
             'remember_token' => null,
         ]);
 
@@ -26,7 +27,7 @@ class SearchableTest extends TestCase
     /** @test */
     public function it_can_search_by_exact_rules_when_keyword_doesnt_match()
     {
-        factory(User::class)->times(2)->create();
+        UserFactory::new()->times(2)->create();
 
         $query = (new StubUser())->search('is:inactive');
 
@@ -36,8 +37,8 @@ class SearchableTest extends TestCase
     /** @test */
     public function it_can_search_by_wildcard_rules()
     {
-        factory(User::class)->times(2)->create();
-        $me = factory(User::class)->create([
+        UserFactory::new()->times(2)->create();
+        $me = UserFactory::new()->create([
             'fullname' => 'Mior Muhammad Zaki',
             'email' => 'crynobone@gmail.com',
         ]);
@@ -55,7 +56,7 @@ class SearchableTest extends TestCase
     /** @test */
     public function it_can_search_by_wildcard_rules_when_keyword_doesnt_match()
     {
-        factory(User::class)->times(2)->create();
+        UserFactory::new()->times(2)->create();
 
         $query = (new StubUser())->search('email:crynobone@gmail.com');
 
@@ -65,7 +66,7 @@ class SearchableTest extends TestCase
     /** @test */
     public function it_can_search_by_wildcard_array_rules()
     {
-        factory(User::class)->times(3)->create();
+        UserFactory::new()->times(3)->create();
 
         $query = (new StubUser())->search('ids:1 ids:3');
 
@@ -76,7 +77,7 @@ class SearchableTest extends TestCase
     /** @test */
     public function it_can_search_by_wildcard_array_rules_when_keyword_doesnt_match()
     {
-        factory(User::class)->times(3)->create();
+        UserFactory::new()->times(3)->create();
 
         $query = (new StubUser())->search('ids:10 ids:30');
 

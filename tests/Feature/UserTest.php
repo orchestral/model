@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Laravie\Dhosa\HotSwap;
 use Mockery as m;
 use Orchestra\Model\Role;
+use Orchestra\Model\Testing\Factories\RoleFactory;
+use Orchestra\Model\Testing\Factories\UserFactory;
 use Orchestra\Model\User;
 
 class UserTest extends TestCase
@@ -56,7 +58,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_attach_roles()
     {
-        $user = User::faker()->create();
+        $user = UserFactory::new()->create();
         $user->attachRole(2);
 
         $this->assertTrue($user->hasRoles('Member'));
@@ -65,7 +67,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_attach_roles_from_instance_of_role()
     {
-        $user = User::faker()->create();
+        $user = UserFactory::new()->create();
         $user->attachRole(Role::find(2));
 
         $this->assertTrue($user->hasRoles('Member'));
@@ -74,7 +76,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_detach_roles()
     {
-        $user = \tap(User::faker()->create(), function ($user) {
+        $user = \tap(UserFactory::new()->create(), function ($user) {
             $user->roles()->sync([2]);
         });
 
@@ -88,7 +90,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_detach_roles_from_instance_of_role()
     {
-        $user = \tap(User::faker()->create(), function ($user) {
+        $user = \tap(UserFactory::new()->create(), function ($user) {
             $user->roles()->sync([2]);
         });
 
@@ -102,7 +104,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_get_list_of_roles()
     {
-        $user = User::faker()->create();
+        $user = UserFactory::new()->create();
         $user->attachRoles([1, 2]);
 
         $this->assertEquals(['Administrator', 'Member'], $user->getRoles()->all());
@@ -111,7 +113,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_manually_set_remember_token()
     {
-        $user = User::faker()->create();
+        $user = UserFactory::new()->create();
         $user->setRememberToken('foobar');
 
         $this->assertSame('foobar', $user->getRememberToken());
@@ -126,7 +128,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_get_remember_token_value()
     {
-        $user = User::faker()->create([
+        $user = UserFactory::new()->create([
             'remember_token' => 'foobar',
         ]);
 
@@ -136,7 +138,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_deactivate_the_user()
     {
-        $user = User::faker()->create([
+        $user = UserFactory::new()->create([
             'status' => 1,
         ]);
 
@@ -147,7 +149,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_suspend_the_user()
     {
-        $user = User::faker()->create([
+        $user = UserFactory::new()->create([
             'status' => 1,
         ]);
 
@@ -158,7 +160,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_activate_the_user()
     {
-        $user = User::faker()->create([
+        $user = UserFactory::new()->create([
             'status' => 0,
             'email_verified_at' => null,
         ]);
@@ -175,7 +177,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_activate_and_suspend_the_user()
     {
-        $user = User::faker()->create([
+        $user = UserFactory::new()->create([
             'status' => 0,
         ]);
 
@@ -190,7 +192,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_get_auth_identifier()
     {
-        $user = User::faker()->create([
+        $user = UserFactory::new()->create([
             'id' => 1983,
         ]);
 
@@ -200,7 +202,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_will_hash_upon_changing_the_password()
     {
-        $user = User::faker()->create();
+        $user = UserFactory::new()->create();
 
         Hash::swap($hash = m::mock('\Illuminate\Hashing\HasherInterface'));
 
@@ -215,7 +217,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_get_password_without_rehash()
     {
-        $user = User::faker()->create();
+        $user = UserFactory::new()->create();
 
         Hash::swap($hash = m::mock('\Illuminate\Hashing\HasherInterface'));
 
@@ -229,7 +231,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_search_user_based_on_keyword_and_roles_id()
     {
-        $user = User::faker()->create();
+        $user = UserFactory::new()->create();
         $user->attachRole(1);
 
         $keyword = substr($user->fullname, 0, 2);
@@ -242,7 +244,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_search_user_based_on_keyword_and_roles_name()
     {
-        $user = User::faker()->create();
+        $user = UserFactory::new()->create();
         $user->attachRole(1);
 
         $keyword = substr($user->fullname, 0, 2);
@@ -255,8 +257,8 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_check_whether_user_has_roles()
     {
-        $user = User::faker()->create();
-        $editor = Role::faker()->create([
+        $user = UserFactory::new()->create();
+        $editor = RoleFactory::new()->create([
             'name' => 'Editor',
         ]);
         $user->attachRoles([1, $editor->id]);
@@ -267,8 +269,8 @@ class UserTest extends TestCase
         $this->assertTrue($user->hasRoles(['Administrator', 'Editor']));
         $this->assertFalse($user->hasRoles(['Administrator', 'User']));
 
-        $user = User::faker()->create();
-        $role = Role::faker()->create([
+        $user = UserFactory::new()->create();
+        $role = RoleFactory::new()->create([
             'name' => 'Foo',
         ]);
 
@@ -284,7 +286,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_check_whether_user_has_any_roles()
     {
-        $user = User::faker()->create();
+        $user = UserFactory::new()->create();
         $user->attachRoles([1, 2]);
 
         $this->assertTrue($user->hasAnyRoles(['Administrator', 'User']));
@@ -294,7 +296,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_check_whether_user_has_any_roles_given_invalid_data()
     {
-        $user = User::faker()->create();
+        $user = UserFactory::new()->create();
         $user->attachRole(1);
 
         $this->assertFalse($user->hasAnyRoles(['admin', 'editor']));
@@ -304,7 +306,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_search_user_based_on_keyword_and_roles_not_found()
     {
-        $user = User::faker()->create();
+        $user = UserFactory::new()->create();
         $user->attachRole(1);
 
         $keyword = substr($user->fullname, 0, 2);
