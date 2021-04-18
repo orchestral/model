@@ -8,7 +8,7 @@ This repository contains the model code of the Orchestra Platform. If you want t
 [![Total Downloads](https://poser.pugx.org/orchestra/model/downloads)](https://packagist.org/packages/orchestra/model)
 [![Latest Unstable Version](https://poser.pugx.org/orchestra/model/v/unstable)](//packagist.org/packages/orchestra/model)
 [![License](https://poser.pugx.org/orchestra/model/license)](https://packagist.org/packages/orchestra/model)
-[![Coverage Status](https://coveralls.io/repos/github/orchestral/model/badge.svg?branch=master)](https://coveralls.io/github/orchestral/model?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/orchestral/model/badge.svg?branch=6.x)](https://coveralls.io/github/orchestral/model?branch=6.x)
 
 ## Version Compatibility
 
