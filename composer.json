@@ -25,7 +25,7 @@
         "php": "^7.3 || ^8.0",
         "laravie/dhosa": "^1.1",
         "orchestra/contracts": "^6.0",
-        "orchestra/database": "^6.0",
+        "orchestra/database": "dev-master",
         "orchestra/support": "^6.0"
     },
     "require-dev": {
